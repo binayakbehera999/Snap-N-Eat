@@ -16,5 +16,4 @@ class OAuth {
         scopes: scopes);
     token = tokenResp.accessToken;
   }
-
 }
