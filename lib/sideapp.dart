@@ -83,7 +83,7 @@ class insuranceapp22 extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       width: 39.0,
-                      heShapeBorderight: 38.0,
+                      height: 38.0,
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.all(Radius.elliptical(19.5, 19.0)),

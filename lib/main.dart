@@ -5,8 +5,6 @@ import 'package:snap_n_eat/screens/leaderboard.dart';
 import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 
-import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:ui' as ui;
 
 void main() {
   runApp(MyApp());
@@ -44,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     auth = new OAuth();
+    auth.authorise();
   }
 
   @override
