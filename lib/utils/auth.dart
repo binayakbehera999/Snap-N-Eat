@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
 import 'package:snap_n_eat/models/FitbitOAuth.dart';
+import 'package:snap_n_eat/utils/apiendpoints.dart';
 
 class OAuth {
   MyOAuth2Client client = MyOAuth2Client(
@@ -12,17 +13,17 @@ class OAuth {
   String token;
   var httpClient;
   var userProfile;
-
+  APIEndpoints apiEndpoints = new APIEndpoints();
   List<String> scopes = [
     "activity",
     "heartrate",
     "location",
     "profile",
     "nutrition",
-    "weight"
+    "weight",
   ];
 
-  authorise() async {
+  Future<AccessTokenResponse> authorise() async {
     client = MyOAuth2Client(
         redirectUri: 'my.app://oauth2redirect', customUriScheme: 'my.app');
     tokenResp = await client.getTokenWithAuthCodeFlow(
@@ -30,7 +31,8 @@ class OAuth {
         clientSecret: '75e8096e59982cb6e3d084c44c46102f',
         scopes: scopes);
     token = tokenResp.accessToken;
-    getUserProfile();
+    floor();
+    return tokenResp;
   }
 
   validate() async {
@@ -47,7 +49,6 @@ class OAuth {
     print(resp.body);
   }
 
-
   getUserProfile() async {
     var client = http.Client();
     try {
@@ -62,29 +63,25 @@ class OAuth {
     }
   }
 
-  perDayBurnt(){
-
+  floor() async {
+    var client = http.Client();
+    try {
+       //print(token);
+      var uriResponse = await client.get(apiEndpoints.heartRate,
+          headers: {"Authorization": "Bearer $token"});
+      userProfile = json.decode(uriResponse.body);
+      print(uriResponse.body);
+    } finally {
+      client.close();
+    }
   }
-  perMonthBurnt(){
 
-  }
+  perMonthBurnt() {}
 
-  perMonthSteps(){
-
-  }
-  perDaySteps(){
-
-  }
-  perDayIntake(){
-
-  }
-  heartRate(){
-
-  }
-  perDayActivity(){
-
-  }
-  foods(){
-    
-  }
+  perMonthSteps() {}
+  perDaySteps() {}
+  perDayIntake() {}
+  heartRate() {}
+  perDayActivity() {}
+  foods() {}
 }
