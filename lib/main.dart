@@ -4,9 +4,7 @@ import 'package:snap_n_eat/screens/dashboard.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
 import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/screens/splash.dart';
-import 'package:snap_n_eat/utils/apiendpoints.dart';
 import 'package:snap_n_eat/utils/auth.dart';
-import 'package:snap_n_eat/sideapp2.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreen(),
+      home: DashBoard(),
     );
   }
 }

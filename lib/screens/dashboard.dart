@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:snap_n_eat/components/card.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:snap_n_eat/components/customCard.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -10,35 +10,136 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(
-        elevation:0,
-        backgroundColor: Colors.white,
-        primary: true,
-        centerTitle: false,
-        title: Text(
-          "Hello \n\t\t Binayak",
-          style: TextStyle(
-            fontFamily: 'Muli',
-            fontSize: 25,
-            color: const Color(0xff29347b),
-            fontWeight: FontWeight.w700,
-          ),
-          textAlign: TextAlign.left,
-        ),
-        titleSpacing: 5.0,
-        actions: <Widget>[
-          Icon(
-            Icons.dashboard,
-            color: const Color(0xff29347b),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Colors.white,
+      //   primary: true,
+      //   centerTitle: false,
+      //   title: Text(
+      //     "Hello \n\t\t Binayak",
+      //     style: TextStyle(
+      //       fontFamily: 'Muli',
+      //       fontSize: 30,
+      //       color: const Color(0xff29347b),
+      //       fontWeight: FontWeight.w700,
+      //     ),
+      //     textAlign: TextAlign.left,
+      //   ),
+      //   titleSpacing: 5.0,
+      //   actions: <Widget>[
+      //     Icon(
+      //       Icons.dashboard,
+      //       color: const Color(0xff29347b),
+      //     ),
+      //   ],
+      // ),
       body: Container(
-        width: 200,
-        height: 200,
+        height: screenHeight,
+        width: screenWidth,
         color: Colors.white,
-        child: CustomCard(cardHeight: 250.0, cardWidth: 250.0, iconSvg: "assets/icons/dashboard.svg", value: 2.toString(), unit: "KCal" ),
+        padding:
+            EdgeInsets.fromLTRB(screenWidth * 0.12, 50, screenWidth * 0.12, 0),
+        child: Column(
+          children: <Widget>[
+            Container(
+                child: Row(children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Text(
+                    "Hello",
+                    style: TextStyle(
+                      color: const Color(0xff29347b),
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    "Binayak",
+                    style: TextStyle(
+                      color: const Color(0xff29347b),
+                      fontSize: 30,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              ),
+              SvgPicture.asset(
+                "assets/icons/dashboard.svg",
+                alignment: Alignment.topRight,
+                color: const Color(0xff29347b),
+              )
+            ])),
+            Row(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    CustomCard(
+                      value: "20",
+                      unit: "kcal",
+                      percentageIndicator: true,
+                      iconSvg: "assets/icons/calorie.svg",
+                      height: screenHeight * 0.25,
+                      width: screenWidth * 0.35,
+                    ),
+                    SizedBox(height: screenWidth * 0.03),
+                    CustomCard(
+                      percentageIndicator: false,
+                      iconSvg: "assets/icons/moon.svg",
+                      value: "85",
+                      unit: "scores",
+                      height: screenHeight * 0.25,
+                      width: screenWidth * 0.35,
+                    ),
+                    SizedBox(height: screenWidth * 0.03),
+                    CustomCard(
+                      percentageIndicator: false,
+                      iconSvg: "assets/icons/distance.svg",
+                      unit: "kms",
+                      value: "2",
+                      height: screenHeight * 0.2,
+                      width: screenWidth * 0.35,
+                    )
+                  ],
+                ),
+                SizedBox(width: screenWidth * 0.03),
+                Column(
+                  children: <Widget>[
+                    CustomCard(
+                      value: "20",
+                      unit: "kcal",
+                      percentageIndicator: true,
+                      iconSvg: "assets/icons/calorie.svg",
+                      height: screenHeight * 0.25,
+                      width: screenWidth * 0.35,
+                    ),
+                    SizedBox(height: screenWidth * 0.03),
+                    CustomCard(
+                      percentageIndicator: false,
+                      iconSvg: "assets/icons/moon.svg",
+                      value: "85",
+                      unit: "scores",
+                      height: screenHeight * 0.25,
+                      width: screenWidth * 0.35,
+                    ),
+                    SizedBox(height: screenWidth * 0.03),
+                    CustomCard(
+                      percentageIndicator: false,
+                      iconSvg: "assets/icons/distance.svg",
+                      unit: "kms",
+                      value: "2",
+                      height: screenHeight * 0.2,
+                      width: screenWidth * 0.35,
+                    )
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

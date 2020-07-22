@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
 import 'package:snap_n_eat/sideapp2.dart';

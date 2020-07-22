@@ -28,7 +28,6 @@ dependencies:
   oauth2_client: ^1.3.0
   flutter_svg: ^0.17.4
   fluid_bottom_nav_bar: ^1.0.1
-  flutter_staggered_grid_view: "^0.2.7"
   percent_indicator: "^2.1.5"
   intl: ^0.16.1
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +54,15 @@ flutter:
     - assets/icons/account_circle.svg
     - assets/icons/dashboard.svg
     - assets/icons/leaderboard.svg
+    - assets/icons/foot.svg
+    - assets/icons/distance.svg
+    - assets/icons/profile.svg
+    - assets/icons/blue-dashboard.svg
+    - assets/icons/calorie.svg
+    - assets/icons/analytics.svg
+    - assets/icons/stairs.svg
+    - assets/icons/moon.svg
+    - assets/icons/list-box.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

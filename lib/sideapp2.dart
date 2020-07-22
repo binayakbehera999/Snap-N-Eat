@@ -22,8 +22,6 @@ class SideApp extends StatefulWidget {
 class _SideAppState extends State<SideApp> {
   var oauth;
 
-  _SideAppState() {}
-
   @override
   void initState() {
     super.initState();
