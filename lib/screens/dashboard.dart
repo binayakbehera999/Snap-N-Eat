@@ -46,33 +46,38 @@ class _DashBoardState extends State<DashBoard> {
         child: Column(
           children: <Widget>[
             Container(
-                child: Row(children: <Widget>[
-              Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Text(
-                    "Hello",
-                    style: TextStyle(
-                      color: const Color(0xff29347b),
-                      fontSize: 20,
-                    ),
-                    textAlign: TextAlign.left,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Hello",
+                        style: TextStyle(
+                          color: const Color(0xff29347b),
+                          fontSize: 20,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      Text(
+                        "Binayak",
+                        style: TextStyle(
+                          color: const Color(0xff29347b),
+                          fontSize: 30,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
                   ),
-                  Text(
-                    "Binayak",
-                    style: TextStyle(
-                      color: const Color(0xff29347b),
-                      fontSize: 30,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
+                  SvgPicture.asset(
+                    "assets/icons/dashboard.svg",
+                    alignment: Alignment.topRight,
+                    color: const Color(0xff29347b),
+                  )
                 ],
               ),
-              SvgPicture.asset(
-                "assets/icons/dashboard.svg",
-                alignment: Alignment.topRight,
-                color: const Color(0xff29347b),
-              )
-            ])),
+            ),
             Row(
               children: <Widget>[
                 Column(

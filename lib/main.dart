@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: DashBoard(),
+      home: SplashScreen(),
     );
   }
 }
@@ -41,8 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    auth = new OAuth();
-    auth.authorise();
   }
 
   @override
