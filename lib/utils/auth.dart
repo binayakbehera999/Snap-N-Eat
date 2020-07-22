@@ -24,8 +24,6 @@ class OAuth {
   ];
 
   Future<AccessTokenResponse> authorise() async {
-    client = MyOAuth2Client(
-        redirectUri: 'my.app://oauth2redirect', customUriScheme: 'my.app');
     tokenResp = await client.getTokenWithAuthCodeFlow(
         clientId: '22BTRZ',
         clientSecret: '75e8096e59982cb6e3d084c44c46102f',
@@ -35,7 +33,7 @@ class OAuth {
     return tokenResp;
   }
 
-  validate() async {
+  Future<AccessTokenResponse> getToken() async {
     OAuth2Helper oauth2Helper = OAuth2Helper(
       client,
       grantType: OAuth2Helper.AUTHORIZATION_CODE,
@@ -43,10 +41,22 @@ class OAuth {
       clientSecret: '75e8096e59982cb6e3d084c44c46102f',
       scopes: scopes,
     );
-    http.Response resp = await oauth2Helper.post(
-        'https://api.fitbit.com/oauth2/token',
-        headers: {"Authorization": "Bearer $token"});
-    print(resp.body);
+    return oauth2Helper.getToken();
+  }
+
+  Future<bool> validate(String token) async {
+    var client = http.Client();
+    var uriResponse = await client
+        .post(apiEndpoints.checkToken, headers: {
+      "Authorization": "Bearer $token",
+      "Content-Type": "application/x-www-form-urlencoded"
+    }, body: {
+      "token": token
+    });
+    client.close();
+    Map decode = json.decode(uriResponse.body);
+    
+    return decode['active'];
   }
 
   getUserProfile() async {
@@ -66,7 +76,7 @@ class OAuth {
   floor() async {
     var client = http.Client();
     try {
-       //print(token);
+      //print(token);
       var uriResponse = await client.get(apiEndpoints.heartRate,
           headers: {"Authorization": "Bearer $token"});
       userProfile = json.decode(uriResponse.body);

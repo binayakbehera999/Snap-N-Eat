@@ -18,23 +18,21 @@ class SideApp extends StatefulWidget {
   @override
   _SideAppState createState() => _SideAppState();
 }
-class _SideAppState extends State<SideApp> {
 
+class _SideAppState extends State<SideApp> {
   var oauth;
 
-  _MyHomePageState() {
-    
-  }
+  _SideAppState() {}
 
   @override
   void initState() {
     super.initState();
     oauth = new OAuth();
+    oauth.validate();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Hello"),
@@ -53,7 +51,7 @@ class _SideAppState extends State<SideApp> {
           oauth.authorise().then((value) {
             print(value);
           });
-        } ,
+        },
         label: Text('Authorize'),
         // icon: Icon(Icons.add),
         icon: Icon(Icons.lock_open),
@@ -65,5 +63,4 @@ class _SideAppState extends State<SideApp> {
   void dispose() {
     super.dispose();
   }
-
 }
