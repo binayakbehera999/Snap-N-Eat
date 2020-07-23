@@ -1,93 +1,36 @@
 class RatingCalculator {
-  double bmiCalculator(double height, double weight) {
-    double bmi;
-    bmi = weight * 10000 / (height * height);
-    return bmi;
+  bool choice(double bmr, double newbmr, double calorieIntake,
+      double calorieBurnt, double scannedFoodCalorie) {
+    if ((calorieIntake + scannedFoodCalorie - calorieBurnt - bmr) <= newbmr) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  double bmrCalculator(double height, double weight, int age,
-      double activityFactor, String sex) {
-    double bmr;
+  double newBmrCalc(double height, double optimumBmi, String sex, int age) {
+    double optimumWeight;
+    double BMR;
+    optimumWeight = (optimumBmi * height * height) / 10000;
     if (sex == 'MALE') {
-      bmr = ((10 * weight) + (6.25 * height) - (5 * age) - 5) * activityFactor;
+      BMR = ((10 * optimumWeight) + (6.25 * height) - (5 * age) + 5);
     } else {
-      bmr =
-          ((10 * weight) + (6.25 * height) - (5 * age) - 161) * activityFactor;
+      BMR = ((10 * optimumWeight) + (6.25 * height) - (5 * age) - 161);
     }
-    return bmr;
+    return BMR;
   }
 
-  int choice(
-      double avgCalBurnt,
-      double calorieIntake,
-      double foodValue,
-      int age,
-      int suggestion,
-      double height,
-      double weight,
-      String sex,
-      double activityFactor) {
-    double bmr = bmrCalculator(height, weight, age, activityFactor, sex);
-    double bmiValue = bmiCalculator(height, weight);
-    double newBmr;
-    // console.log(bmr + "bmr" + bmiValue + "bmi");
-    if (suggestion == 1) {
-      if ((bmiValue) < 18.25) {
-        var suggestedWeight;
-        suggestedWeight = 18.25 * (height * height) / 10000;
-        // console.log(suggestedWeight);
-        if (sex == 'MALE') {
-          newBmr = ((10 * suggestedWeight) + (6.25 * height) - (5 * age) - 5) *
-              activityFactor;
-        } else {
-          newBmr =
-              ((10 * suggestedWeight) + (6.25 * height) - (5 * age) - 161) *
-                  activityFactor;
-        }
-      } else if (bmiValue > 25) {
-        var suggestedWeight;
-        suggestedWeight = 25 * (height * height) / 10000;
-        // console.log(suggestedWeight);
-        if (sex == 'MALE') {
-          newBmr = (10 * suggestedWeight) +
-              (6.25 * height) -
-              (5 * age) -
-              5 * activityFactor;
-        } else {
-          newBmr =
-              ((10 * suggestedWeight) + (6.25 * height) - (5 * age) - 161) *
-                  activityFactor;
-        }
-      }
-    } else {
-      newBmr = bmr;
-      // console.log(newBmr);
-    }
-    var overallCalorie = calorieIntake - avgCalBurnt + foodValue;
-    if (bmiValue < 18.25) {
-      if (suggestion == 0) {
-        return 0;
-      } else if (newBmr > overallCalorie) {
-        // console.log("nbmr");
-        // console.log(newBmr);
-        // console.log(overallCalorie);
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-    if (bmiValue > 25) {
-      // console.log("nbmr");
-      // console.log(newBmr);
-      // console.log(overallCalorie);
-      if (suggestion == 0) {
-        return 1;
-      } else if (newBmr > overallCalorie) {
-        return 0;
-      } else {
-        return 1;
-      }
-    }
-    return -1;
+  double healthRating(weight, height) {
+    double optimumWeight = 21.7 * height * height / 10000;
+    double rating = (5 - (weight - optimumWeight) / 5).abs();
+    return rating;
+  }
+
+  double goalRating(initialWeight, currWeight, totalWeek, currWeek, height) {
+    double goalWeight = 21.7 * height * height / 10000;
+    double idealWeightChange =
+        (((goalWeight - initialWeight) / totalWeek) * currWeek).abs();
+    double actualWeightChange = (initialWeight - currWeight).abs();
+    return (actualWeightChange / idealWeightChange) * 5;
   }
 }
