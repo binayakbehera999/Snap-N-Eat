@@ -64,6 +64,10 @@ flutter:
     - assets/icons/stairs.svg
     - assets/icons/moon.svg
     - assets/icons/list-box.svg
+    - assets/icons/heartbeat.svg
+    - assets/icons/heartline.svg
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

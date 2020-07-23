@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
-class CustomCard extends StatefulWidget {
+class SmallCard extends StatefulWidget {
   final String iconSvg;
   final String value;
   final String unit;
-  final bool percentageIndicator;
   final double height, width;
-  CustomCard(
-      {this.iconSvg,
-      this.value,
-      this.unit,
-      this.percentageIndicator,
-      this.height,
-      this.width});
+  SmallCard({this.iconSvg, this.value, this.unit, this.height, this.width});
   @override
-  _CustomCardState createState() => _CustomCardState();
+  _SmallCardState createState() => _SmallCardState();
 }
 
-class _CustomCardState extends State<CustomCard> {
+class _SmallCardState extends State<SmallCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,24 +25,13 @@ class _CustomCardState extends State<CustomCard> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new CircularPercentIndicator(
-              radius: 80.0,
-              lineWidth: 10.0,
-              animation: true,
-              animationDuration: 1200,
-              percent: 0.5,
-              center: (widget.iconSvg.isNotEmpty)
-                  ? SvgPicture.asset(widget.iconSvg,
-                      color: const Color(0xff828282),
-                      semanticsLabel: 'A red up arrow')
-                  : "assets/icons/profile.svg",
-              circularStrokeCap: CircularStrokeCap.round,
-              backgroundColor: const Color(0xff2A347b),
-              progressColor: Colors.white,
+            SvgPicture.asset(
+              widget.iconSvg,
+              color: const Color(0xff828282),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

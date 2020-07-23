@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_n_eat/components/customCard.dart';
+import 'package:snap_n_eat/components/smallCard.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _DashBoardState extends State<DashBoard> {
                         "Hello",
                         style: TextStyle(
                           color: const Color(0xff29347b),
-                          fontSize: 20,
+                          fontSize: 30,
                         ),
                         textAlign: TextAlign.left,
                       ),
@@ -64,7 +65,7 @@ class _DashBoardState extends State<DashBoard> {
                         "Binayak",
                         style: TextStyle(
                           color: const Color(0xff29347b),
-                          fontSize: 30,
+                          fontSize: 40,
                         ),
                         textAlign: TextAlign.left,
                       ),
@@ -93,19 +94,18 @@ class _DashBoardState extends State<DashBoard> {
                     SizedBox(height: screenWidth * 0.03),
                     CustomCard(
                       percentageIndicator: false,
-                      iconSvg: "assets/icons/moon.svg",
+                      iconSvg: "assets/icons/heartbeat.svg",
                       value: "85",
                       unit: "scores",
                       height: screenHeight * 0.25,
                       width: screenWidth * 0.35,
                     ),
                     SizedBox(height: screenWidth * 0.03),
-                    CustomCard(
-                      percentageIndicator: false,
+                    SmallCard(
                       iconSvg: "assets/icons/distance.svg",
                       unit: "kms",
                       value: "2",
-                      height: screenHeight * 0.2,
+                      height: screenHeight * 0.15,
                       width: screenWidth * 0.35,
                     )
                   ],
@@ -113,18 +113,17 @@ class _DashBoardState extends State<DashBoard> {
                 SizedBox(width: screenWidth * 0.03),
                 Column(
                   children: <Widget>[
-                    CustomCard(
+                    SmallCard(
                       value: "20",
                       unit: "kcal",
-                      percentageIndicator: true,
-                      iconSvg: "assets/icons/calorie.svg",
-                      height: screenHeight * 0.25,
+                      iconSvg: "assets/icons/moon.svg",
+                      height: screenHeight * 0.15,
                       width: screenWidth * 0.35,
                     ),
                     SizedBox(height: screenWidth * 0.03),
                     CustomCard(
                       percentageIndicator: false,
-                      iconSvg: "assets/icons/moon.svg",
+                      iconSvg: "assets/icons/foot.svg",
                       value: "85",
                       unit: "scores",
                       height: screenHeight * 0.25,
@@ -133,10 +132,10 @@ class _DashBoardState extends State<DashBoard> {
                     SizedBox(height: screenWidth * 0.03),
                     CustomCard(
                       percentageIndicator: false,
-                      iconSvg: "assets/icons/distance.svg",
+                      iconSvg: "assets/icons/stairs.svg",
                       unit: "kms",
                       value: "2",
-                      height: screenHeight * 0.2,
+                      height: screenHeight * 0.25,
                       width: screenWidth * 0.35,
                     )
                   ],
