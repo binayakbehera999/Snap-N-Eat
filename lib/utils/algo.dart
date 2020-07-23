@@ -37,7 +37,7 @@ class RatingCalculator {
         suggestedWeight = 18.25 * (height * height) / 10000;
         // console.log(suggestedWeight);
         if (sex == 'MALE') {
-          newBmr = [(10 * suggestedWeight) + (6.25 * height) - (5 * age) - 5] *
+          newBmr = ((10 * suggestedWeight) + (6.25 * height) - (5 * age) - 5) *
               activityFactor;
         } else {
           newBmr =
