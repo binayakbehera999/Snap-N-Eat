@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
-import 'package:snap_n_eat/main.dart';
 import 'package:snap_n_eat/models/FitbitOAuth.dart';
+import 'package:snap_n_eat/screens/home.dart';
 import 'package:snap_n_eat/utils/apiendpoints.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,6 +26,7 @@ class OAuth {
     "profile",
     "nutrition",
     "weight",
+    "sleep",
   ];
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -35,12 +37,12 @@ class OAuth {
         scopes: scopes);
     token = tokenResp.accessToken;
     SharedPreferences prefs = await _prefs;
-    prefs.setString("token", token).then((value){
-      if(value){
+    prefs.setString("token", token).then((value) {
+      if (value) {
         Navigator.pushReplacement(
-          context,
-          new MaterialPageRoute(
-              builder: (BuildContext context) => MyHomePage())); 
+            context,
+            new MaterialPageRoute(
+                builder: (BuildContext context) => MyHomePage(token: token,)));
       }
     });
     return tokenResp;
@@ -94,6 +96,24 @@ class OAuth {
     } finally {
       client.close();
     }
+  }
+
+  fetchAllData(String token) async {
+    var client = http.Client();
+    List<String> apiRequests = [
+      "https://api.fitbit.com/1/user/-/activities/calories/date/2020-01-15/1d/15min/time/12:30/12:45.json",
+      "https://api.fitbit.com/1/user/-/activities/floors/date/2020-01-15/1d/15min/time/12:30/12:45.json",
+      "https://api.fitbit.com/1/user/-/activities/distance/date/2020-01-15/1d/15min/time/12:30/12:45.json",
+      "https://api.fitbit.com/1/user/-/activities/heart/date/2020-01-15/1d/1sec/time/00:00/00:01.json",
+      "https://api.fitbit.com/1.2/user/-/sleep/date/2020-01-15.json"
+    ]; //different ids
+
+    List<Response> list = await Future.wait(
+        apiRequests.map((apiReq) => client.get(apiReq,headers: {"Authorization": "Bearer $token"})));
+
+    list.map((response) {
+      print(response.body);
+    }).toList();
   }
 
   perMonthBurnt() {}

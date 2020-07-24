@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_n_eat/components/customCard.dart';
 import 'package:snap_n_eat/components/smallCard.dart';
+import 'package:snap_n_eat/utils/auth.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -13,6 +14,11 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+
+    @override
+    void initState() {
+      super.initState();
+    }
 
     return Scaffold(
       // appBar: AppBar(
