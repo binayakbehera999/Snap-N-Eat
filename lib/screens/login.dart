@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key key, this.title}) : super(key: key);
+  LoginScreen({@required this.hasAccount, Key key,}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final bool hasAccount;
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           padding: EdgeInsets.all(16.0),
             onPressed: () {
-              oauth.authorise(context).then((value) {
+              oauth.authorise(context,widget.hasAccount).then((value) {
                 print(value);
               });
             },

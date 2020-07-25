@@ -14,6 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   var oAuth;
   bool check = true;
   String token;
+  bool hasAccount = false;
 
   startTime() async {
     var _duration = new Duration(seconds: 2);
@@ -23,12 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
       oAuth.validate(token).then((value) {
         setState(() {
           check = value;
+          hasAccount = true;
         });
         return new Timer(_duration, navigation);
       });
     } else {
       setState(() {
         check = false;
+        hasAccount = false;
       });
       return new Timer(_duration, navigation);
     }
@@ -39,12 +42,14 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           new MaterialPageRoute(
-              builder: (BuildContext context) => MyHomePage(token: token,)));
+              builder: (BuildContext context) => MyHomePage(
+                    token: token,
+                  )));
     } else {
       Navigator.pushReplacement(
           context,
           new MaterialPageRoute(
-              builder: (BuildContext context) => LoginScreen()));
+              builder: (BuildContext context) => LoginScreen(hasAccount: hasAccount,)));
     }
   }
 

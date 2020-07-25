@@ -1,6 +1,8 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
+import 'package:snap_n_eat/screens/leaderboard.dart';
+import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -20,13 +22,26 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     auth = new OAuth();
-    auth.fetchAllData(widget.token);
+    auth.fetchAllData(widget.token, context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: _child,
+        floatingActionButton: Container(
+          width: 45,
+          height: 45                                                                                                                                                  ,
+          child: FittedBox(
+            child: FloatingActionButton(
+              onPressed: null,
+              splashColor: Colors.grey,
+              elevation: 5.0,
+              child: Icon(Icons.camera),
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         bottomNavigationBar: FluidNavBar(
           icons: [
             FluidNavBarIcon(
