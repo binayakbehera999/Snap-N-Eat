@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class CustomCard extends StatefulWidget {
   final String iconSvg;
@@ -37,23 +36,11 @@ class _CustomCardState extends State<CustomCard> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new CircularPercentIndicator(
-              radius: 80.0,
-              lineWidth: 10.0,
-              animation: true,
-              animationDuration: 1200,
-              percent: 0.5,
-              center: (widget.iconSvg.isNotEmpty)
-                  ? SvgPicture.asset(widget.iconSvg,
-                      color: const Color(0xff828282),
-                      semanticsLabel: 'A red up arrow')
-                  : "assets/icons/profile.svg",
-              circularStrokeCap: CircularStrokeCap.round,
-              backgroundColor: const Color(0xff2A347b),
-              progressColor: Colors.white,
-            ),
+            SvgPicture.asset(widget.iconSvg,
+                color: const Color(0xff29347b),
+                semanticsLabel: 'A red up arrow'),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(15),
               child: Text(
                 widget.value,
                 style: TextStyle(

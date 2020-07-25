@@ -31,7 +31,7 @@ class _SmallCardState extends State<SmallCard> {
           children: <Widget>[
             SvgPicture.asset(
               widget.iconSvg,
-              color: const Color(0xff828282),
+              color: const Color(0xff29347b),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
