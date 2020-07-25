@@ -54,7 +54,7 @@ class _DashBoardState extends State<DashBoard> {
           children: <Widget>[
             Container(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,13 +75,16 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                         textAlign: TextAlign.left,
                       ),
+                      SizedBox(
+                        height: screenHeight*0.02,
+                      ),
                     ],
                   ),
                   SvgPicture.asset(
                     "assets/icons/dashboard.svg",
                     alignment: Alignment.topRight,
                     color: const Color(0xff29347b),
-                  )
+                  ),
                 ],
               ),
             ),

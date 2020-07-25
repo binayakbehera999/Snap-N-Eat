@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:ui' as ui;
 
-class insuranceapp22 extends StatelessWidget {
-  insuranceapp22({
+class InsuranceApp22 extends StatelessWidget {
+  InsuranceApp22({
     Key key,
   }) : super(key: key);
   @override

@@ -30,7 +30,8 @@ dependencies:
   fluid_bottom_nav_bar: ^1.0.1
   percent_indicator: "^2.1.5"
   intl: ^0.16.1
-  shared_preferences: ^0.5.8 
+  shared_preferences: ^0.5.8
+  fl_chart: ^0.10.1
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -67,6 +68,13 @@ flutter:
     - assets/icons/list-box.svg
     - assets/icons/heartbeat.svg
     - assets/icons/heartline.svg
+    - assets/icons/bmi.svg
+    - assets/icons/height.svg
+    - assets/icons/icon_email.svg
+    - assets/icons/line.svg
+    - assets/icons/radial_gradient.svg
+    - assets/icons/weight-scale.svg
+    - assets/icons/logo.png
 
 
 
@@ -81,17 +89,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

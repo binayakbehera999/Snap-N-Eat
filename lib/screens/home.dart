@@ -1,6 +1,8 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
+import 'package:snap_n_eat/screens/leaderboard.dart';
+import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -30,7 +32,8 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: FluidNavBar(
           icons: [
             FluidNavBarIcon(
-                iconPath: "assets/icons/dashboard.svg", extras: {"label": ""}),
+                iconPath: "assets/icons/dashboard.svg", 
+                extras: {"label": ""}),
             FluidNavBarIcon(
                 iconPath: "assets/icons/account_circle.svg",
                 extras: {"label": "Dashboard"}),
@@ -68,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _child = AnimatedSwitcher(
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 200),
         child: _child,
       );
     });

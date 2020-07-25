@@ -10,13 +10,16 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
   var oAuth;
   bool check = true;
   String token;
+  var _visible = true;
+  AnimationController animationController;
+  Animation<double> animation;
 
   startTime() async {
-    var _duration = new Duration(seconds: 2);
+    var _duration = new Duration(seconds: 3);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
     if (token != null) {
@@ -52,13 +55,30 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     oAuth = new OAuth();
+     animationController = new AnimationController(
+        vsync: this, duration: new Duration(seconds: 2));
+    animation =
+    new CurvedAnimation(parent: animationController, curve: Curves.elasticInOut);
+
+    animation.addListener(() => this.setState(() {}));
+    animationController.forward();
+
+    setState(() {
+      _visible = !_visible;
+    });
     startTime();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.cyanAccent,
+    return Scaffold(
+      body: Center(
+        child: new Image.asset(
+          'assets/icons/logo.png',
+          width: animation.value * 250,
+          height: animation.value * 250,
+        ),
+      ),
     );
   }
 }
