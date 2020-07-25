@@ -1,9 +1,13 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
+<<<<<<< HEAD
 import 'package:snap_n_eat/screens/leaderboard.dart';
+=======
+>>>>>>> 5a67cf92ac15a48932e64559ef94d2de632e235b
 import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/auth.dart';
+import 'package:snap_n_eat/screens/leaderboard.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({@required this.token, Key key}) : super(key: key);
@@ -31,13 +35,19 @@ class _MyHomePageState extends State<MyHomePage> {
         body: _child,
         floatingActionButton: Container(
           width: 45,
-          height: 45                                                                                                                                                  ,
+          height: 45,
           child: FittedBox(
+            fit: BoxFit.fill,
             child: FloatingActionButton(
-              onPressed: null,
-              splashColor: Colors.grey,
+              onPressed: () => print("clicked"),
+              backgroundColor: Colors.white,
               elevation: 5.0,
-              child: Icon(Icons.camera),
+              splashColor: Color(0xff29347b),
+              child: Icon(
+                Icons.camera,
+                color: Colors.grey,
+                size: 40,
+              ),
             ),
           ),
         ),

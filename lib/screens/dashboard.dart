@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_n_eat/components/customCard.dart';
 import 'package:snap_n_eat/components/smallCard.dart';
+<<<<<<< HEAD
+=======
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:snap_n_eat/utils/auth.dart';
+>>>>>>> 5a67cf92ac15a48932e64559ef94d2de632e235b
 
 class DashBoard extends StatefulWidget {
   @override
@@ -15,29 +20,6 @@ class _DashBoardState extends State<DashBoard> {
     var screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.white,
-      //   primary: true,
-      //   centerTitle: false,
-      //   title: Text(
-      //     "Hello \n\t\t Binayak",
-      //     style: TextStyle(
-      //       fontFamily: 'Muli',
-      //       fontSize: 30,
-      //       color: const Color(0xff29347b),
-      //       fontWeight: FontWeight.w700,
-      //     ),
-      //     textAlign: TextAlign.left,
-      //   ),
-      //   titleSpacing: 5.0,
-      //   actions: <Widget>[
-      //     Icon(
-      //       Icons.dashboard,
-      //       color: const Color(0xff29347b),
-      //     ),
-      //   ],
-      // ),
       body: Container(
         height: screenHeight,
         width: screenWidth,
@@ -83,17 +65,64 @@ class _DashBoardState extends State<DashBoard> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    CustomCard(
-                      value: "20",
-                      unit: "kcal",
-                      percentageIndicator: true,
-                      iconSvg: "assets/icons/calorie.svg",
+                    Container(
                       height: screenHeight * 0.25,
                       width: screenWidth * 0.35,
+                      child: Card(
+                        color: Colors.white,
+                        margin: EdgeInsets.all(5.0),
+                        shadowColor: Colors.grey,
+                        elevation: 15.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            new CircularPercentIndicator(
+                              radius: 80.0,
+                              lineWidth: 10.0,
+                              animation: true,
+                              animationDuration: 1200,
+                              percent: 0.5,
+                              center: SvgPicture.asset(
+                                  "assets/icons/calorie.svg",
+                                  color: const Color(0xff828282),
+                                  semanticsLabel: 'A red up arrow'),
+                              circularStrokeCap: CircularStrokeCap.round,
+                              backgroundColor: const Color(0xff2A347b),
+                              progressColor: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "120",
+                                style: TextStyle(
+                                  fontFamily: 'Muli',
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            Text(
+                              "cal",
+                              style: TextStyle(
+                                fontFamily: 'Muli',
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     SizedBox(height: screenWidth * 0.03),
                     CustomCard(
-                      percentageIndicator: false,
                       iconSvg: "assets/icons/heartbeat.svg",
                       value: "85",
                       unit: "scores",
@@ -122,7 +151,6 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                     SizedBox(height: screenWidth * 0.03),
                     CustomCard(
-                      percentageIndicator: false,
                       iconSvg: "assets/icons/foot.svg",
                       value: "85",
                       unit: "scores",
@@ -131,7 +159,6 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                     SizedBox(height: screenWidth * 0.03),
                     CustomCard(
-                      percentageIndicator: false,
                       iconSvg: "assets/icons/stairs.svg",
                       unit: "kms",
                       value: "2",
