@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
 import 'package:snap_n_eat/screens/profile.dart';
@@ -21,8 +25,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    loadData(context);
+  }
+
+  loadData(BuildContext context) {
     auth = new OAuth();
-    auth.fetchAllData(widget.token);
+    auth.fetchAllData(widget.token).then((list) {
+      final dashBoardProvider =
+          Provider.of<DashBoardProvider>(context, listen: false);
+      list.map((response) {
+        Map result = json.decode(response.body);
+        print(result);
+        if (result.containsKey('activities-calories')) {
+          dashBoardProvider
+              .setCalories(result['activities-calories'][0]['value']);
+          print(result['activities-calories'][0]['value'].runtimeType);
+        } else if (result.containsKey('activities-floors')) {
+          dashBoardProvider.setFloor(result['activities-floors'][0]['value']);
+          print(result['activities-floors'][0]['value'].runtimeType);
+        } else if (result.containsKey('activities-distance')) {
+          dashBoardProvider
+              .setDistance(result['activities-distance'][0]['value']);
+          print(result['activities-distance'][0]['value'].runtimeType);
+        } else if (result.containsKey('activities-heart')) {
+          dashBoardProvider
+              .setHeartRate(result['activities-heart'][0]['value']);
+          print(result['activities-heart'][0]['value'].runtimeType);
+        } else if (result.containsKey('activities-steps')) {
+          dashBoardProvider.setSteps(result['activities-steps'][0]['value']);
+          print(result['activities-steps'][0]['value'].runtimeType);
+        } else if (result.containsKey('sleep')) {
+          dashBoardProvider
+              .setSleep(result['summary']['totalMinutesAsleep'].toString());
+          print(result['summary']['totalMinutesAsleep'].runtimeType);
+        } else if (result.containsKey('user')) {
+          dashBoardProvider.setFirstName(result['user']['firstName']);
+        }
+      }).toList();
+    });
   }
 
   @override
@@ -32,8 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: FluidNavBar(
           icons: [
             FluidNavBarIcon(
-                iconPath: "assets/icons/dashboard.svg", 
-                extras: {"label": ""}),
+                iconPath: "assets/icons/dashboard.svg", extras: {"label": ""}),
             FluidNavBarIcon(
                 iconPath: "assets/icons/account_circle.svg",
                 extras: {"label": "Dashboard"}),
