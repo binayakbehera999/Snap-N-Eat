@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
+import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/FitbitOAuth.dart';
 import 'package:snap_n_eat/models/user.dart';
 import 'package:snap_n_eat/screens/home.dart';
@@ -93,7 +94,7 @@ class OAuth {
     client.close();
     Map decode = json.decode(uriResponse.body);
 
-    return decode['active'];
+    return decode.containsKey('active');
   }
 
   Future<Map> getUserProfile() async {
@@ -124,28 +125,38 @@ class OAuth {
     }
   }
 
-  fetchAllData(String token, BuildContext context) async {
-    // getToken().then((value) => print(value));
+  Future<List<Response>> fetchAllData(String token) async {
     var client = http.Client();
     List<String> apiRequests = [
-      "https://api.fitbit.com/1/user/-/activities/calories/date/today/1d/1min.json",
-      "https://api.fitbit.com/1/user/-/activities/floors/date/today/1d/1min.json",
-      "https://api.fitbit.com/1/user/-/activities/distance/date/today/1d/1min.json",
-      "https://api.fitbit.com/1/user/-/activities/heart/date/2020-01-15/1d/1min/time/00:00/00:01.json",
+      "https://api.fitbit.com/1/user/-/activities/calories/date/2020-01-15/1d/15min/time/12:30/12:45.json",
+      "https://api.fitbit.com/1/user/-/activities/floors/date/2020-01-15/1d/15min/time/12:30/12:45.json",
+      "https://api.fitbit.com/1/user/-/activities/distance/date/2020-01-15/1d/15min/time/12:30/12:45.json",
+      "https://api.fitbit.com/1/user/-/activities/heart/date/2020-01-15/1d/1sec/time/00:00/00:01.json",
+      "https://api.fitbit.com/1/user/-/activities/steps/date/2020-01-15/1d/15min/time/12:30/12:45.json",
       "https://api.fitbit.com/1.2/user/-/sleep/date/2020-01-15.json",
-      'https://api.fitbit.com/1/user/-/profile.json'
-    ];
-
+      "https://api.fitbit.com/1/user/-/profile.json",
+    ]; //different ids
+    
     List<Response> list = await Future.wait(apiRequests.map((apiReq) =>
         client.get(apiReq, headers: {"Authorization": "Bearer $token"})));
 
-    list.map((response) {
-      Map result = json.decode(response.body);
-      // if (result.containsKey("user")) {
-      //   Map userDetails = result["user"];
-      // }
-      // print(result);
-    }).toList();
+    // list.map((response) {
+    //   Map result = json.decode(response.body);
+    //   // print(result[0]);
+    //   if (result.containsKey('activities-calories')) {
+    //     dashBoardProvider
+    //         .setCalories(result['activities-calories'][0]['value']);
+    //     print(result['activities-calories'][0]['value']);
+    //   } else if (result.containsKey('activities-floors')) {
+    //     dashBoardProvider.setFloor(result['activities-floors'][0]['value']);
+    //   } else if (result.containsKey('activities-heart')) {
+    //     dashBoardProvider.setHeartRate(result['activities-heart'][0]['value']);
+    //   } else if (result.containsKey('sleep')) {
+    //     dashBoardProvider.setSteps(result['summary']['totalMinutesAsleep']);
+    //   }
+    //   // print(response.body);
+    // }).toList();
+    return list;
   }
 
   perMonthBurnt() {}
