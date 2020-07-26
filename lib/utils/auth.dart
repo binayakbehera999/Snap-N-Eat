@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
-import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/FitbitOAuth.dart';
 import 'package:snap_n_eat/models/user.dart';
 import 'package:snap_n_eat/screens/home.dart';
@@ -92,8 +91,9 @@ class OAuth {
       "token": token
     });
     client.close();
+    // print(uriResponse.body);
     Map decode = json.decode(uriResponse.body);
-
+    // return false;
     return decode.containsKey('active');
   }
 
@@ -136,7 +136,7 @@ class OAuth {
       "https://api.fitbit.com/1.2/user/-/sleep/date/2020-01-15.json",
       "https://api.fitbit.com/1/user/-/profile.json",
     ]; //different ids
-    
+
     List<Response> list = await Future.wait(apiRequests.map((apiReq) =>
         client.get(apiReq, headers: {"Authorization": "Bearer $token"})));
 
