@@ -1,10 +1,6 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
-<<<<<<< HEAD
-import 'package:snap_n_eat/screens/leaderboard.dart';
-=======
->>>>>>> 5a67cf92ac15a48932e64559ef94d2de632e235b
 import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
@@ -45,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
               splashColor: Color(0xff29347b),
               child: Icon(
                 Icons.camera,
-                color: Colors.grey,
+                color: Color(0xff29347b),
                 size: 40,
               ),
             ),
@@ -93,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _child = AnimatedSwitcher(
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 200),
         child: _child,
       );
     });

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_n_eat/components/customCard.dart';
 import 'package:snap_n_eat/components/smallCard.dart';
-<<<<<<< HEAD
-=======
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:snap_n_eat/utils/auth.dart';
->>>>>>> 5a67cf92ac15a48932e64559ef94d2de632e235b
 
 class DashBoard extends StatefulWidget {
   @override
@@ -69,7 +66,7 @@ class _DashBoardState extends State<DashBoard> {
                       height: screenHeight * 0.25,
                       width: screenWidth * 0.35,
                       child: Card(
-                        color: Colors.white,
+                        color: const Color(0xff29347b),
                         margin: EdgeInsets.all(5.0),
                         shadowColor: Colors.grey,
                         elevation: 15.0,
@@ -88,10 +85,10 @@ class _DashBoardState extends State<DashBoard> {
                               percent: 0.5,
                               center: SvgPicture.asset(
                                   "assets/icons/calorie.svg",
-                                  color: const Color(0xff828282),
+                                  color: Colors.white,
                                   semanticsLabel: 'A red up arrow'),
                               circularStrokeCap: CircularStrokeCap.round,
-                              backgroundColor: const Color(0xff2A347b),
+                              backgroundColor: const Color(0xff777EAA),
                               progressColor: Colors.white,
                             ),
                             Padding(
@@ -101,7 +98,7 @@ class _DashBoardState extends State<DashBoard> {
                                 style: TextStyle(
                                   fontFamily: 'Muli',
                                   fontSize: 20,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w800,
                                 ),
                                 textAlign: TextAlign.left,
@@ -112,7 +109,7 @@ class _DashBoardState extends State<DashBoard> {
                               style: TextStyle(
                                 fontFamily: 'Muli',
                                 fontSize: 13,
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontWeight: FontWeight.w800,
                               ),
                               textAlign: TextAlign.left,
@@ -169,9 +166,6 @@ class _DashBoardState extends State<DashBoard> {
                 )
               ],
             ),
-            Center(
-              child: Icon(Icons.accessible),
-            )
           ],
         ),
       ),

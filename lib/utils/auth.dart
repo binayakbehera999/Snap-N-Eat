@@ -40,26 +40,28 @@ class OAuth {
         clientSecret: '75e8096e59982cb6e3d084c44c46102f',
         scopes: scopes);
     token = tokenResp.accessToken;
-    getUserProfile().then((value) {
-      User user = new User(
-          uid: value["encodedId"],
-          fullName: value["fullName"],
-          avatar: value["avatar150"],
-          height: value["height"],
-          age: value["age"],
-          gender: value["gender"],
-          weight: value["weight"]);
-      firestoreInstance
-          .collection("users")
-          .document(user.uid)
-          .setData(user.toMap(), merge: true)
-          .then((_) {
-        print("Successfull");
-      });
-    });
+    print(token);
+
     SharedPreferences prefs = await _prefs;
     prefs.setString("token", token).then((value) {
       if (value) {
+        getUserProfile().then((value) {
+          User user = new User(
+              uid: value["encodedId"],
+              fullName: value["fullName"],
+              avatar: value["avatar150"],
+              height: value["height"],
+              age: value["age"],
+              gender: value["gender"],
+              weight: value["weight"]);
+          firestoreInstance
+              .collection("users")
+              .document(user.uid)
+              .setData(user.toMap(), merge: true)
+              .then((_) {
+            print("Successfull");
+          });
+        });
         Navigator.pushReplacement(
             context,
             new MaterialPageRoute(
@@ -92,8 +94,7 @@ class OAuth {
     });
     client.close();
     Map decode = json.decode(uriResponse.body);
-
-    return decode['active'];
+    return decode.containsKey('active') ? decode['active'] : decode['success'];
   }
 
   Future<Map> getUserProfile() async {
@@ -144,10 +145,11 @@ class OAuth {
       // if (result.containsKey("user")) {
       //   Map userDetails = result["user"];
       // }
-      // print(result);
+      print(result);
     }).toList();
   }
 
+  addUserstodB() async {}
   perMonthBurnt() {}
 
   perMonthSteps() {}
