@@ -31,7 +31,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
                     fontFamily: "Muli", color: Colors.white, fontSize: 80)),
             ListView(
               children: <Widget>[
-                Container(child: LeaderBoardCard()),
+                Container(child: LeaderBoardCard(),
+					 height: 200,
+					 width: 100,
+					 ),
               ],
             )
           ],
