@@ -1,6 +1,7 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
+import 'package:snap_n_eat/screens/friends.dart';
 import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
@@ -58,6 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
             FluidNavBarIcon(
                 iconPath: "assets/icons/leaderboard.svg",
                 extras: {"label": "partner"}),
+            FluidNavBarIcon(
+                iconPath: "assets/icons/analytics.svg", extras: {"label": ""})
           ],
           onChange: _handleNavigationChange,
           style: FluidNavBarStyle(
@@ -84,6 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         case 2:
           _child = LeaderBoard();
+          break;
+        case 3:
+          _child = FriendScreen();
           break;
       }
       _child = AnimatedSwitcher(
