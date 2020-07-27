@@ -133,6 +133,20 @@ class OAuth {
     }
   }
 
+  Future<String> refreshToken(String token) async {
+    var client = http.Client();
+    var uriResponse = await client.post(apiEndpoints.checkToken, headers: {
+      "Authorization": "Basic 22BTRZ:75e8096e59982cb6e3d084c44c46102f",
+      "Content-Type": "application/x-www-form-urlencoded"
+    }, body: {
+      "token": "$token"
+    });
+    token = json.decode(uriResponse.body);
+
+    print(token);
+    return token;
+  }
+
   floor() async {
     var client = http.Client();
     try {
