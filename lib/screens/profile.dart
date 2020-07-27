@@ -10,7 +10,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   var pulseRate = 231;
   var email = 'binayakbehera@gmail.com';
   var rating = 4.0;
@@ -28,8 +27,7 @@ class _ProfileState extends State<Profile> {
         height: screenHeight,
         width: screenWidth,
         color: Colors.white,
-        padding:
-          EdgeInsets.fromLTRB(10, screenHeight* 0.05, 10, 10),
+        padding: EdgeInsets.fromLTRB(10, screenHeight * 0.05, 10, 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -58,10 +56,9 @@ class _ProfileState extends State<Profile> {
                         Text(
                           pulseRate.toString(),
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: screenHeight * 0.018,
-                            fontWeight: FontWeight.w500
-                          ),
+                              color: Colors.white,
+                              fontSize: screenHeight * 0.018,
+                              fontWeight: FontWeight.w500),
                         )
                       ],
                     ),
@@ -87,24 +84,24 @@ class _ProfileState extends State<Profile> {
                     //   color: primaryColor,
                     // ),
                     Container(
-                      height: screenWidth*0.35,
-                      width: screenWidth*0.35,
+                      height: screenWidth * 0.35,
+                      width: screenWidth * 0.35,
                       decoration: new BoxDecoration(
                         color: lightGradient,
                         shape: BoxShape.circle,
                       ),
                     ),
                     Container(
-                      height: screenWidth*0.30,
-                      width: screenWidth*0.30,
+                      height: screenWidth * 0.30,
+                      width: screenWidth * 0.30,
                       decoration: new BoxDecoration(
                         color: secondaryColor,
                         shape: BoxShape.circle,
                       ),
                     ),
                     Container(
-                      height: screenWidth*0.25,
-                      width: screenWidth*0.25,
+                      height: screenWidth * 0.25,
+                      width: screenWidth * 0.25,
                       decoration: new BoxDecoration(
                         color: primaryColor,
                         shape: BoxShape.circle,
@@ -126,10 +123,9 @@ class _ProfileState extends State<Profile> {
                       child: Text(
                         "Binayak \nBehera",
                         style: TextStyle(
-                          color: const Color(0xff29347b),
-                          fontSize: screenWidth * 0.05,
-                          fontWeight: FontWeight.bold
-                        ),
+                            color: const Color(0xff29347b),
+                            fontSize: screenWidth * 0.05,
+                            fontWeight: FontWeight.bold),
                         textAlign: TextAlign.left,
                       ),
                     ),
@@ -138,11 +134,8 @@ class _ProfileState extends State<Profile> {
                       height: 3,
                       width: screenWidth * 0.4,
                       decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(7)
-                        )
-                      ),
+                          color: primaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(7))),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -150,9 +143,9 @@ class _ProfileState extends State<Profile> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           SvgPicture.asset(
-                          "assets/icons/icon_email.svg",
-                          color: primaryColor,
-                          height: screenWidth * 0.02,
+                            "assets/icons/icon_email.svg",
+                            color: primaryColor,
+                            height: screenWidth * 0.02,
                           ),
                           SizedBox(
                             width: 10,
@@ -176,19 +169,20 @@ class _ProfileState extends State<Profile> {
                       ),
                       child: Row(
                         children: <Widget>[
-                          Icon(Icons.star,
-                          color: Colors.white,
-                          size: screenHeight * 0.015,),
+                          Icon(
+                            Icons.star,
+                            color: Colors.white,
+                            size: screenHeight * 0.015,
+                          ),
                           SizedBox(
                             width: 10,
                           ),
                           Text(
                             rating.toString(),
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: screenHeight * 0.015,
-                              fontWeight: FontWeight.w500
-                            ),
+                                color: Colors.white,
+                                fontSize: screenHeight * 0.015,
+                                fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
@@ -227,18 +221,6 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Graph(),
-            MaterialButton(
-              onPressed: () {},
-              elevation: 7,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.camera,
-                color: primaryColor,
-                size: 30,),
-              ),
-              shape: CircleBorder(),
-            ),
           ],
         ),
       ),
