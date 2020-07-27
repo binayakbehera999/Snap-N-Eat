@@ -27,7 +27,7 @@ class _FriendListState extends State<FriendList> {
   }
 
   acceptFriendRequest(String friendId) {
-    var newFormat = DateFormat("yy-MM-dd");
+    var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
     print(updatedDt);
 
@@ -39,7 +39,7 @@ class _FriendListState extends State<FriendList> {
         .collection('Friends')
         .document(friendId)
         .setData({
-      'join': updatedDt,
+      'Friend Since': updatedDt,
     }).whenComplete(() {
       db
           .collection('users')
@@ -47,10 +47,11 @@ class _FriendListState extends State<FriendList> {
           .collection('Friends')
           .document(userId.uid)
           .setData({
-        'join': updatedDt,
+        'Friend Since': updatedDt,
       }).whenComplete(() => print("Added Friend into FriendsList"));
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

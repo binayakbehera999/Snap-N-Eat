@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/screens/friendlist.dart';
+import 'package:snap_n_eat/screens/friendrequest.dart';
 
 class FriendScreen extends StatefulWidget {
   FriendScreen({Key key}) : super(key: key);
@@ -26,7 +27,7 @@ class _FriendScreenState extends State<FriendScreen> {
           body: TabBarView(
             children: [
               FriendList(),
-              Icon(Icons.directions_transit),
+              FriendRequest(),
               Icon(Icons.directions_bike),
             ],
           ),
