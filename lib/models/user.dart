@@ -13,13 +13,13 @@ class User {
   List<String> pendingFriendRequests=[];
   List<double> healthRatingHistory=[];
   User({
-    @required this.uid,
-    @required this.fullName,
-    @required this.avatar,
-    @required this.height,
-    @required this.age,
-    @required this.gender,
-    @required this.weight,
+    this.uid,
+    this.fullName,
+    this.avatar,
+    this.height,
+    this.age,
+    this.gender,
+    this.weight,
     this.bmi = 0.0,
   });
   Map<String, dynamic> toMap() {
