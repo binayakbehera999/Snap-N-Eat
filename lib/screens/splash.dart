@@ -23,8 +23,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     var _duration = new Duration(seconds: 3);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
+    print(token);
     if (token != null) {
       oAuth.validate(token).then((value) {
+        print(value);
         setState(() {
           check = value;
           hasAccount = true;
@@ -52,7 +54,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       Navigator.pushReplacement(
           context,
           new MaterialPageRoute(
-              builder: (BuildContext context) => LoginScreen(hasAccount: hasAccount,)));
+              builder: (BuildContext context) => LoginScreen(
+                    hasAccount: hasAccount,
+                  )));
     }
   }
 

@@ -62,7 +62,7 @@ class OAuth {
                   .collection("users")
                   .document(user.uid)
                   .setData(user.toMap(), merge: true)
-                  .then((_) {
+                  .whenComplete(() {
                 print("Successfull");
               });
             }
@@ -77,17 +77,6 @@ class OAuth {
       }
     });
 
-    // SharedPreferences prefs = await _prefs;
-    // prefs.setString("token", token).then((value) {
-    //   if (value) {
-    //     Navigator.pushReplacement(
-    //         context,
-    //         new MaterialPageRoute(
-    //             builder: (BuildContext context) => MyHomePage(
-    //                   token: token,
-    //                 )));
-    //   }
-    // });
     return tokenResp;
   }
 
@@ -144,7 +133,7 @@ class OAuth {
       client.close();
     }
   }
-
+  
   Future<List<Response>> fetchAllData(String token) async {
     var client = http.Client();
     List<String> apiRequests = [
@@ -159,26 +148,10 @@ class OAuth {
 
     List<Response> list = await Future.wait(apiRequests.map((apiReq) =>
         client.get(apiReq, headers: {"Authorization": "Bearer $token"})));
-
-    // list.map((response) {
-    //   Map result = json.decode(response.body);
-    //   // print(result[0]);
-    //   if (result.containsKey('activities-calories')) {
-    //     dashBoardProvider
-    //         .setCalories(result['activities-calories'][0]['value']);
-    //     print(result['activities-calories'][0]['value']);
-    //   } else if (result.containsKey('activities-floors')) {
-    //     dashBoardProvider.setFloor(result['activities-floors'][0]['value']);
-    //   } else if (result.containsKey('activities-heart')) {
-    //     dashBoardProvider.setHeartRate(result['activities-heart'][0]['value']);
-    //   } else if (result.containsKey('sleep')) {
-    //     dashBoardProvider.setSteps(result['summary']['totalMinutesAsleep']);
-    //   }
-    //   // print(response.body);
-    // }).toList();
     return list;
   }
 
+  addUserstodB() async {}
   perMonthBurnt() {}
 
   perMonthSteps() {}
