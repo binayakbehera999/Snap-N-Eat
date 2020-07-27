@@ -50,7 +50,7 @@ class _SmallCardState extends State<SmallCard> {
               widget.unit,
               style: TextStyle(
                 fontFamily: 'Muli',
-                fontSize: 13,
+                fontSize: 11,
                 color: Colors.black,
                 fontWeight: FontWeight.w800,
               ),

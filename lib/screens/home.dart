@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 iconPath: "assets/icons/leaderboard.svg",
                 extras: {"label": "LeaderBoard"}),
             FluidNavBarIcon(
-                iconPath: "assets/icons/analytics.svg",
+                iconPath: "assets/icons/friendNav.svg",
                 extras: {"label": "Friends"})
           ],
           onChange: _handleNavigationChange,

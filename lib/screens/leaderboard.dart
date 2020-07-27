@@ -30,7 +30,12 @@ class _LeaderBoardState extends State<LeaderBoard> {
                 style: TextStyle(
                     fontFamily: "Muli", color: Colors.white, fontSize: 80)),
             Container(
-                color: Colors.white,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50)),
+                  color: Colors.white,
+                ),
                 height: screenHeight * 0.5,
                 width: screenWidth,
                 child: ListView(

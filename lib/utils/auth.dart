@@ -40,6 +40,7 @@ class OAuth {
         clientSecret: '75e8096e59982cb6e3d084c44c46102f',
         scopes: scopes);
     token = tokenResp.accessToken;
+    print(tokenResp.refreshToken);
     SharedPreferences prefs = await _prefs;
     prefs.setString("token", token).then((value) {
       if (value) {
@@ -135,7 +136,8 @@ class OAuth {
 
   Future<String> refreshToken(String token) async {
     var client = http.Client();
-    var uriResponse = await client.post(apiEndpoints.checkToken, headers: {
+    var uriResponse =
+        await client.post("https://api.fitbit.com/oauth2/token", headers: {
       "Authorization": "Basic 22BTRZ:75e8096e59982cb6e3d084c44c46102f",
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
