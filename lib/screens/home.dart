@@ -40,25 +40,19 @@ class _MyHomePageState extends State<MyHomePage> {
         if (result.containsKey('activities-calories')) {
           dashBoardProvider
               .setCalories(result['activities-calories'][0]['value']);
-          print(result['activities-calories'][0]['value'].runtimeType);
         } else if (result.containsKey('activities-floors')) {
           dashBoardProvider.setFloor(result['activities-floors'][0]['value']);
-          print(result['activities-floors'][0]['value'].runtimeType);
         } else if (result.containsKey('activities-distance')) {
           dashBoardProvider
               .setDistance(result['activities-distance'][0]['value']);
-          print(result['activities-distance'][0]['value'].runtimeType);
         } else if (result.containsKey('activities-heart')) {
           dashBoardProvider
               .setHeartRate(result['activities-heart'][0]['value']);
-          print(result['activities-heart'][0]['value'].runtimeType);
         } else if (result.containsKey('activities-steps')) {
           dashBoardProvider.setSteps(result['activities-steps'][0]['value']);
-          print(result['activities-steps'][0]['value'].runtimeType);
         } else if (result.containsKey('sleep')) {
           dashBoardProvider
               .setSleep(result['summary']['totalMinutesAsleep'].toString());
-          print(result['summary']['totalMinutesAsleep'].runtimeType);
         } else if (result.containsKey('user')) {
           dashBoardProvider.sesetUserDetails(
               result['user']['firstName'],
@@ -68,7 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
               result['user']['avatar150'],
               result['user']['height'],
               result['user']['weight']);
-          // print(result['user']['height'].runtimeType);
         }
       }).toList();
     });
@@ -77,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        
         body: _child,
         floatingActionButton: Container(
           width: 45,

@@ -17,29 +17,6 @@ class _DashBoardState extends State<DashBoard> {
     var screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.white,
-      //   primary: true,
-      //   centerTitle: false,
-      //   title: Text(
-      //     "Hello \n\t\t Binayak",
-      //     style: TextStyle(
-      //       fontFamily: 'Muli',
-      //       fontSize: 30,
-      //       color: const Color(0xff29347b),
-      //       fontWeight: FontWeight.w700,
-      //     ),
-      //     textAlign: TextAlign.left,
-      //   ),
-      //   titleSpacing: 5.0,
-      //   actions: <Widget>[
-      //     Icon(
-      //       Icons.dashboard,
-      //       color: const Color(0xff29347b),
-      //     ),
-      //   ],
-      // ),
       body: Consumer<DashBoardProvider>(
         builder: (context, value, child) => SingleChildScrollView(
           primary: false,

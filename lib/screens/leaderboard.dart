@@ -29,14 +29,17 @@ class _LeaderBoardState extends State<LeaderBoard> {
             Text("8 th",
                 style: TextStyle(
                     fontFamily: "Muli", color: Colors.white, fontSize: 80)),
-            ListView(
-              children: <Widget>[
-                Container(child: LeaderBoardCard(),
-					 height: 200,
-					 width: 100,
-					 ),
-              ],
-            )
+            Container(
+                color: Colors.white,
+                height: screenHeight * 0.5,
+                width: screenWidth,
+                child: ListView(
+                  children: <Widget>[
+                    LeaderBoardCard(),
+                    LeaderBoardCard(),
+                    LeaderBoardCard()
+                  ],
+                ))
           ],
         ),
       ),
