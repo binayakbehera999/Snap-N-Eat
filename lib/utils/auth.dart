@@ -40,7 +40,9 @@ class OAuth {
         clientSecret: '75e8096e59982cb6e3d084c44c46102f',
         scopes: scopes);
     token = tokenResp.accessToken;
+    print(tokenResp.refreshToken);
     SharedPreferences prefs = await _prefs;
+    prefs.setString("refreshToken", tokenResp.refreshToken);
     prefs.setString("token", token).then((value) {
       if (value) {
         getUserProfile().then((userProfile) {
@@ -124,14 +126,22 @@ class OAuth {
 
   Future<String> refreshToken(String token) async {
     var client = http.Client();
-    var uriResponse = await client.post(apiEndpoints.checkToken, headers: {
-      "Authorization": "Basic 22BTRZ:75e8096e59982cb6e3d084c44c46102f",
+    var secretKey = "22BTRZ:75e8096e59982cb6e3d084c44c46102f";
+    var bytes = utf8.encode(secretKey);
+    var base64Str = base64.encode(bytes);
+    print(base64Str);
+    var uriResponse =
+        await client.post("https://api.fitbit.com/oauth2/token ", headers: {
+      "Authorization": "Basic $base64Str",
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
-      "token": "$token"
+      "grant_type": "refresh_token",
+      "token": "$token",
     });
-    token = json.decode(uriResponse.body);
-
+    Map result = json.decode(uriResponse.body);
+    print(result);
+    SharedPreferences prefs = await _prefs;
+    prefs.setString("token", token).then((value) => print(value));
     print(token);
     return token;
   }
@@ -147,7 +157,7 @@ class OAuth {
       client.close();
     }
   }
-  
+
   Future<List<Response>> fetchAllData(String token) async {
     var client = http.Client();
     List<String> apiRequests = [

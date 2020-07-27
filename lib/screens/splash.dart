@@ -10,7 +10,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   var oAuth;
   bool check = true;
   String token;
@@ -29,9 +30,18 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         print(value);
         setState(() {
           check = value;
-          hasAccount = true;
         });
-        return new Timer(_duration, navigation);
+        if (value) {
+          return new Timer(_duration, navigation);
+        } else {
+          oAuth.refreshToken(token).then((value) {
+            setState(() {
+              
+              token = value;
+            });
+            return new Timer(_duration, navigation);
+          });
+        }
       });
     } else {
       setState(() {
@@ -64,10 +74,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     oAuth = new OAuth();
-     animationController = new AnimationController(
+    // oAuth.refreshToken(token).then((value) => print(value));
+    animationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 2));
-    animation =
-    new CurvedAnimation(parent: animationController, curve: Curves.elasticInOut);
+    animation = new CurvedAnimation(
+        parent: animationController, curve: Curves.elasticInOut);
 
     animation.addListener(() => this.setState(() {}));
     animationController.forward();

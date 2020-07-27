@@ -71,25 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _child,
-        floatingActionButton: Container(
-          width: 45,
-          height: 45,
-          child: FittedBox(
-            fit: BoxFit.fill,
-            child: FloatingActionButton(
-              onPressed: () => print("clicked"),
-              backgroundColor: Colors.white,
-              elevation: 5.0,
-              splashColor: Color(0xff29347b),
-              child: Icon(
-                Icons.camera,
-                color: Color(0xff29347b),
-                size: 40,
-              ),
-            ),
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         bottomNavigationBar: FluidNavBar(
           icons: [
             FluidNavBarIcon(
