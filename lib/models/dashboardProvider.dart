@@ -1,20 +1,32 @@
 import 'package:flutter/widgets.dart';
 
 class DashBoardProvider with ChangeNotifier {
-  String calorie;
-  String distance;
-  String floor;
-  String heartrate;
-  String steps;
-  String sleep;
-  String firstName;
+  String calorie = "Loading...";
+  String distance = "Loading...";
+  String floor = "Loading...";
+  String heartrate = "Loading...";
+  String steps = "Loading...";
+  String sleep = "Loading...";
+  String firstName = "Loading...";
+  String lastName = "Loading...";
+  String email = "Loading...";
+  String gender = "";
+  double height;
+  double weight;
+  String avatar;
 
   void setCalories(String calories) {
     this.calorie = calories;
     notifyListeners();
   }
-  void setFirstName(String firstName) {
+
+  void sesetUserDetails(String firstName, String lastName, String gender, String avatar,
+    double height, double weight) {
     this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.height = height;
+    this.weight = weight;
     notifyListeners();
   }
 

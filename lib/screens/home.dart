@@ -60,7 +60,14 @@ class _MyHomePageState extends State<MyHomePage> {
               .setSleep(result['summary']['totalMinutesAsleep'].toString());
           print(result['summary']['totalMinutesAsleep'].runtimeType);
         } else if (result.containsKey('user')) {
-          dashBoardProvider.setFirstName(result['user']['firstName']);
+          dashBoardProvider.sesetUserDetails(
+              result['user']['firstName'],
+              result['user']['lastName'],
+              result['user']['gender'],
+              result['user']['avatar150'],
+              result['user']['height'],
+              result['user']['weight']);
+          print(result['user']['height'].runtimeType);
         }
       }).toList();
     });
@@ -92,14 +99,17 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: FluidNavBar(
           icons: [
             FluidNavBarIcon(
-                iconPath: "assets/icons/dashboard.svg", extras: {"label": ""}),
+                iconPath: "assets/icons/dashboard.svg",
+                extras: {"label": "DashBoard"}),
             FluidNavBarIcon(
                 iconPath: "assets/icons/account_circle.svg",
-                extras: {"label": "Dashboard"}),
+                extras: {"label": "Profile"}),
             FluidNavBarIcon(
                 iconPath: "assets/icons/leaderboard.svg",
-                extras: {"label": "partner"}),
-            FluidNavBarIcon(iconPath: "assets/icons/analytics.svg",extras: {"label": ""} )
+                extras: {"label": "LeaderBoard"}),
+            FluidNavBarIcon(
+                iconPath: "assets/icons/analytics.svg",
+                extras: {"label": "Friends"})
           ],
           onChange: _handleNavigationChange,
           style: FluidNavBarStyle(

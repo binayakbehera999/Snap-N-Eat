@@ -40,26 +40,34 @@ class OAuth {
         clientSecret: '75e8096e59982cb6e3d084c44c46102f',
         scopes: scopes);
     token = tokenResp.accessToken;
-    getUserProfile().then((value) {
-      User user = new User(
-          uid: value["encodedId"],
-          fullName: value["fullName"],
-          avatar: value["avatar150"],
-          height: value["height"],
-          age: value["age"],
-          gender: value["gender"],
-          weight: value["weight"]);
-      firestoreInstance
-          .collection("users")
-          .document(user.uid)
-          .setData(user.toMap(), merge: true)
-          .then((_) {
-        print("Successfull");
-      });
-    });
     SharedPreferences prefs = await _prefs;
     prefs.setString("token", token).then((value) {
       if (value) {
+        getUserProfile().then((userProfile) {
+          firestoreInstance
+              .collection('users')
+              .document(userProfile["encodedId"])
+              .get()
+              .then((value) {
+            if (value == null) {
+              User user = new User(
+                  uid: userProfile["encodedId"],
+                  fullName: userProfile["fullName"],
+                  avatar: userProfile["avatar150"],
+                  height: userProfile["height"],
+                  age: userProfile["age"],
+                  gender: userProfile["gender"],
+                  weight: userProfile["weight"]);
+              firestoreInstance
+                  .collection("users")
+                  .document(user.uid)
+                  .setData(user.toMap(), merge: true)
+                  .then((_) {
+                print("Successfull");
+              });
+            }
+          });
+        });
         Navigator.pushReplacement(
             context,
             new MaterialPageRoute(
@@ -68,6 +76,18 @@ class OAuth {
                     )));
       }
     });
+
+    // SharedPreferences prefs = await _prefs;
+    // prefs.setString("token", token).then((value) {
+    //   if (value) {
+    //     Navigator.pushReplacement(
+    //         context,
+    //         new MaterialPageRoute(
+    //             builder: (BuildContext context) => MyHomePage(
+    //                   token: token,
+    //                 )));
+    //   }
+    // });
     return tokenResp;
   }
 
