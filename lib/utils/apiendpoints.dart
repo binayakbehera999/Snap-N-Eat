@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 class APIEndpoints {
   final DateTime now = DateTime.now();
+
   final formatter = DateFormat('yyyy-MM-dd');
   String perDayBurnt;
   String floor;

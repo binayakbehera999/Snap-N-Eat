@@ -8,6 +8,20 @@ class RatingCalculator {
     }
   }
 
+  double bmiCalculator(double height, double weight) {
+    double bmi = (weight / (height * height)) * 10000;
+    return bmi;
+  }
+
+  double optimumWeight(double bmi) {
+    if (bmi < 18.5)
+      return 18.5;
+    else if (bmi > 24.9)
+      return 24.9;
+    else
+      return bmi;
+  }
+
   double newBmrCalc(double height, double optimumBmi, String sex, int age) {
     double optimumWeight;
     double bmr;
@@ -26,11 +40,11 @@ class RatingCalculator {
     return rating;
   }
 
-  double goalRating(initialWeight, currWeight, totalWeek, currWeek, height) {
-    double goalWeight = 21.7 * height * height / 10000;
-    double idealWeightChange =
-        (((goalWeight - initialWeight) / totalWeek) * currWeek).abs();
-    double actualWeightChange = (initialWeight - currWeight).abs();
-    return (actualWeightChange / idealWeightChange) * 5;
-  }
+  // double goalRating(initialWeight, currWeight, totalWeek, currWeek, height) {
+  //   double goalWeight = 21.7 * height * height / 10000;
+  //   double idealWeightChange =
+  //       (((goalWeight - initialWeight) / totalWeek) * currWeek).abs();
+  //   double actualWeightChange = (initialWeight - currWeight).abs();
+  //   return (actualWeightChange / idealWeightChange) * 5;
+  // }
 }
