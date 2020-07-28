@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/components/leaderBoardCard.dart';
+import 'package:snap_n_eat/components/leaderCard.dart';
 
 class LeaderBoard extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class LeaderBoard extends StatefulWidget {
 class _LeaderBoardState extends State<LeaderBoard> {
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
+    // var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xff29347b),
@@ -17,17 +18,21 @@ class _LeaderBoardState extends State<LeaderBoard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "Rank",
-              style: TextStyle(
-                color: Color(0xff535C94),
-                fontSize: 80,
-                fontFamily: "Muli",
-              ),
+            Container(
+              child: Column(children: <Widget>[
+                Text(
+                  "Rank",
+                  style: TextStyle(
+                    color: Color(0xff535C94),
+                    fontSize: 80,
+                    fontFamily: "Muli",
+                  ),
+                ),
+                Text("8 th",
+                    style: TextStyle(
+                        fontFamily: "Muli", color: Colors.white, fontSize: 80)),
+              ]),
             ),
-            Text("8 th",
-                style: TextStyle(
-                    fontFamily: "Muli", color: Colors.white, fontSize: 80)),
             Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -35,10 +40,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
                       topRight: Radius.circular(50)),
                   color: Colors.white,
                 ),
-                height: screenHeight * 0.5,
                 width: screenWidth,
                 child: ListView(
                   children: <Widget>[
+                    LeaderCard(),
                     LeaderBoardCard(),
                     LeaderBoardCard(),
                     LeaderBoardCard()
