@@ -124,7 +124,7 @@ class OAuth {
     }
   }
 
-  Future<String> refreshToken(String token) async {
+  Future<String> refreshToken(String refreshToken) async {
     var client = http.Client();
     var secretKey = "22BTRZ:75e8096e59982cb6e3d084c44c46102f";
     var bytes = utf8.encode(secretKey);
@@ -136,7 +136,7 @@ class OAuth {
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
       "grant_type": "refresh_token",
-      "token": "$token",
+      "refresh_token": "$refreshToken",
     });
     Map result = json.decode(uriResponse.body);
     print(result);

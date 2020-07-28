@@ -121,7 +121,7 @@ class _ProfileState extends State<Profile> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Binayak \nBehera",
+                        "Binayak Behera",
                         style: TextStyle(
                             color: const Color(0xff29347b),
                             fontSize: screenWidth * 0.05,
@@ -200,22 +200,22 @@ class _ProfileState extends State<Profile> {
                     iconSvg: "assets/icons/height.svg",
                     unit: "ft",
                     value: "$height",
-                    height: screenWidth * 0.28,
+                    height: screenWidth * 0.25,
                     width: screenWidth * 0.25,
                   ),
                   SmallCard(
                     iconSvg: "assets/icons/weight-scale.svg",
                     unit: "KGs",
                     value: "$weight",
-                    height: screenWidth * 0.28,
+                    height: screenWidth * 0.25,
                     width: screenWidth * 0.25,
                   ),
                   SmallCard(
                     iconSvg: "assets/icons/bmi.svg",
-                    unit: "kg/m^2",
+                    unit: "k/m2",
                     value: "$height",
-                    height: screenWidth * 0.28,
-                    width: screenWidth * 0.25,
+                    height: screenWidth * 0.25,
+                    width: screenWidth * 0.29,
                   ),
                 ],
               ),

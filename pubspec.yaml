@@ -78,6 +78,14 @@ flutter:
     - assets/icons/radial_gradient.svg
     - assets/icons/weight-scale.svg
     - assets/icons/logo.png
+    - assets/icons/friend.svg
+    - assets/icons/friendNav.svg
+    - assets/icons/challenge.svg
+    - assets/icons/addFriend.svg
+    - assets/icons/check.svg
+    - assets/icons/clear.svg
+
+
 
 
 

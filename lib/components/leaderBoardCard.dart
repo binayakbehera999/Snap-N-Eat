@@ -10,6 +10,8 @@ class LeaderBoardCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
           child: Card(
+            elevation: 15.0,
+            shadowColor: lightGradient,
             color: Colors.white,
             child: Row(
               children: <Widget>[
@@ -36,15 +38,15 @@ class LeaderBoardCard extends StatelessWidget {
                         "John",
                         style: TextStyle(
                             color: Color(0xff535C94),
-                            fontSize: 18,
+                            fontSize: 15,
                             fontFamily: "Muli"),
                       ),
                       Text(
                         "22541",
                         style: TextStyle(
                             color: Color(0xff535C94),
-                            fontSize: 18,
-                            fontFamily: "Muli",
+                            fontSize: 15,
+                            fontFamily: "Poppins",
                             fontWeight: FontWeight.w600),
                       )
                     ],
