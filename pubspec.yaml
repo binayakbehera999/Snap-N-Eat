@@ -84,6 +84,9 @@ flutter:
     - assets/icons/addFriend.svg
     - assets/icons/check.svg
     - assets/icons/clear.svg
+    - assets/icons/crown.svg
+    - assets/icons/star.svg
+
 
 
 

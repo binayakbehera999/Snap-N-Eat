@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/components/leaderBoardCard.dart';
+import 'package:snap_n_eat/components/leaderCard.dart';
 
 class LeaderBoard extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class LeaderBoard extends StatefulWidget {
 class _LeaderBoardState extends State<LeaderBoard> {
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
+    // var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xff29347b),
@@ -39,8 +40,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
                       topRight: Radius.circular(50)),
                   color: Colors.white,
                 ),
+                width: screenWidth,
                 child: ListView(
                   children: <Widget>[
+                    LeaderCard(),
                     LeaderBoardCard(),
                     LeaderBoardCard(),
                     LeaderBoardCard()
