@@ -13,8 +13,7 @@ class Loader extends StatefulWidget {
   _LoaderState createState() => _LoaderState();
 }
 
-class _LoaderState extends State<Loader>
-    with SingleTickerProviderStateMixin {
+class _LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
   Animation<double> animation_rotation;
   Animation<double> animation_radius_in;
   Animation<double> animation_radius_out;
@@ -83,7 +82,6 @@ class _LoaderState extends State<Loader>
       height: 100.0,
       child: new Center(
         child: new RotationTransition(
-
           turns: animation_rotation,
           child: new Container(
             child: new Center(
@@ -187,7 +185,6 @@ class _LoaderState extends State<Loader>
 
   @override
   void dispose() {
-
     controller.dispose();
     super.dispose();
   }

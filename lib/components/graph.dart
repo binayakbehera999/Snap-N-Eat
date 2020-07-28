@@ -8,7 +8,6 @@ class Graph extends StatefulWidget {
 }
 
 class _GraphState extends State<Graph> {
-
   bool isShowingMainData;
 
   @override
@@ -326,11 +325,11 @@ class _GraphState extends State<Graph> {
       ),
     ];
   }
-  
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
-    var screenWidth = MediaQuery.of(context).size.width;
+    // var screenWidth = MediaQuery.of(context).size.width;
 
     return AspectRatio(
       aspectRatio: 1.23,
@@ -357,10 +356,10 @@ class _GraphState extends State<Graph> {
                 Text(
                   'Graph Data',
                   style: TextStyle(
-                    color: lightGradient,
-                    fontSize: screenHeight * 0.02,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2),
+                      color: lightGradient,
+                      fontSize: screenHeight * 0.02,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(

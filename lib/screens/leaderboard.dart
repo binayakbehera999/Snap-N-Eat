@@ -17,17 +17,21 @@ class _LeaderBoardState extends State<LeaderBoard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "Rank",
-              style: TextStyle(
-                color: Color(0xff535C94),
-                fontSize: 80,
-                fontFamily: "Muli",
-              ),
+            Container(
+              child: Column(children: <Widget>[
+                Text(
+                  "Rank",
+                  style: TextStyle(
+                    color: Color(0xff535C94),
+                    fontSize: 80,
+                    fontFamily: "Muli",
+                  ),
+                ),
+                Text("8 th",
+                    style: TextStyle(
+                        fontFamily: "Muli", color: Colors.white, fontSize: 80)),
+              ]),
             ),
-            Text("8 th",
-                style: TextStyle(
-                    fontFamily: "Muli", color: Colors.white, fontSize: 80)),
             Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -35,8 +39,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
                       topRight: Radius.circular(50)),
                   color: Colors.white,
                 ),
-                height: screenHeight * 0.5,
-                width: screenWidth,
                 child: ListView(
                   children: <Widget>[
                     LeaderBoardCard(),

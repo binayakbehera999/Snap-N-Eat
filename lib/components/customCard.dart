@@ -5,15 +5,8 @@ class CustomCard extends StatefulWidget {
   final String iconSvg;
   final String value;
   final String unit;
-  final bool percentageIndicator;
   final double height, width;
-  CustomCard(
-      {this.iconSvg,
-      this.value,
-      this.unit,
-      this.percentageIndicator,
-      this.height,
-      this.width});
+  CustomCard({this.iconSvg, this.value, this.unit, this.height, this.width});
   @override
   _CustomCardState createState() => _CustomCardState();
 }

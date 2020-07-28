@@ -71,14 +71,12 @@ class _DashBoardState extends State<DashBoard> {
                         CustomCard(
                           value: value.calorie.toString(),
                           unit: "kcal",
-                          percentageIndicator: true,
                           iconSvg: "assets/icons/calorie.svg",
                           height: screenHeight * 0.25,
                           width: screenWidth * 0.35,
                         ),
                         SizedBox(height: screenWidth * 0.03),
                         CustomCard(
-                          percentageIndicator: false,
                           iconSvg: "assets/icons/heartbeat.svg",
                           value: value.heartrate,
                           unit: "scores",
@@ -107,7 +105,6 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                         SizedBox(height: screenWidth * 0.03),
                         CustomCard(
-                          percentageIndicator: false,
                           iconSvg: "assets/icons/foot.svg",
                           value: value.steps.toString(),
                           unit: "scores",
@@ -116,7 +113,6 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                         SizedBox(height: screenWidth * 0.03),
                         CustomCard(
-                          percentageIndicator: false,
                           iconSvg: "assets/icons/stairs.svg",
                           unit: "kms",
                           value: value.floor.toString(),
@@ -128,17 +124,17 @@ class _DashBoardState extends State<DashBoard> {
                   ],
                 ),
                 Center(
-                    child: RaisedButton(
-                      onPressed: () => print("clicked"),
-                      shape: CircleBorder(),
-                      elevation: 5.0,
-                      splashColor: Color(0xff29347b),
-                      child: Icon(
-                        Icons.camera,
-                        color: Colors.grey,
-                        size: 40,
-                      ),
+                  child: RaisedButton(
+                    onPressed: () => print("clicked"),
+                    shape: CircleBorder(),
+                    elevation: 5.0,
+                    splashColor: Color(0xff29347b),
+                    child: Icon(
+                      Icons.camera,
+                      color: Colors.grey,
+                      size: 40,
                     ),
+                  ),
                 ),
               ],
             ),
