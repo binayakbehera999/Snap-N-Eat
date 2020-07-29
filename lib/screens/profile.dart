@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_n_eat/components/graph.dart';
-import 'package:snap_n_eat/components/smallCard.dart';
+import 'package:snap_n_eat/components/profileCard.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
 class Profile extends StatefulWidget {
@@ -191,26 +191,26 @@ class _ProfileState extends State<Profile> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  SmallCard(
+                  ProfileCard(
                     iconSvg: "assets/icons/height.svg",
-                    unit: "ft",
+                    unit: "CM",
                     value: "$height",
                     height: screenWidth * 0.25,
                     width: screenWidth * 0.25,
                   ),
-                  SmallCard(
+                  ProfileCard(
                     iconSvg: "assets/icons/weight-scale.svg",
                     unit: "KGs",
                     value: "$weight",
                     height: screenWidth * 0.25,
                     width: screenWidth * 0.25,
                   ),
-                  SmallCard(
+                  ProfileCard(
                     iconSvg: "assets/icons/bmi.svg",
                     unit: "k/m2",
                     value: "$height",
                     height: screenWidth * 0.25,
-                    width: screenWidth * 0.29,
+                    width: screenWidth * 0.25,
                   ),
                 ],
               ),
