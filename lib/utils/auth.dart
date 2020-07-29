@@ -131,7 +131,7 @@ class OAuth {
     var base64Str = base64.encode(bytes);
     print(base64Str);
     var uriResponse =
-        await client.post("https://api.fitbit.com/oauth2/token ", headers: {
+        await client.post("https://api.fitbit.com/oauth2/token", headers: {
       "Authorization": "Basic $base64Str",
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
@@ -139,10 +139,12 @@ class OAuth {
       "refresh_token": "$refreshToken",
     });
     Map result = json.decode(uriResponse.body);
-    print(result);
+    print(result['token']);
+    String token = result['token'];
+    String refreshtoken = result['refresh_token'];
     SharedPreferences prefs = await _prefs;
     prefs.setString("token", token).then((value) => print(value));
-    print(token);
+    prefs.setString("refreshToken", refreshtoken).then((value) => print(value));
     return token;
   }
 

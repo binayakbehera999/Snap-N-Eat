@@ -170,7 +170,7 @@ class _FriendRequestState extends State<FriendRequest> {
                         itemBuilder: (context, index) {
                           DocumentSnapshot pendingRequests =
                               snapshot.data.documents[index];
-                          print(pendingRequests.data);
+                          
                           return FriendRequestTiles(
                             name: pendingRequests['fullName'],
                             avatar: pendingRequests['avatar'],

@@ -36,11 +36,11 @@ class _SplashScreenState extends State<SplashScreen>
         } else {
           oAuth.refreshToken(token).then((value) {
             setState(() {
-              
               token = value;
             });
             return new Timer(_duration, navigation);
           });
+          // return new Timer(_duration, navigation);
         }
       });
     } else {

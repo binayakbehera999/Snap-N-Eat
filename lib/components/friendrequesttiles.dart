@@ -16,24 +16,34 @@ class FriendRequestTiles extends StatefulWidget {
 class _FriendRequestTilesState extends State<FriendRequestTiles> {
   @override
   Widget build(BuildContext context) {
-    return new ListTile(
-      title: Text(widget.name),
-      leading: CircleAvatar(child: Image.network(widget.avatar)),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          RaisedButton(
-            onPressed: null,
-            child: Icon(Icons.flight),
-          ),
-          Padding(
-            padding: EdgeInsets.all(2.0),
-          ),
-          RaisedButton(
-            onPressed: null,
-            child: Icon(Icons.flight),
-          ),
-        ],
+    return Card(
+      margin: EdgeInsets.all(5.0),
+      shadowColor: Colors.grey,
+      elevation: 15.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(20.0),
+        ),
+      ),
+      child: new ListTile(
+        title: Text(widget.name),
+        leading: CircleAvatar(child: Image.network(widget.avatar)),
+        trailing: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            RaisedButton(
+              onPressed: null,
+              child: Icon(Icons.flight),
+              shape: CircleBorder(),
+            ),
+            RaisedButton(
+              onPressed: null,
+              child: Icon(Icons.flight),
+              shape: CircleBorder(),
+            ),
+          ],
+        ),
       ),
     );
   }
