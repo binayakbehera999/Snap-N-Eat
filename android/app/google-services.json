@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "523954535513",
+    "firebase_url": "https://gamify-insurance.firebaseio.com",
+    "project_id": "gamify-insurance",
+    "storage_bucket": "gamify-insurance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523954535513:android:9f27786fadce5f74d64548",
+        "android_client_info": {
+          "package_name": "com.example.snap_n_eat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523954535513-rinnvpok6du058kt1372gor0s67r958p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1n1heS2rVOToOwZPOLpGkGSi3wqabMsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523954535513-rinnvpok6du058kt1372gor0s67r958p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
