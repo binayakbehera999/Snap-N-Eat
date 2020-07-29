@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:snap_n_eat/screens/challengers.dart';
 import 'package:snap_n_eat/screens/friendlist.dart';
 import 'package:snap_n_eat/screens/friendrequest.dart';
 
@@ -29,7 +30,7 @@ class _FriendScreenState extends State<FriendScreen> {
           children: [
             FriendList(),
             FriendRequest(),
-            Icon(Icons.directions_bike),
+            ChallengerScreen(),
           ],
         ),
       ),
