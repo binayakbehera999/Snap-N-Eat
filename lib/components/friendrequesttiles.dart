@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FriendRequestTiles extends StatefulWidget {
   final String name;
@@ -17,7 +18,6 @@ class _FriendRequestTilesState extends State<FriendRequestTiles> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(5.0),
       shadowColor: Colors.grey,
       elevation: 15.0,
       shape: RoundedRectangleBorder(
@@ -34,12 +34,12 @@ class _FriendRequestTilesState extends State<FriendRequestTiles> {
           children: <Widget>[
             RaisedButton(
               onPressed: null,
-              child: Icon(Icons.flight),
+              child: new SvgPicture.asset("assets/icons/check.svg"),
               shape: CircleBorder(),
             ),
             RaisedButton(
               onPressed: null,
-              child: Icon(Icons.flight),
+              child: new SvgPicture.asset("assets/icons/clear.svg"),
               shape: CircleBorder(),
             ),
           ],
