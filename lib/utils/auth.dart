@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 import 'package:oauth2_client/access_token_response.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
 import 'package:snap_n_eat/models/FitbitOAuth.dart';
@@ -138,7 +139,9 @@ class OAuth {
       "grant_type": "refresh_token",
       "refresh_token": "$refreshToken",
     });
+    print(uriResponse.body);
     Map result = json.decode(uriResponse.body);
+
     print(result['token']);
     String token = result['token'];
     String refreshtoken = result['refresh_token'];
@@ -162,28 +165,22 @@ class OAuth {
 
   Future<List<Response>> fetchAllData(String token) async {
     var client = http.Client();
+    var newFormat = DateFormat("HH:MM");
+    String updatedDt = newFormat.format(DateTime.now());
+    print(updatedDt);
     List<String> apiRequests = [
-      "https://api.fitbit.com/1/user/-/activities/calories/date/2020-01-15/1d/15min/time/12:30/12:45.json",
-      "https://api.fitbit.com/1/user/-/activities/floors/date/2020-01-15/1d/15min/time/12:30/12:45.json",
-      "https://api.fitbit.com/1/user/-/activities/distance/date/2020-01-15/1d/15min/time/12:30/12:45.json",
-      "https://api.fitbit.com/1/user/-/activities/heart/date/2020-01-15/1d/1sec/time/00:00/00:01.json",
-      "https://api.fitbit.com/1/user/-/activities/steps/date/2020-01-15/1d/15min/time/12:30/12:45.json",
-      "https://api.fitbit.com/1.2/user/-/sleep/date/2020-01-15.json",
       "https://api.fitbit.com/1/user/-/profile.json",
+      "https://api.fitbit.com/1/user/-/activities/calories/date/today/1d/15min/time/00:00/$updatedDt.json",
+      "https://api.fitbit.com/1/user/-/activities/floors/date/today/1d/15min/time/00:00/$updatedDt.json",
+      "https://api.fitbit.com/1/user/-/activities/distance/date/today/1d/15min/time/00:00/12:45.json",
+      "https://api.fitbit.com/1/user/-/activities/heart/date/today/1d/1sec/time/00:00/$updatedDt.json",
+      "https://api.fitbit.com/1.2/user/-/sleep/date/today.json",
+      "https://api.fitbit.com/1/user/-/activities/steps/date/today/1d/15min/time/00:00/$updatedDt.json",
     ]; //different ids
 
     List<Response> list = await Future.wait(apiRequests.map((apiReq) =>
         client.get(apiReq, headers: {"Authorization": "Bearer $token"})));
+
     return list;
   }
-
-  addUserstodB() async {}
-  perMonthBurnt() {}
-
-  perMonthSteps() {}
-  perDaySteps() {}
-  perDayIntake() {}
-  heartRate() {}
-  perDayActivity() {}
-  foods() {}
 }

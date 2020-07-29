@@ -46,7 +46,7 @@ class _DashBoardState extends State<DashBoard> {
                             textAlign: TextAlign.left,
                           ),
                           Text(
-                            value.firstName,
+                            value.fullName.split(" ").first,
                             style: TextStyle(
                               color: primaryColor,
                               fontSize: 40,

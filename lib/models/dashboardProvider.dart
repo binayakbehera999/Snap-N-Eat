@@ -8,11 +8,12 @@ class DashBoardProvider with ChangeNotifier {
   String heartrate = "Loading...";
   String steps = "Loading...";
   String sleep = "Loading...";
-  String firstName = "Loading...";
-  String lastName = "Loading...";
+  String fullName = "Loading...";
   String email = "Loading...";
   String userId = "Loading...";
   String gender = "";
+  double rating = 0.0;
+  double bmi = 0.0;
   double height;
   double weight;
   String avatar;
@@ -22,18 +23,19 @@ class DashBoardProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void sesetUserDetails(String firstName, String lastName, String gender,
-      String userId, String avatar, double height, double weight) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  void setUserDetails(String fullName, String gender, String userId,
+      String avatar, double height, double weight, double rating, double bmi) {
+    this.fullName = fullName;
     this.gender = gender;
     this.height = height;
     this.weight = weight;
     this.userId = userId;
     this.avatar = avatar;
+    this.rating = rating;
+    this.bmi = bmi;
     user = new User(
         uid: userId,
-        fullName: firstName + lastName,
+        fullName: fullName,
         avatar: avatar,
         height: height,
         age: 0,

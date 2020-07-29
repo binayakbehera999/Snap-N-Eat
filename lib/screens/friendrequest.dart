@@ -18,14 +18,12 @@ class _FriendRequestState extends State<FriendRequest> {
   TextEditingController addFriendTextContoller;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     addFriendTextContoller = new TextEditingController();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     addFriendTextContoller.dispose();
     super.dispose();
   }
