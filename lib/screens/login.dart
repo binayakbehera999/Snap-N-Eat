@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:snap_n_eat/utils/auth.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({@required this.hasAccount, Key key,}) : super(key: key);
+  LoginScreen({
+    @required this.hasAccount,
+    Key key,
+  }) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -38,17 +42,21 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Center(
           widthFactor: 5.0,
           child: RaisedButton.icon(
-            shape:RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          ),
-          padding: EdgeInsets.all(16.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            ),
+            padding: EdgeInsets.all(16.0),
             onPressed: () {
-              oauth.authorise(context,widget.hasAccount).then((value) {
+              oauth.authorise(context, widget.hasAccount).then((value) {
                 print(value);
               });
             },
-            color: Color(0xff29347b),
-            icon: Icon(Icons.lock_open,size: 30,color: Colors.white,),
+            color: primaryColor,
+            icon: Icon(
+              Icons.lock_open,
+              size: 30,
+              color: Colors.white,
+            ),
             label: Text(
               "Login",
               style: TextStyle(
@@ -59,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               textAlign: TextAlign.left,
             ),
-            
           ),
         ),
       ),

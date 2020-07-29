@@ -55,8 +55,10 @@ class LeaderCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: new SvgPicture.asset(
-                    "assets/icons/star.svg",
+                    "assets/icons/crown.svg",
                     color: Colors.yellow,
+                    height: 30,
+                    width: 30,
                   ),
                 )
               ],

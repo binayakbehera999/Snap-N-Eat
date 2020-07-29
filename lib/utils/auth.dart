@@ -86,8 +86,8 @@ class OAuth {
     OAuth2Helper oauth2Helper = OAuth2Helper(
       client,
       grantType: OAuth2Helper.AUTHORIZATION_CODE,
-      clientId: '22BTRZ',
-      clientSecret: '75e8096e59982cb6e3d084c44c46102f',
+      clientId: '22BTYH',
+      clientSecret: 'cb2538d70342d5c6f1880535a4a4c766',
       scopes: scopes,
     );
     return oauth2Helper.getToken();

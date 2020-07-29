@@ -9,6 +9,7 @@ import 'package:snap_n_eat/screens/friends.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
 import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/auth.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({@required this.token, Key key}) : super(key: key);
@@ -88,8 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           onChange: _handleNavigationChange,
           style: FluidNavBarStyle(
-              barBackgroundColor: Color(0xff29347b),
-              iconBackgroundColor: Color(0xff29347b),
+              barBackgroundColor: primaryColor,
+              iconBackgroundColor: primaryColor,
               iconSelectedForegroundColor: Colors.white,
               iconUnselectedForegroundColor: Colors.white),
           scaleFactor: 2.0,

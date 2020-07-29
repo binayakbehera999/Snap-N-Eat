@@ -66,7 +66,7 @@ class _ProfileState extends State<Profile> {
                   SvgPicture.asset(
                     "assets/icons/dashboard.svg",
                     alignment: Alignment.topRight,
-                    color: const Color(0xff29347b),
+                    color: primaryColor,
                     height: screenHeight * 0.03,
                   ),
                 ],
@@ -78,11 +78,6 @@ class _ProfileState extends State<Profile> {
                 Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
-                    // SvgPicture.asset(
-                    //   "assets/icons/radial_gradient.svg",
-                    //   height: screenWidth * 0.3,
-                    //   color: primaryColor,
-                    // ),
                     Container(
                       height: screenWidth * 0.35,
                       width: screenWidth * 0.35,
@@ -123,7 +118,7 @@ class _ProfileState extends State<Profile> {
                       child: Text(
                         "Binayak Behera",
                         style: TextStyle(
-                            color: const Color(0xff29347b),
+                            color: primaryColor,
                             fontSize: screenWidth * 0.05,
                             fontWeight: FontWeight.bold),
                         textAlign: TextAlign.left,
@@ -153,7 +148,7 @@ class _ProfileState extends State<Profile> {
                           Text(
                             "$email",
                             style: TextStyle(
-                              color: const Color(0xff29347b),
+                              color: primaryColor,
                               fontWeight: FontWeight.w300,
                             ),
                             softWrap: true,
