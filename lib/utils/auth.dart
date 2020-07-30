@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -36,10 +37,14 @@ class OAuth {
 
   Future<AccessTokenResponse> authorise(
       BuildContext context, bool hasAccount) async {
-    tokenResp = await client.getTokenWithAuthCodeFlow(
-        clientId: '22BTRZ',
-        clientSecret: '75e8096e59982cb6e3d084c44c46102f',
-        scopes: scopes);
+    try {
+      tokenResp = await client.getTokenWithAuthCodeFlow(
+          clientId: '22BTRZ',
+          clientSecret: '75e8096e59982cb6e3d084c44c46102f',
+          scopes: scopes);
+    } on PlatformException catch (e) {
+      print('Error $e');
+    }
     token = tokenResp.accessToken;
     print(tokenResp.refreshToken);
     SharedPreferences prefs = await _prefs;
@@ -78,8 +83,9 @@ class OAuth {
                       token: token,
                     )));
       }
+    }).catchError((onError) {
+      print("error $onError");
     });
-
     return tokenResp;
   }
 
@@ -91,7 +97,9 @@ class OAuth {
       clientSecret: 'cb2538d70342d5c6f1880535a4a4c766',
       scopes: scopes,
     );
-    return oauth2Helper.getToken();
+    return oauth2Helper.getToken().catchError((onError) {
+      print("error $onError");
+    });
   }
 
   Future<bool> validate(String token) async {
@@ -101,6 +109,8 @@ class OAuth {
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
       "token": token
+    }).catchError((onError) {
+      print("error $onError");
     });
     client.close();
     // print(uriResponse.body);
