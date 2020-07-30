@@ -87,6 +87,8 @@ flutter:
     - assets/icons/clear.svg
     - assets/icons/crown.svg
     - assets/icons/star.svg
+    - assets/icons/vs.svg
+
 
 
 

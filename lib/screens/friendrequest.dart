@@ -147,7 +147,7 @@ class _FriendRequestState extends State<FriendRequest> {
           Padding(
             padding: EdgeInsets.all(5.0),
           ),
-         Container(
+          Container(
             height: height * 0.4,
             width: width - 20,
             padding: EdgeInsets.all(10),
@@ -170,7 +170,7 @@ class _FriendRequestState extends State<FriendRequest> {
                         itemBuilder: (context, index) {
                           DocumentSnapshot pendingRequests =
                               snapshot.data.documents[index];
-                          
+
                           return FriendRequestTiles(
                             name: pendingRequests['fullName'],
                             avatar: pendingRequests['avatar'],

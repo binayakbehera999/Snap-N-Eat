@@ -4,6 +4,7 @@ import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
+import 'package:snap_n_eat/screens/arena.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
 import 'package:snap_n_eat/screens/friends.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
@@ -114,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _child = LeaderBoard();
           break;
         case 3:
-          _child = FriendScreen();
+          _child = Arena();
           break;
       }
       _child = AnimatedSwitcher(
