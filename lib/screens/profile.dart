@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/graph.dart';
 import 'package:snap_n_eat/components/profileCard.dart';
-import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
@@ -27,7 +26,7 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       body: Consumer<DashBoardProvider>(
-        builder: (context, value, child) =>  Container(
+        builder: (context, value, child) => Container(
           height: screenHeight,
           width: screenWidth,
           color: Colors.white,
@@ -198,7 +197,7 @@ class _ProfileState extends State<Profile> {
                     ProfileCard(
                       iconSvg: "assets/icons/height.svg",
                       unit: "cm",
-                      value: ((value.height/100)).toString(),
+                      value: ((value.height / 100)).toString(),
                       height: screenWidth * 0.25,
                       width: screenWidth * 0.25,
                     ),

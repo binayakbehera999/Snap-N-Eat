@@ -87,8 +87,8 @@ class _DashBoardState extends State<DashBoard> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 new CircularPercentIndicator(
-                                  radius: 90,
-                                  lineWidth: 13.0,
+                                  radius: 80,
+                                  lineWidth: 7.0,
                                   animation: true,
                                   percent: 0.7,
                                   center: new SvgPicture.asset(
