@@ -37,6 +37,8 @@ dependencies:
   provider: ^4.0.1
   fluttertoast: ^7.0.1
   share: ^0.6.4+3
+  tflite: ^1.0.4
+  image_picker: ^0.6.2+3
     
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -89,12 +91,7 @@ flutter:
     - assets/icons/crown.svg
     - assets/icons/star.svg
     - assets/icons/vs.svg
-
-
-
-
-
-
+    - assets/tflite_model/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

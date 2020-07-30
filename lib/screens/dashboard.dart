@@ -6,6 +6,7 @@ import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:snap_n_eat/models/classifier.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -13,6 +14,13 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+
+  @override
+  void initState() {
+    super.initState();
+    loadModel().then((value) {    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -130,7 +138,7 @@ class _DashBoardState extends State<DashBoard> {
                         CustomCard(
                           iconSvg: "assets/icons/heartbeat.svg",
                           value: value.heartrate,
-                          unit: "scores",
+                          unit: "bpm",
                           height: screenHeight * 0.25,
                           width: screenWidth * 0.35,
                         ),
@@ -158,14 +166,14 @@ class _DashBoardState extends State<DashBoard> {
                         CustomCard(
                           iconSvg: "assets/icons/foot.svg",
                           value: value.steps.toString(),
-                          unit: "scores",
+                          unit: "steps",
                           height: screenHeight * 0.25,
                           width: screenWidth * 0.35,
                         ),
                         SizedBox(height: screenWidth * 0.03),
                         CustomCard(
                           iconSvg: "assets/icons/stairs.svg",
-                          unit: "kms",
+                          unit: "floors",
                           value: value.floor.toString(),
                           height: screenHeight * 0.25,
                           width: screenWidth * 0.35,
@@ -176,7 +184,7 @@ class _DashBoardState extends State<DashBoard> {
                 ),
                 Center(
                   child: RaisedButton(
-                    onPressed: () => print("clicked"),
+                    onPressed: () => pickImage(),
                     shape: CircleBorder(),
                     elevation: 5.0,
                     splashColor: primaryColor,

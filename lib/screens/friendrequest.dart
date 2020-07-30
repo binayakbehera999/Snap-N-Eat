@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/friendrequesttiles.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
+import 'package:share/share.dart';
 
 class FriendRequest extends StatefulWidget {
   @override
@@ -126,6 +127,7 @@ class _FriendRequestState extends State<FriendRequest> {
                         color: Colors.white,
                         elevation: 0,
                         onPressed: () {
+                          Share.share('check out my website https://example.com');
                           print('Hello');
                         },
                         child: Icon(
