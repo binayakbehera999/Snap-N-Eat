@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +11,7 @@ import 'package:snap_n_eat/screens/dashboard.dart';
 import 'package:snap_n_eat/screens/friends.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
 import 'package:snap_n_eat/screens/profile.dart';
+import 'package:snap_n_eat/utils/algo.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
@@ -33,12 +36,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   loadData(BuildContext context) {
     auth = new OAuth();
+    var db = Firestore.instance;
+
     auth.fetchAllData(widget.token).then((list) {
       final dashBoardProvider =
           Provider.of<DashBoardProvider>(context, listen: false);
+      String userId;
       list.map((response) {
         Map result = json.decode(response.body);
-        print(result);
         if (result.containsKey('activities-calories')) {
           dashBoardProvider
               .setCalories(result['activities-calories'][0]['value']);
@@ -56,14 +61,26 @@ class _MyHomePageState extends State<MyHomePage> {
           dashBoardProvider
               .setSleep(result['summary']['totalMinutesAsleep'].toString());
         } else if (result.containsKey('user')) {
-          dashBoardProvider.sesetUserDetails(
-              result['user']['firstName'],
-              result['user']['lastName'],
+          userId = result['user']['encodedId'];
+          double rating = RatingCalculator()
+              .healthRating(result['user']['weight'], result['user']['height']);
+          double bmi = RatingCalculator()
+              .bmiCalculator(result['user']['height'], result['user']['weight']);
+          db.collection('users').document(userId).updateData({
+            'weight': result['user']['weight'],
+            'rating' : rating,
+          }).whenComplete(() => print("Value updated"));
+
+          dashBoardProvider.setUserDetails(
+              result['user']['fullName'],
               result['user']['gender'],
               result['user']['encodedId'],
               result['user']['avatar150'],
               result['user']['height'],
-              result['user']['weight']);
+              result['user']['weight'],
+              rating,
+              bmi,
+          );
         }
       }).toList();
     });
