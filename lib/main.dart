@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<DashBoardProvider>(
+return ChangeNotifierProvider<DashBoardProvider>( 
       create: (context) => DashBoardProvider(),
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Poppins'),
