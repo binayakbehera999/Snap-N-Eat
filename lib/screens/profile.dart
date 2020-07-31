@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +14,6 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   var pulseRate = 231;
-  // var email = 'binayakbehera@gmail.com';
-  // var rating = 4.0;
-  // var height = 5.8;
-  // var weight = 71;
-  // var bmi = 22.3;
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +218,24 @@ class _ProfileState extends State<Profile> {
                   ],
                 ),
               ),
-              Graph(),
+              StreamBuilder(
+                  stream: Firestore.instance
+                      .collection('users')
+                      .document(value.userId)
+                      .collection('history')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Text("Please Wait");
+                    } else {
+                      
+                      List<DocumentSnapshot> values = snapshot.data.documents;
+                      values.sort(
+                          (a, b) => (a.documentID.compareTo(b.documentID)));
+                      print(values[0].data);
+                      return Graph(viewMode: "profile", user: values,);
+                    }
+                  }),
             ],
           ),
         ),

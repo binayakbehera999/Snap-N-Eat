@@ -168,7 +168,7 @@ class _CommonTileState extends State<CommonTile> {
         .document(widget.friendId)
         .collection('pendingChallengeRequest')
         .document(widget.userId)
-        .setData({'noOFDays': noOfDays, 'date': updatedDt}).whenComplete(
+        .setData({'noOFDays': noOfDays, 'date': updatedDt},merge: true).whenComplete(
             () => print("Challenge Sent"));
   }
 
@@ -194,13 +194,13 @@ class _CommonTileState extends State<CommonTile> {
         .document(widget.friendId)
         .collection('acceptedChallengeRequest')
         .document(widget.userId)
-        .setData({'noOfDays': noOfDays, 'date': updatedDt}).whenComplete(() {
+        .setData({'noOfDays': noOfDays, 'date': updatedDt},merge: true).whenComplete(() {
       db
           .collection('users')
           .document(widget.userId)
           .collection('acceptedChallengeRequest')
           .document(widget.friendId)
-          .setData({'noOfDays': noOfDays, 'date': updatedDt}).whenComplete(() {
+          .setData({'noOfDays': noOfDays, 'date': updatedDt},merge: true).whenComplete(() {
         db
             .collection('users')
             .document(widget.userId)

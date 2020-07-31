@@ -40,7 +40,7 @@ class _FriendRequestState extends State<FriendRequest> {
         .setData({
       'avatar': userId.avatar,
       'fullName': userId.fullName,
-    }).whenComplete(() => print("Friend Request Send"));
+    },merge: true).whenComplete(() => print("Friend Request Send"));
   }
 
   acceptFriendRequest(String friendId) {
@@ -57,7 +57,7 @@ class _FriendRequestState extends State<FriendRequest> {
         .document(friendId)
         .setData({
       'Friend Since': updatedDt,
-    }).whenComplete(() {
+    },merge: true).whenComplete(() {
       db
           .collection('users')
           .document(friendId)
@@ -65,7 +65,7 @@ class _FriendRequestState extends State<FriendRequest> {
           .document(userId.uid)
           .setData({
         'Friend Since': updatedDt,
-      }).whenComplete(() => print("Added Friend into FriendsList"));
+      },merge: true).whenComplete(() => print("Added Friend into FriendsList"));
     });
   }
 

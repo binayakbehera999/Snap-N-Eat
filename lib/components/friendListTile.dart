@@ -123,7 +123,7 @@ class _FriendlistTileState extends State<FriendlistTile> {
       'noOFDays': noOfDays,
       'rating': rating,
       'date': updatedDt
-    }).whenComplete(() => print("Challenge Sent"));
+    },merge: true).whenComplete(() => print("Challenge Sent"));
   }
 
   acceptChallenge(String noOfDays, String rating) {
@@ -142,7 +142,7 @@ class _FriendlistTileState extends State<FriendlistTile> {
       'noOFDays': noOfDays,
       'rating': rating,
       'date': updatedDt
-    }).whenComplete(() {
+    },merge: true).whenComplete(() {
       db
           .collection('users')
           .document(widget.userId)
@@ -152,7 +152,7 @@ class _FriendlistTileState extends State<FriendlistTile> {
         'noOFDays': noOfDays,
         'rating': rating,
         'date': updatedDt
-      }).whenComplete(() {
+      },merge: true).whenComplete(() {
         db
             .collection('users')
             .document(widget.friendId)

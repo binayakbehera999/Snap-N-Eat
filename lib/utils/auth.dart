@@ -75,17 +75,16 @@ class OAuth {
                   .document(user.uid)
                   .setData(user.toMap(), merge: true)
                   .whenComplete(() {
-                print("Successfull");
+                Navigator.pushReplacement(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) => MyHomePage(
+                              token: token,
+                            )));
               });
             }
           });
         });
-        Navigator.pushReplacement(
-            context,
-            new MaterialPageRoute(
-                builder: (BuildContext context) => MyHomePage(
-                      token: token,
-                    )));
       }
     }).catchError((onError) {
       print("error $onError");

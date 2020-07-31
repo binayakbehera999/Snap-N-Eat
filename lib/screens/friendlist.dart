@@ -23,7 +23,7 @@ class _FriendListState extends State<FriendList> {
         .setData({
       'avatar': userId.avatar,
       'fullName': userId.fullName,
-    }).whenComplete(() => print("Friend Request Send"));
+    },merge: true).whenComplete(() => print("Friend Request Send"));
   }
 
   @override

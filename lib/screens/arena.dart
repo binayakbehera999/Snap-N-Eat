@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/graph.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
@@ -27,8 +28,6 @@ class _ArenaState extends State<Arena> {
         stream: Firestore.instance
             .collection("users")
             .document(userId.uid)
-            .collection('acceptedChallengeRequest')
-            .document(widget.friendId)
             .snapshots(),
         builder: (context, snapshotUser) {
           return !snapshotUser.hasData
@@ -37,8 +36,6 @@ class _ArenaState extends State<Arena> {
                   stream: Firestore.instance
                       .collection("users")
                       .document(widget.friendId)
-                      .collection('acceptedChallengeRequest')
-                      .document(userId.uid)
                       .snapshots(),
                   builder: (context, snapshotFriend) {
                     if (!snapshotFriend.hasData) {
@@ -46,8 +43,9 @@ class _ArenaState extends State<Arena> {
                     } else {
                       DocumentSnapshot userData = snapshotUser.data;
                       DocumentSnapshot friendData = snapshotFriend.data;
-                      print(userData.data);
-                      // print(friendData.data);
+
+                      var newFormat = DateFormat("yyyy-MM-dd");
+                      String updatedDt = newFormat.format(DateTime.now());
                       return Container(
                         color: Colors.white,
                         child: Column(children: <Widget>[
@@ -69,13 +67,12 @@ class _ArenaState extends State<Arena> {
                                       padding: const EdgeInsets.only(top: 50),
                                       child: Column(
                                         children: <Widget>[
-                                          new SvgPicture.asset(
-                                            "assets/icons/account_circle.svg",
+                                          Image.network(
+                                            userData['avatar'],
                                             height: 60,
-                                            color: primaryColor,
                                           ),
                                           Text(
-                                            "Binayak Behera",
+                                            userData["fullName"],
                                             style: TextStyle(
                                                 fontFamily: "Poppins",
                                                 color: primaryColor,
@@ -93,13 +90,12 @@ class _ArenaState extends State<Arena> {
                                       padding: const EdgeInsets.only(top: 50),
                                       child: Column(
                                         children: <Widget>[
-                                          new SvgPicture.asset(
-                                            "assets/icons/account_circle.svg",
+                                          Image.network(
+                                            friendData['avatar'],
                                             height: 60,
-                                            color: primaryColor,
                                           ),
                                           Text(
-                                            "Prateek Mihra",
+                                            friendData["fullName"],
                                             style: TextStyle(
                                                 fontFamily: "Poppins",
                                                 color: primaryColor,
@@ -118,7 +114,7 @@ class _ArenaState extends State<Arena> {
                                 15.0, 10.0, 15.0, 0.0),
                             child: Container(
                               width: screenWidth,
-                              height: screenHeight * 0.6,
+                              height: screenHeight * 0.65,
                               child: Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
@@ -137,102 +133,186 @@ class _ArenaState extends State<Arena> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      Container(
-                                        child: Graph(),
-                                        height: screenHeight * 0.3,
+                                      StreamBuilder(
+                                        stream: Firestore.instance
+                                            .collection("users")
+                                            .document(userId.uid)
+                                            .collection('history')
+                                            .snapshots(),
+                                        builder: (context, snapshotUserList) {
+                                          return snapshotUserList.hasData
+                                              ? StreamBuilder(
+                                                  stream: Firestore.instance
+                                                      .collection("users")
+                                                      .document(widget.friendId)
+                                                      .collection('history')
+                                                      .snapshots(),
+                                                  builder: (context,
+                                                      snapshotFriendList) {
+                                                    List<DocumentSnapshot>
+                                                        userRatingData =
+                                                        snapshotUserList
+                                                            .data.documents;
+                                                    List<DocumentSnapshot>
+                                                        friendRatingData =
+                                                        snapshotFriendList
+                                                            .data.documents;
+                                                    return Graph(
+                                                      viewMode: 'Arena',
+                                                      user: userRatingData,
+                                                      friend: friendRatingData,
+                                                    );
+                                                  },
+                                                )
+                                              : null;
+                                        },
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Text(
-                                              "3.0",
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Center(
-                                              child: Text(
-                                                "Scores",
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ),
-                                            Text(
-                                              "4.0",
-                                              style: TextStyle(fontSize: 15),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Text(
-                                              "3.0",
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Center(
-                                              child: Text(
-                                                "Rating",
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ),
-                                            Text(
-                                              "4.0",
-                                              style: TextStyle(fontSize: 15),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Text(
-                                              "3.0",
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Center(
-                                              child: Text(
-                                                "Calorie Intake",
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ),
-                                            Text(
-                                              "4.0",
-                                              style: TextStyle(fontSize: 15),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Text(
-                                              "3.0",
-                                              style: TextStyle(fontSize: 15),
-                                            ),
-                                            Center(
-                                              child: Text(
-                                                "Calorie Burnt",
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            ),
-                                            Text(
-                                              "4.0",
-                                              style: TextStyle(fontSize: 15),
-                                            )
-                                          ],
-                                        ),
-                                      )
+                                      ////////////////////////////////////////////////
+                                      StreamBuilder(
+                                          stream: Firestore.instance
+                                              .collection('users')
+                                              .document(userId.uid)
+                                              .collection('history')
+                                              .document(updatedDt)
+                                              .snapshots(),
+                                          builder:
+                                              (context, snapshotUserHistory) {
+                                            return StreamBuilder(
+                                                stream: Firestore.instance
+                                                    .collection('users')
+                                                    .document(widget.friendId)
+                                                    .collection('history')
+                                                    .document(updatedDt)
+                                                    .snapshots(),
+                                                builder: (context,
+                                                    snapshotFriendHistory) {
+                                                  return Column(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: <Widget>[
+                                                            Text(
+                                                              "3.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            ),
+                                                            Center(
+                                                              child: Text(
+                                                                "Scores",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "4.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: <Widget>[
+                                                            Text(
+                                                              "3.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            ),
+                                                            Center(
+                                                              child: Text(
+                                                                "Rating",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "4.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: <Widget>[
+                                                            Text(
+                                                              "3.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            ),
+                                                            Center(
+                                                              child: Text(
+                                                                "Calorie Intake",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "4.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: <Widget>[
+                                                            Text(
+                                                              "3.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            ),
+                                                            Center(
+                                                              child: Text(
+                                                                "Calorie Burnt",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "4.0",
+                                                              style: TextStyle(
+                                                                  fontSize: 15),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                });
+                                          }),
+                                      ////////////////////////////////////////////////
                                     ],
                                   ),
                                 ),
