@@ -14,11 +14,10 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-
   @override
   void initState() {
     super.initState();
-    loadModel().then((value) {    });
+    loadModel().then((value) {});
   }
 
   @override
@@ -190,8 +189,8 @@ class _DashBoardState extends State<DashBoard> {
                     splashColor: primaryColor,
                     child: Icon(
                       Icons.camera,
-                      color: Colors.grey,
-                      size: 40,
+                      color: primaryColor,
+                      size: 55,
                     ),
                   ),
                 ),

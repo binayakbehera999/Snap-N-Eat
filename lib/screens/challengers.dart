@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class ChallengerScreen extends StatefulWidget {
   @override
@@ -26,7 +27,14 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
           return !snapshot.hasData
               ? Text('PLease Wait')
               : (snapshot.data.documents.length == 0)
-                  ? Text(" You are alone in the Race")
+                  ? Center(
+                      child: Text(
+                      " You are alone in the Race",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: primaryColor,
+                      ),
+                    ))
                   : ListView.builder(
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
