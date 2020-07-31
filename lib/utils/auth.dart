@@ -38,6 +38,7 @@ class OAuth {
   Future<AccessTokenResponse> authorise(
       BuildContext context, bool hasAccount) async {
     try {
+      // client.accessTokenRequestHeaders = { '' : '' };
       tokenResp = await client.getTokenWithAuthCodeFlow(
           clientId: '22BTRZ',
           clientSecret: '75e8096e59982cb6e3d084c44c46102f',

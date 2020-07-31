@@ -40,6 +40,7 @@ class _GraphState extends State<Graph> {
           margin: 10,
           getTitles: (value) {
             switch (value.toInt()) {
+              
               case 2:
                 return 'SEPT';
               case 7:

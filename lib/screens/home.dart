@@ -67,7 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
           db.collection('users').document(userId).updateData({
             'weight': result['user']['weight'],
             'rating': rating,
-          }).whenComplete(() => print("Value updated"));
+          }).whenComplete((){
+            // db.collection('users').document(userId).collection('history').document()
+          });
 
           dashBoardProvider.setUserDetails(
             result['user']['fullName'],

@@ -230,6 +230,7 @@ class _FriendRequestState extends State<FriendRequest> {
                                 fontWeight: FontWeight.bold),
                           ),
                           ListView.builder(
+                            shrinkWrap: true,
                             itemCount: snapshot.data.documents.length,
                             itemBuilder: (context, index) {
                               DocumentSnapshot pendingRequests =
