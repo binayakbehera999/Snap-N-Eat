@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
 import 'package:snap_n_eat/screens/friends.dart';
+import 'package:snap_n_eat/screens/insurance.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
 import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/algo.dart';
@@ -126,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _child = DashBoard();
           break;
         case 1:
-          _child = Profile();
+          _child = Card2();
           break;
         case 2:
           _child = LeaderBoard();
