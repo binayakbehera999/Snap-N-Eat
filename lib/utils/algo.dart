@@ -36,15 +36,16 @@ class RatingCalculator {
 
   double healthRating(weight, height) {
     double optimumWeight = 21.7 * height * height / 10000;
-    double rating = (((weight - optimumWeight) / optimumWeight).abs()-1).abs()*5;
+    double rating =
+        (((weight - optimumWeight) / optimumWeight).abs() - 1).abs() * 5;
     return rating;
   }
 
-  // double goalRating(initialWeight, currWeight, totalWeek, currWeek, height) {
-  //   double goalWeight = 21.7 * height * height / 10000;
-  //   double idealWeightChange =
-  //       (((goalWeight - initialWeight) / totalWeek) * currWeek).abs();
-  //   double actualWeightChange = (initialWeight - currWeight).abs();
-  //   return (actualWeightChange / idealWeightChange) * 5;
-  // }
+  double goalRating(initialWeight, currWeight, totalWeek, currWeek, height) {
+    double goalWeight = 21.7 * height * height / 10000;
+    double idealWeightChange =
+        (((goalWeight - initialWeight) / totalWeek) * currWeek).abs();
+    double actualWeightChange = (initialWeight - currWeight).abs();
+    return (actualWeightChange / idealWeightChange) * 5;
+  }
 }
