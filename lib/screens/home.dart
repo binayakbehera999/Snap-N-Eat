@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
           db.collection('users').document(userId).updateData({
             'weight': result['user']['weight'],
             'rating': rating,
-          }).whenComplete((){
+          }).whenComplete(() {
             // db.collection('users').document(userId).collection('history').document()
           });
 
