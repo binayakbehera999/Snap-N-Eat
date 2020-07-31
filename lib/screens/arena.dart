@@ -92,7 +92,10 @@ class _ArenaState extends State<Arena> {
                     Center(
                       child: Text(
                         "Stats",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
@@ -110,7 +113,73 @@ class _ArenaState extends State<Arena> {
                           ),
                           Center(
                             child: Text(
+                              "Scores",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Text(
+                            "4.0",
+                            style: TextStyle(fontSize: 15),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(
+                            "3.0",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          Center(
+                            child: Text(
                               "Rating",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Text(
+                            "4.0",
+                            style: TextStyle(fontSize: 15),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(
+                            "3.0",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          Center(
+                            child: Text(
+                              "Calorie Intake",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Text(
+                            "4.0",
+                            style: TextStyle(fontSize: 15),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(
+                            "3.0",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          Center(
+                            child: Text(
+                              "Calorie Burnt",
                               style: TextStyle(fontSize: 18),
                             ),
                           ),
