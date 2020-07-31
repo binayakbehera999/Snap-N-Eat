@@ -75,28 +75,31 @@ class _FriendRequestTilesState extends State<FriendRequestTiles> {
           Radius.circular(20.0),
         ),
       ),
-      child: new ListTile(
-        title: Text(widget.name),
-        leading: CircleAvatar(child: Image.network(widget.avatar)),
-        trailing: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () => acceptFriendRequest(),
-              child: new SvgPicture.asset("assets/icons/check.svg",
-                  color: Colors.white),
-              shape: CircleBorder(),
-              color: Colors.green,
-            ),
-            RaisedButton(
-              onPressed: () => cancelFriendRequest(),
-              child: new SvgPicture.asset("assets/icons/clear.svg",
-                  color: Colors.white),
-              shape: CircleBorder(),
-              color: Colors.red,
-            ),
-          ],
+      child: Card(
+        elevation: 10,
+        child: new ListTile(
+          title: Text(widget.name),
+          leading: CircleAvatar(child: Image.network(widget.avatar)),
+          trailing: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              RaisedButton(
+                onPressed: () => acceptFriendRequest(),
+                child: new SvgPicture.asset("assets/icons/check.svg",
+                    color: Colors.white),
+                shape: CircleBorder(),
+                color: Colors.green,
+              ),
+              RaisedButton(
+                onPressed: () => cancelFriendRequest(),
+                child: new SvgPicture.asset("assets/icons/clear.svg",
+                    color: Colors.white),
+                shape: CircleBorder(),
+                color: Colors.red,
+              ),
+            ],
+          ),
         ),
       ),
     );

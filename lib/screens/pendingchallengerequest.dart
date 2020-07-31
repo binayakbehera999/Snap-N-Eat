@@ -4,43 +4,36 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/commontiles.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
-class FriendList extends StatefulWidget {
+class PendingChallengeRequest extends StatefulWidget {
   @override
-  _FriendListState createState() => _FriendListState();
+  _PendingChallengeRequestState createState() =>
+      _PendingChallengeRequestState();
 }
 
-class _FriendListState extends State<FriendList> {
+class _PendingChallengeRequestState extends State<PendingChallengeRequest> {
   User userId;
-
-  sendFriendRequest(String friendId) {
-    var db = Firestore.instance;
-    db
-        .collection('users')
-        .document(userId.uid)
-        .collection('PendingFriendRequest')
-        .document(friendId)
-        .setData({
-      'avatar': userId.avatar,
-      'fullName': userId.fullName,
-    }).whenComplete(() => print("Friend Request Send"));
-  }
 
   @override
   Widget build(BuildContext context) {
     userId = Provider.of<DashBoardProvider>(context, listen: false).user;
-    return Container(
-      child: StreamBuilder(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+      ),
+      body: StreamBuilder(
         stream: Firestore.instance
             .collection("users")
             .document(userId.uid)
-            .collection('Friends')
+            .collection('pendingChallengeRequest')
             .snapshots(),
         builder: (context, snapshot) {
           return !snapshot.hasData
               ? Text('PLease Wait')
               : (snapshot.data.documents.length == 0)
-                  ? Text(" You Have No Friends")
+                  ? // TODO: Change this 
+                  Text(" You Have No Friends")
                   : ListView.builder(
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
@@ -49,7 +42,8 @@ class _FriendListState extends State<FriendList> {
                         return CommonTile(
                           friendId: pendingRequests.documentID,
                           userId: userId.uid,
-                          arguement: 'viewFriends',
+                          arguement: 'viewChallenge',
+                          noOfDays:pendingRequests['noOfDays']
                         );
                       },
                     );

@@ -38,9 +38,13 @@ class OAuth {
   Future<AccessTokenResponse> authorise(
       BuildContext context, bool hasAccount) async {
     try {
+      client.accessTokenRequestHeaders = {
+        'response_type': 'token',
+        'expires_in': '31536000'
+      };
       tokenResp = await client.getTokenWithAuthCodeFlow(
-          clientId: '22BTRZ',
-          clientSecret: '75e8096e59982cb6e3d084c44c46102f',
+          clientId: '22BTYH',
+          clientSecret: 'cb2538d70342d5c6f1880535a4a4c766',
           scopes: scopes);
     } on PlatformException catch (e) {
       print('Error $e');
@@ -137,7 +141,7 @@ class OAuth {
 
   Future<String> refreshToken(String refreshToken) async {
     var client = http.Client();
-    var secretKey = "22BTRZ:75e8096e59982cb6e3d084c44c46102f";
+    var secretKey = "22BTYH:cb2538d70342d5c6f1880535a4a4c766";
     var bytes = utf8.encode(secretKey);
     var base64Str = base64.encode(bytes);
     print(base64Str);

@@ -6,6 +6,7 @@ import 'package:snap_n_eat/components/friendrequesttiles.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
 import 'package:share/share.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class FriendRequest extends StatefulWidget {
   @override
@@ -68,10 +69,6 @@ class _FriendRequestState extends State<FriendRequest> {
     });
   }
 
-  // shareCode() {
-  //   Share.share('check out my website https://example.com');
-  // }
-
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -83,81 +80,120 @@ class _FriendRequestState extends State<FriendRequest> {
         width: width,
         child: Column(
           children: <Widget>[
-            Container(
-              height: height * 0.3,
-              width: width - 20,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: Colors.black, style: BorderStyle.solid, width: 2.0),
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Center(
-                    child: Text(" Add Friend"),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+              child: Container(
+                height: height * 0.35,
+                width: width - 20,
+                padding: EdgeInsets.all(10),
+                child: Card(
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Text(" Your Code is "),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 1.0),
+                          child: Text(
+                            " Add Friend",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: primaryColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                       Padding(
-                        padding: EdgeInsets.all(1.0),
-                      ),
-                      Text(
-                        userId.uid + '.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                        padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                " Your Code: " + userId.uid + '.',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: RaisedButton(
+                                color: Colors.white,
+                                elevation: 0,
+                                onPressed: () {
+                                  print('Hello');
+                                },
+                                child: Icon(
+                                  Icons.content_copy,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: RaisedButton(
+                                color: Colors.white,
+                                elevation: 0,
+                                onPressed: () {
+                                  Share.share(
+                                      'check out my website https://example.com');
+                                },
+                                child: Icon(
+                                  Icons.share,
+                                  size: 20,
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      RaisedButton(
-                        color: Colors.white,
-                        elevation: 0,
-                        onPressed: () {
-                          print('Hello');
-                        },
-                        child: Icon(
-                          Icons.content_copy,
-                          size: 20,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
+                        child: TextField(
+                          controller: addFriendTextContoller,
+                          keyboardType: TextInputType.text,
+                          decoration: new InputDecoration(
+                            hintText: 'Enter Room ID...',
+                            contentPadding: const EdgeInsets.fromLTRB(
+                                20.0, 10.0, 20.0, 10.0),
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(32.0),
+                            ),
+                            icon: Icon(
+                              Icons.person_add,
+                              color: primaryColor,
+                            ),
+                          ),
                         ),
                       ),
-                      RaisedButton(
-                        color: Colors.white,
-                        elevation: 0,
-                        onPressed: () {
-                          Share.share('check out my website https://example.com');
-                          print('Hello');
-                        },
-                        child: Icon(
-                          Icons.share,
-                          size: 20,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          onPressed: () {
+                            String friendId = addFriendTextContoller.text;
+                            sendFriendRequest(friendId);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Send Friend Request",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          color: primaryColor,
                         ),
                       )
                     ],
                   ),
-                  TextField(
-                    controller: addFriendTextContoller,
-                    keyboardType: TextInputType.text,
-                    decoration: new InputDecoration(
-                      hintText: 'Enter Room ID...',
-                      contentPadding:
-                          const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(32.0),
-                      ),
-                      icon: Icon(Icons.person_add),
-                    ),
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      String friendId = addFriendTextContoller.text;
-                      sendFriendRequest(friendId);
-                    },
-                    child: Text("Send Friend Request"),
-                  )
-                ],
+                ),
               ),
             ),
             Padding(
@@ -167,11 +203,6 @@ class _FriendRequestState extends State<FriendRequest> {
               height: height * 0.4,
               width: width - 20,
               padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: Colors.black, style: BorderStyle.solid, width: 2.0),
-                borderRadius: BorderRadius.circular(5.0),
-              ),
               child: StreamBuilder(
                 stream: Firestore.instance
                     .collection("users")
@@ -180,21 +211,40 @@ class _FriendRequestState extends State<FriendRequest> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   return !snapshot.hasData
-                      ? Text('PLease Wait')
-                      : ListView.builder(
-                          itemCount: snapshot.data.documents.length,
-                          itemBuilder: (context, index) {
-                            DocumentSnapshot pendingRequests =
-                                snapshot.data.documents[index];
+                      ? Column(children: <Widget>[
+                          Text(
+                            "Friend Requests",
+                            style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text('PLease Wait'),
+                        ])
+                      : Column(children: <Widget>[
+                          Text(
+                            "Friend Requests",
+                            style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, index) {
+                              DocumentSnapshot pendingRequests =
+                                  snapshot.data.documents[index];
 
-                            return FriendRequestTiles(
-                              name: pendingRequests['fullName'],
-                              avatar: pendingRequests['avatar'],
-                              friendId: pendingRequests.documentID,
-                              userId: userId.uid,
-                            );
-                          },
-                        );
+                              return FriendRequestTiles(
+                                name: pendingRequests['fullName'],
+                                avatar: pendingRequests['avatar'],
+                                friendId: pendingRequests.documentID,
+                                userId: userId.uid,
+                              );
+                            },
+                          ),
+                        ]);
                 },
               ),
             ),
