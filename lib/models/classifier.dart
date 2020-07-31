@@ -9,7 +9,7 @@ import 'package:tflite/tflite.dart';
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
     if (image == null) return null;
     var res= await classifyImage(image);
-    print(res);
+    return res;
   }
 
   classifyImage(File image) async {

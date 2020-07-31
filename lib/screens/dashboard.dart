@@ -7,6 +7,8 @@ import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:snap_n_eat/models/classifier.dart';
+import 'package:snap_n_eat/screens/foodResult.dart';
+import 'package:snap_n_eat/utils/cameraOutput.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -184,7 +186,15 @@ class _DashBoardState extends State<DashBoard> {
                 ),
                 Center(
                   child: RaisedButton(
-                    onPressed: () => pickImage(),
+                    onPressed: () async {
+                      var output= await pickImage();
+                      var result = Data(
+                        data: "${output[0]["label"]}"
+                      );
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FoodResult(data:result)),
+                    );
+                    },
                     shape: CircleBorder(),
                     elevation: 5.0,
                     splashColor: primaryColor,
