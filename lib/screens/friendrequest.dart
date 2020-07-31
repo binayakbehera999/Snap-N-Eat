@@ -69,10 +69,6 @@ class _FriendRequestState extends State<FriendRequest> {
     });
   }
 
-  // shareCode() {
-  //   Share.share('check out my website https://example.com');
-  // }
-
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -207,11 +203,6 @@ class _FriendRequestState extends State<FriendRequest> {
               height: height * 0.4,
               width: width - 20,
               padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: Colors.black, style: BorderStyle.solid, width: 2.0),
-                borderRadius: BorderRadius.circular(5.0),
-              ),
               child: StreamBuilder(
                 stream: Firestore.instance
                     .collection("users")
@@ -220,21 +211,39 @@ class _FriendRequestState extends State<FriendRequest> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   return !snapshot.hasData
-                      ? Text('PLease Wait')
-                      : ListView.builder(
-                          itemCount: snapshot.data.documents.length,
-                          itemBuilder: (context, index) {
-                            DocumentSnapshot pendingRequests =
-                                snapshot.data.documents[index];
+                      ? Column(children: <Widget>[
+                          Text(
+                            "Friend Requests",
+                            style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text('PLease Wait'),
+                        ])
+                      : Column(children: <Widget>[
+                          Text(
+                            "Friend Requests",
+                            style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          ListView.builder(
+                            itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, index) {
+                              DocumentSnapshot pendingRequests =
+                                  snapshot.data.documents[index];
 
-                            return FriendRequestTiles(
-                              name: pendingRequests['fullName'],
-                              avatar: pendingRequests['avatar'],
-                              friendId: pendingRequests.documentID,
-                              userId: userId.uid,
-                            );
-                          },
-                        );
+                              return FriendRequestTiles(
+                                name: pendingRequests['fullName'],
+                                avatar: pendingRequests['avatar'],
+                                friendId: pendingRequests.documentID,
+                                userId: userId.uid,
+                              );
+                            },
+                          ),
+                        ]);
                 },
               ),
             ),
