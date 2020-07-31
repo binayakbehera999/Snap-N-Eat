@@ -223,6 +223,8 @@ class _ProfileState extends State<Profile> {
                       .collection('users')
                       .document(value.userId)
                       .collection('history')
+                      .orderBy('date',descending: true)
+                      .limit(7)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
@@ -230,9 +232,6 @@ class _ProfileState extends State<Profile> {
                     } else {
                       
                       List<DocumentSnapshot> values = snapshot.data.documents;
-                      values.sort(
-                          (a, b) => (a.documentID.compareTo(b.documentID)));
-                      print(values[0].data);
                       return Graph(viewMode: "profile", user: values,);
                     }
                   }),

@@ -82,6 +82,13 @@ class OAuth {
                               token: token,
                             )));
               });
+            } else {
+              Navigator.pushReplacement(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (BuildContext context) => MyHomePage(
+                            token: token,
+                          )));
             }
           });
         });

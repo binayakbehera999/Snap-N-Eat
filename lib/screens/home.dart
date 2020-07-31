@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
@@ -34,16 +35,37 @@ class _MyHomePageState extends State<MyHomePage> {
   loadData(BuildContext context) {
     auth = new OAuth();
     var db = Firestore.instance;
-
+    var newFormat = DateFormat("yyyy-MM-dd");
+            String updatedDt = newFormat.format(DateTime.now());
     auth.fetchAllData(widget.token).then((list) {
       final dashBoardProvider =
-      Provider.of<DashBoardProvider>(context, listen: false);
+          Provider.of<DashBoardProvider>(context, listen: false);
       String userId;
       list.map((response) {
         Map result = json.decode(response.body);
         if (result.containsKey('activities-calories')) {
           dashBoardProvider
               .setCalories(result['activities-calories'][0]['value']);
+          db
+                .collection('users')
+                .document(userId)
+                .collection('history')
+                .orderBy('date', descending: true)
+                .limit(1)
+                .getDocuments()
+                .then((value) {
+              List<DocumentSnapshot> values = value.documents;
+              if (values.first.documentID == updatedDt) {
+                db
+                    .collection('users')
+                    .document(userId)
+                    .collection('history')
+                    .document(updatedDt)
+                    .updateData({
+                  'calorieBurnt': result['activities-calories'][0]['value'],
+                },).whenComplete(() => print("CaloriesBurnt is update"));
+              }
+            });
         } else if (result.containsKey('activities-floors')) {
           dashBoardProvider.setFloor(result['activities-floors'][0]['value']);
         } else if (result.containsKey('activities-distance')) {
@@ -67,7 +89,29 @@ class _MyHomePageState extends State<MyHomePage> {
             'weight': result['user']['weight'],
             'rating': rating,
           }).whenComplete(() {
-            // db.collection('users').document(userId).collection('history').document()
+            
+           db
+                .collection('users')
+                .document(userId)
+                .collection('history')
+                .orderBy('date', descending: true)
+                .limit(1)
+                .getDocuments()
+                .then((value) {
+              List<DocumentSnapshot> values = value.documents;
+              if (values.first.documentID != updatedDt) {
+                db
+                    .collection('users')
+                    .document(userId)
+                    .collection('history')
+                    .document(updatedDt)
+                    .setData({
+                  'date': updatedDt,
+                  'caloriesIntake': 0.0,
+                  'rating': rating
+                },merge: true).whenComplete(() => print("New Date is Added"));
+              }
+            });
           });
 
           dashBoardProvider.setUserDetails(

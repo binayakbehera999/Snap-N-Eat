@@ -138,6 +138,8 @@ class _ArenaState extends State<Arena> {
                                             .collection("users")
                                             .document(userId.uid)
                                             .collection('history')
+                                            .orderBy('date', descending: true)
+                                            .limit(7)
                                             .snapshots(),
                                         builder: (context, snapshotUserList) {
                                           return snapshotUserList.hasData
@@ -146,6 +148,9 @@ class _ArenaState extends State<Arena> {
                                                       .collection("users")
                                                       .document(widget.friendId)
                                                       .collection('history')
+                                                      .orderBy('date',
+                                                          descending: true)
+                                                      .limit(7)
                                                       .snapshots(),
                                                   builder: (context,
                                                       snapshotFriendList) {
@@ -157,6 +162,10 @@ class _ArenaState extends State<Arena> {
                                                         friendRatingData =
                                                         snapshotFriendList
                                                             .data.documents;
+                                                    print(
+                                                        userRatingData.last.documentID);
+                                                    print(friendRatingData
+                                                        .last.documentID);
                                                     return Graph(
                                                       viewMode: 'Arena',
                                                       user: userRatingData,
@@ -186,6 +195,15 @@ class _ArenaState extends State<Arena> {
                                                     .snapshots(),
                                                 builder: (context,
                                                     snapshotFriendHistory) {
+                                                  DocumentSnapshot userHistory =
+                                                      snapshotUserHistory.data;
+                                                  DocumentSnapshot
+                                                      friendHistory =
+                                                      snapshotFriendHistory
+                                                          .data;
+                                                  print(userHistory);
+                                                  print(friendHistory);
+
                                                   return Column(
                                                     children: <Widget>[
                                                       Padding(

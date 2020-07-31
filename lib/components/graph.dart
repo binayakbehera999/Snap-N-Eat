@@ -59,19 +59,19 @@ class _GraphState extends State<Graph> {
             // print(value);
             switch (value.toInt()) {
               case 0:
-                return widget.user[0].documentID.split('-').last;
+                return widget.user[6].documentID.split('-').last;
               case 2:
-                return widget.user[1].documentID.split('-').last;
+                return widget.user[5].documentID.split('-').last;
               case 4:
-                return widget.user[2].documentID.split('-').last;
+                return widget.user[4].documentID.split('-').last;
               case 6:
                 return widget.user[3].documentID.split('-').last;
               case 8:
-                return widget.user[4].documentID.split('-').last;
+                return widget.user[2].documentID.split('-').last;
               case 10:
-                return widget.user[5].documentID.split('-').last;
+                return widget.user[1].documentID.split('-').last;
               case 12:
-                return widget.user[6].documentID.split('-').last;
+                return widget.user[0].documentID.split('-').last;
             }
             return '';
           },
@@ -119,13 +119,13 @@ class _GraphState extends State<Graph> {
     return [
       LineChartBarData(
         spots: [
-          FlSpot(0, widget.user[0].data['rating'].toDouble()),
-          FlSpot(2, widget.user[1].data['rating'].toDouble()),
-          FlSpot(4, widget.user[2].data['rating'].toDouble()),
+          FlSpot(0, widget.user[6].data['rating'].toDouble()),
+          FlSpot(2, widget.user[5].data['rating'].toDouble()),
+          FlSpot(4, widget.user[4].data['rating'].toDouble()),
           FlSpot(6, widget.user[3].data['rating'].toDouble()),
-          FlSpot(8, widget.user[4].data['rating'].toDouble()),
-          FlSpot(10, widget.user[5].data['rating'].toDouble()),
-          FlSpot(12, widget.user[6].data['rating'].toDouble()),
+          FlSpot(8, widget.user[2].data['rating'].toDouble()),
+          FlSpot(10, widget.user[1].data['rating'].toDouble()),
+          FlSpot(12, widget.user[0].data['rating'].toDouble()),
         ],
         isCurved: true,
         colors: gradientColors,
@@ -147,13 +147,13 @@ class _GraphState extends State<Graph> {
     return [
       LineChartBarData(
         spots: [
-          FlSpot(0, widget.user[0].data['rating'].toDouble()),
-          FlSpot(2, widget.user[1].data['rating'].toDouble()),
-          FlSpot(4, widget.user[2].data['rating'].toDouble()),
+          FlSpot(0, widget.user[6].data['rating'].toDouble()),
+          FlSpot(2, widget.user[5].data['rating'].toDouble()),
+          FlSpot(4, widget.user[4].data['rating'].toDouble()),
           FlSpot(6, widget.user[3].data['rating'].toDouble()),
-          FlSpot(8, widget.user[4].data['rating'].toDouble()),
-          FlSpot(10, widget.user[5].data['rating'].toDouble()),
-          FlSpot(12, widget.user[6].data['rating'].toDouble()),
+          FlSpot(8, widget.user[2].data['rating'].toDouble()),
+          FlSpot(10, widget.user[1].data['rating'].toDouble()),
+          FlSpot(12, widget.user[0].data['rating'].toDouble()),
         ],
         isCurved: true,
         colors: gradientColors,
