@@ -47,7 +47,8 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
                 !snapshot.hasData
                     ? Text('PLease Wait')
                     : (snapshot.data.documents.length == 0)
-                        ? Text(" You are alone in the Race")
+                        ? // TODO: Change this 
+                        Text(" You are alone in the Race")
                         : ListView.builder(
                             shrinkWrap: true,
                             itemCount: snapshot.data.documents.length,

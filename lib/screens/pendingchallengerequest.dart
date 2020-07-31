@@ -32,7 +32,8 @@ class _PendingChallengeRequestState extends State<PendingChallengeRequest> {
           return !snapshot.hasData
               ? Text('PLease Wait')
               : (snapshot.data.documents.length == 0)
-                  ? Text(" You Have No Friends")
+                  ? // TODO: Change this 
+                  Text(" You Have No Friends")
                   : ListView.builder(
                       itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
