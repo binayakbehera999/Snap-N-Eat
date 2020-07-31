@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     auth.fetchAllData(widget.token).then((list) {
       final dashBoardProvider =
-          Provider.of<DashBoardProvider>(context, listen: false);
+      Provider.of<DashBoardProvider>(context, listen: false);
       String userId;
       list.map((response) {
         Map result = json.decode(response.body);

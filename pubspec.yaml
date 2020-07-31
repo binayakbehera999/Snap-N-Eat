@@ -83,6 +83,11 @@ flutter:
     - assets/icons/radial_gradient.svg
     - assets/icons/weight-scale.svg
     - assets/icons/logo.png
+    - assets/icons/deadline.png
+    - assets/icons/edit.png
+    - assets/icons/message.png
+    - assets/icons/payslip.png
+    - assets/icons/refund.png
     - assets/icons/friend.svg
     - assets/icons/friendNav.svg
     - assets/icons/challenge.svg

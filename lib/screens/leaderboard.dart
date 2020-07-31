@@ -30,12 +30,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
                   style: TextStyle(
                     color: secondaryColor,
                     fontSize: screenHeight * 0.065,
-                    fontFamily: "Muli",
                   ),
                 ),
                 Text("8th",
                   style: TextStyle(
-                    fontFamily: "Muli", 
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: screenHeight * 0.07,
