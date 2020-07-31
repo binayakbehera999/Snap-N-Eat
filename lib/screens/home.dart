@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,22 +62,22 @@ class _MyHomePageState extends State<MyHomePage> {
           userId = result['user']['encodedId'];
           double rating = RatingCalculator()
               .healthRating(result['user']['weight'], result['user']['height']);
-          double bmi = RatingCalculator()
-              .bmiCalculator(result['user']['height'], result['user']['weight']);
+          double bmi = RatingCalculator().bmiCalculator(
+              result['user']['height'], result['user']['weight']);
           db.collection('users').document(userId).updateData({
             'weight': result['user']['weight'],
-            'rating' : rating,
+            'rating': rating,
           }).whenComplete(() => print("Value updated"));
 
           dashBoardProvider.setUserDetails(
-              result['user']['fullName'],
-              result['user']['gender'],
-              result['user']['encodedId'],
-              result['user']['avatar150'],
-              result['user']['height'],
-              result['user']['weight'],
-              rating,
-              bmi,
+            result['user']['fullName'],
+            result['user']['gender'],
+            result['user']['encodedId'],
+            result['user']['avatar150'],
+            result['user']['height'],
+            result['user']['weight'],
+            rating,
+            bmi,
           );
         }
       }).toList();

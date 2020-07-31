@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/graph.dart';
 import 'package:snap_n_eat/components/profileCard.dart';
-import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
@@ -14,11 +13,11 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   var pulseRate = 231;
-  var email = 'binayakbehera@gmail.com';
-  var rating = 4.0;
-  var height = 5.8;
-  var weight = 70;
-  var bmi = 22.3;
+  // var email = 'binayakbehera@gmail.com';
+  // var rating = 4.0;
+  // var height = 5.8;
+  // var weight = 71;
+  // var bmi = 22.3;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       body: Consumer<DashBoardProvider>(
-        builder: (context, value, child) =>  Container(
+        builder: (context, value, child) => Container(
           height: screenHeight,
           width: screenWidth,
           color: Colors.white,
@@ -177,7 +176,7 @@ class _ProfileState extends State<Profile> {
                               width: 10,
                             ),
                             Text(
-                              value.rating.toString(),
+                              value.rating.toStringAsFixed(2),
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: screenHeight * 0.015,
@@ -198,21 +197,21 @@ class _ProfileState extends State<Profile> {
                     ProfileCard(
                       iconSvg: "assets/icons/height.svg",
                       unit: "cm",
-                      value: ((value.height/100)).toString(),
+                      value: ((value.height / 100)).toString(),
                       height: screenWidth * 0.25,
                       width: screenWidth * 0.25,
                     ),
                     ProfileCard(
                       iconSvg: "assets/icons/weight-scale.svg",
                       unit: "KGs",
-                      value: "$weight",
+                      value: (value.weight).toString(),
                       height: screenWidth * 0.25,
                       width: screenWidth * 0.25,
                     ),
                     ProfileCard(
                       iconSvg: "assets/icons/bmi.svg",
                       unit: "k/m2",
-                      value: "$height",
+                      value: (value.bmi).toStringAsFixed(2),
                       height: screenWidth * 0.25,
                       width: screenWidth * 0.29,
                     ),

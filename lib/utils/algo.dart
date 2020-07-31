@@ -36,7 +36,7 @@ class RatingCalculator {
 
   double healthRating(weight, height) {
     double optimumWeight = 21.7 * height * height / 10000;
-    double rating = (5 - (weight - optimumWeight) / 5).abs();
+    double rating = (((weight - optimumWeight) / optimumWeight).abs()-1).abs()*5;
     return rating;
   }
 

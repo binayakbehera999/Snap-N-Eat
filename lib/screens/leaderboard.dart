@@ -13,53 +13,56 @@ class _LeaderBoardState extends State<LeaderBoard> {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
+    print(screenHeight * 0.06);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: primaryColor,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              color: primaryColor,
-              width: screenWidth,
-              height: screenHeight * 0.3,
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Column(children: <Widget>[
-                  Text(
-                    "Rank",
-                    style: TextStyle(
-                      color: Color(0xff535C94),
-                      fontSize: 80,
-                      fontFamily: "Muli",
-                    ),
+            SizedBox(
+              height: screenHeight * 0.1,
+            ),
+            Column(
+              children: <Widget>[
+                Text(
+                  "Rank",
+                  style: TextStyle(
+                    color: secondaryColor,
+                    fontSize: screenHeight * 0.065,
+                    fontFamily: "Muli",
                   ),
-                  Text("8 th",
-                      style: TextStyle(
-                          fontFamily: "Muli",
-                          color: Colors.white,
-                          fontSize: 80)),
-                ]),
-              ),
+                ),
+                Text("8th",
+                  style: TextStyle(
+                    fontFamily: "Muli", 
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenHeight * 0.07,
+                  )
+                ),
+              ],
             ),
             Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50)),
-                  color: Colors.white,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50)
                 ),
-                width: screenWidth,
-                height: screenHeight * 0.6,
-                child: ListView(
-                  children: <Widget>[
-                    LeaderCard(),
-                    LeaderBoardCard(),
-                    LeaderBoardCard(),
-                    LeaderBoardCard(),
-                    LeaderBoardCard()
-                  ],
-                ))
+                color: Colors.white,
+              ),
+              width: screenWidth,
+              height: screenHeight * 0.6,
+              child: ListView(
+                children: <Widget>[
+                  LeaderCard(),
+                  LeaderBoardCard(),
+                  LeaderBoardCard(),
+                  LeaderBoardCard(),
+                  LeaderBoardCard()
+                ],
+              ),
+            ),
           ],
         ),
       ),
