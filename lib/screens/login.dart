@@ -33,10 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Gamify Insurance"),
-      ),
       body: Container(
+        color: Colors.white,
         width: double.infinity,
         height: double.infinity,
         child: Center(

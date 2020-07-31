@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/commontiles.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
-import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/screens/pendingchallengerequest.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class ChallengerScreen extends StatefulWidget {
   @override
@@ -29,25 +29,10 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text("To View Your Pending Challenge Request"),
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      PendingChallengeRequest()));
-                        },
-                        child: Text("Click Here")),
-                  ],
-                ),
                 !snapshot.hasData
                     ? Text('PLease Wait')
                     : (snapshot.data.documents.length == 0)
-                        ? // TODO: Change this 
+                        ? // TODO: Change this
                         Text(" You are alone in the Race")
                         : ListView.builder(
                             shrinkWrap: true,
@@ -61,7 +46,30 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
                                 arguement: 'viewArena',
                               );
                             },
-                          )
+                          ),
+                RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40)),
+                  elevation: 20,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      "Pending Requests",
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PendingChallengeRequest()));
+                    print("hello");
+                  },
+                )
               ],
             ),
           );

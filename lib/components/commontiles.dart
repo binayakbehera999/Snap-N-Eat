@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:snap_n_eat/screens/arena.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class CommonTile extends StatefulWidget {
   final String friendId;
@@ -238,21 +239,36 @@ class _CommonTileState extends State<CommonTile> {
               leading:
                   CircleAvatar(child: Image.network(userDocument['avatar'])),
               subtitle: Text(userDocument['rating'].toString()),
-              trailing: FlatButton(
+              trailing: RaisedButton(
+                color: primaryColor,
+                elevation: 10,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 ),
                 child: (widget.arguement == 'viewChallenge')
-                    ? Text('View Challenge')
+                    ? Text(
+                        'View Challenge',
+                        style: TextStyle(color: Colors.white),
+                      )
                     : (widget.arguement == 'viewArena')
-                        ? Text("Progress")
-                        : Text("Challenge !"),
+                        ? Text(
+                            "Progress",
+                            style: TextStyle(fontSize: 12, color: Colors.white),
+                          )
+                        : Text(
+                            "Challenge !",
+                            style: TextStyle(color: Colors.white),
+                          ),
                 onPressed: () {
                   (widget.arguement == 'viewChallenge')
                       ? showViewChallengingDialogBox(widget.noOfDays, context)
                       : (widget.arguement == 'viewArena')
-                          ? Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Arena(friendId: widget.friendId,)))
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Arena(
+                                        friendId: widget.friendId,
+                                      )))
                           : showChallengingDialogBox(context);
                 },
               ),

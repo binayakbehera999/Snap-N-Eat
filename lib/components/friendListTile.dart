@@ -128,7 +128,7 @@ class _FriendlistTileState extends State<FriendlistTile> {
 
   acceptChallenge(String noOfDays, String rating) {
     var db = Firestore.instance;
-    
+
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
     print(updatedDt);
@@ -199,10 +199,14 @@ class _FriendlistTileState extends State<FriendlistTile> {
                 style: TextStyle(color: primaryColor, fontSize: 20),
               ),
               trailing: FlatButton(
+                color: primaryColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
-                child: Text('Challenge !'),
+                child: Text(
+                  'Challenge !',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   showChallengingDialogBox(context);
                 },

@@ -41,11 +41,11 @@ class RatingCalculator {
     return rating;
   }
 
-  double goalRating(initialWeight, currWeight, totalWeek, currWeek, height) {
+  double goalRating(initialWeight, currWeight, totalDays, currDay, height) {
     double goalWeight = 21.7 * height * height / 10000;
     double idealWeightChange =
-        (((goalWeight - initialWeight) / totalWeek) * currWeek).abs();
+        (((goalWeight - initialWeight) / totalDays) * currDay).abs();
     double actualWeightChange = (initialWeight - currWeight).abs();
-    return (actualWeightChange / idealWeightChange) * 5;
+    return (actualWeightChange / idealWeightChange) * 100;
   }
 }
