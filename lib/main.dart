@@ -10,7 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<DashBoardProvider>(
+return ChangeNotifierProvider<DashBoardProvider>( 
       create: (context) => DashBoardProvider(),
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Poppins'),

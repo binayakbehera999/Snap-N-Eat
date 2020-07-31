@@ -6,9 +6,11 @@ import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:snap_n_eat/models/classifier.dart';
+import 'package:snap_n_eat/utils/classifier.dart';
 import 'package:snap_n_eat/screens/foodResult.dart';
 import 'package:snap_n_eat/utils/cameraOutput.dart';
+import 'package:snap_n_eat/utils/calories.dart';
+
 
 class DashBoard extends StatefulWidget {
   @override
@@ -187,8 +189,10 @@ class _DashBoardState extends State<DashBoard> {
                   child: RaisedButton(
                     onPressed: () async {
                       var output= await pickImage();
+                      var calorie = await foodCalorie("${output[0]["label"]}");
+                      calorie = calorie.toString();
                       var result = Data(
-                        data: "${output[0]["label"]}"
+                        data: "$calorie"
                       );
                       Navigator.push(context,
                       MaterialPageRoute(builder: (context) => FoodResult(data:result)),
