@@ -175,12 +175,16 @@ class _ProfileState extends State<Profile> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              value.rating.toStringAsFixed(2),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: screenHeight * 0.015,
-                                  fontWeight: FontWeight.w500),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 5),
+                              child: Text(
+                                value.rating.toStringAsFixed(2),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: screenHeight * 0.015,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             )
                           ],
                         ),
