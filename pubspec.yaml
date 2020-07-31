@@ -98,6 +98,8 @@ flutter:
     - assets/icons/star.svg
     - assets/icons/vs.svg
     - assets/tflite_model/
+    - assets/gameImage/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

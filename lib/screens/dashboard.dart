@@ -10,6 +10,9 @@ import 'package:snap_n_eat/utils/classifier.dart';
 import 'package:snap_n_eat/screens/foodResult.dart';
 import 'package:snap_n_eat/utils/cameraOutput.dart';
 import 'package:snap_n_eat/utils/calories.dart';
+import 'package:snap_n_eat/screens/gameScreens/screen1.dart';
+import 'package:snap_n_eat/utils/gamePoints.dart';
+
 
 
 class DashBoard extends StatefulWidget {
@@ -186,26 +189,51 @@ class _DashBoardState extends State<DashBoard> {
                   ],
                 ),
                 Center(
-                  child: RaisedButton(
-                    onPressed: () async {
-                      var output= await pickImage();
-                      var calorie = await foodCalorie("${output[0]["label"]}");
-                      calorie = calorie.toString();
-                      var result = Data(
-                        data: "$calorie"
-                      );
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FoodResult(data:result)),
-                    );
-                    },
-                    shape: CircleBorder(),
-                    elevation: 5.0,
-                    splashColor: primaryColor,
-                    child: Icon(
-                      Icons.camera,
-                      color: primaryColor,
-                      size: 55,
-                    ),
+                  child: Row(
+                    children: <Widget>[
+                      RaisedButton(
+                        onPressed: () async {
+                          var output= await pickImage();
+                          var calorie = await foodCalorie("${output[0]["label"]}");
+                          calorie = calorie.toString();
+                          var result = Data(
+                            data: "$calorie"
+                          );
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FoodResult(data:result)),
+                        );
+                        },
+                        shape: CircleBorder(),
+                        elevation: 5.0,
+                        splashColor: primaryColor,
+                        child: Icon(
+                          Icons.camera,
+                          color: primaryColor,
+                          size: 55,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      RaisedButton(
+                        onPressed: () {
+
+                          var pt = Point(
+                            point: 1000
+                          );
+                          
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
+                        );
+                        },
+                        shape: CircleBorder(),
+                        elevation: 5.0,
+                        splashColor: primaryColor,
+                        child: Icon(
+                          Icons.camera,
+                          color: primaryColor,
+                          size: 55,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
