@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   OAuth auth;
   Widget _child = DashBoard();
+  String userId;
 
   @override
   void initState() {
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
     auth.fetchAllData(widget.token).then((list) {
       final dashBoardProvider =
           Provider.of<DashBoardProvider>(context, listen: false);
-      String userId;
+      
       list.map((response) {
         Map result = json.decode(response.body);
         if (result.containsKey('activities-calories')) {
@@ -173,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _child = Profile();
           break;
         case 2:
-          _child = LeaderBoard();
+          _child = LeaderBoard(userId: userId,);
           break;
         case 3:
           _child = FriendScreen();
