@@ -27,7 +27,7 @@ class _ScreenTenState extends State<ScreenTen> {
             width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/gameImage/screen2.jpeg"),
+                image: AssetImage("assets/gameImage/screen11.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),

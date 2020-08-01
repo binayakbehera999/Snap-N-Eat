@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/screens/detailsPage.dart';
 import 'package:snap_n_eat/utils/constants.dart';
+import 'package:snap_n_eat/utils/gamePoints.dart';
+
+import 'gameScreens/screen1.dart';
 
 class Insurance extends StatefulWidget {
   @override
@@ -80,7 +83,14 @@ class _InsuranceState extends State<Insurance> {
             right: 30,
             top: screenHeight * 0.05,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                var pt = Point(
+                             point: 1000
+                           );
+                Navigator.push(context,
+                           MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
+                         );
+              },
               icon: Icon(Icons.gamepad),
               color: Colors.amber,
               iconSize: 30,),

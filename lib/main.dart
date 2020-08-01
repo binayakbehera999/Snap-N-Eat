@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Poppins'),
         debugShowCheckedModeBanner: false,
-        home: Insurance(),
+        home: SplashScreen(),
       ),
     );
   }

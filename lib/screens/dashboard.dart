@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/customCard.dart';
 import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
+import 'package:snap_n_eat/screens/insurance.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:snap_n_eat/utils/classifier.dart';
@@ -72,10 +73,17 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ],
                       ),
-                      SvgPicture.asset(
-                        "assets/icons/dashboard.svg",
-                        alignment: Alignment.topRight,
-                        color: primaryColor,
+                      InkWell(
+                        onTap:(){
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Insurance()),
+                        );
+                        } ,
+                        child: SvgPicture.asset(
+                          "assets/icons/dashboard.svg",
+                          alignment: Alignment.topRight,
+                          color: primaryColor,
+                        ),
                       ),
                     ],
                   ),
@@ -213,26 +221,26 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                       ),
                       SizedBox(width: 10),
-                      RaisedButton(
-                        onPressed: () {
+                      // RaisedButton(
+                      //   onPressed: () {
 
-                          var pt = Point(
-                            point: 1000
-                          );
+                      //     var pt = Point(
+                      //       point: 1000
+                      //     );
                           
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
-                        );
-                        },
-                        shape: CircleBorder(),
-                        elevation: 5.0,
-                        splashColor: primaryColor,
-                        child: Icon(
-                          Icons.camera,
-                          color: primaryColor,
-                          size: 55,
-                        ),
-                      ),
+                      //     Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
+                      //   );
+                      //   },
+                      //   shape: CircleBorder(),
+                      //   elevation: 5.0,
+                      //   splashColor: primaryColor,
+                      //   child: Icon(
+                      //     Icons.camera,
+                      //     color: primaryColor,
+                      //     size: 55,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
