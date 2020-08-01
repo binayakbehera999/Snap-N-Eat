@@ -16,6 +16,7 @@ class _ScreenFourState extends State<ScreenFour> {
   @override
   Widget build(BuildContext context) {
     String _point = widget.point.point.toString();
+    int _previousChoice = widget.point.previousChoice;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -42,9 +43,16 @@ class _ScreenFourState extends State<ScreenFour> {
                   child: InkWell(
                     onTap: () {
                       var pt = widget.point;
+                      String txt ="";
                       print(pt);
                       setState(() {
-                        pt = Point(point: 750);
+                        if(_previousChoice==1)
+                          {
+                            pt = Point(point:750);
+                          }
+                        else{
+                            pt = Point(point: 650);
+                        }
                       });
                       Navigator.push(
                         context,
@@ -59,33 +67,7 @@ class _ScreenFourState extends State<ScreenFour> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Buy Insurance',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: () {
-                      var pt = Point(point: 1000);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ScreenFive(point: pt)),
-                      );
-                    },
-                    child: Container(
-                      width: screenWidth - 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: secondaryColor),
-                      height: 50.0,
-                      child: Center(
-                        child: Text('No, Thanks',
+                        child: Text('Spend \$250/ Covered by Insurance',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),

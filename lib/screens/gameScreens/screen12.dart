@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:snap_n_eat/screens/gameScreens/screen11.dart';
+import 'package:snap_n_eat/screens/gameScreens/screen13.dart';
+import 'package:snap_n_eat/screens/gameScreens/screen5.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -15,6 +18,7 @@ class _ScreenTwelveState extends State<ScreenTwelve> {
   @override
   Widget build(BuildContext context) {
     String _point = widget.point.point.toString();
+    int _previousChoice = widget.point.previousChoice;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -25,7 +29,7 @@ class _ScreenTwelveState extends State<ScreenTwelve> {
             width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/gameImage/screen2.jpeg"),
+                image: AssetImage("assets/gameImage/screen12.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -40,12 +44,23 @@ class _ScreenTwelveState extends State<ScreenTwelve> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      var pt = widget.point;
+                      var pt ;
+                      String txt ="";
                       print(pt);
                       setState(() {
-                        pt = Point(point: 750);
+                        if(widget.point.previousChoice==1)
+                          {
+                            pt = Point(point: widget.point.point);
+                          }
+                        else{
+                            pt = Point(point: widget.point.point-50);
+                        }
                       });
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScreenThirteen(point: pt)),
+                      );
                     },
                     child: Container(
                       width: screenWidth - 30,
@@ -54,29 +69,7 @@ class _ScreenTwelveState extends State<ScreenTwelve> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Buy Insurance',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: () {
-                      // var pt = Point(point: 1000);
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: screenWidth - 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: secondaryColor),
-                      height: 50.0,
-                      child: Center(
-                        child: Text('No, Thanks',
+                        child: Text('Spend \$50/ Covered by Insurance',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),

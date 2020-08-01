@@ -44,7 +44,7 @@ class _ScreenSixState extends State<ScreenSix> {
                       var pt = widget.point;
                       print(pt);
                       setState(() {
-                        pt = Point(point: 750);
+                        pt = Point(point: (widget.point.point-200));
                       });
                       Navigator.push(
                         context,
@@ -59,33 +59,7 @@ class _ScreenSixState extends State<ScreenSix> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Buy Insurance',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: () {
-                      var pt = Point(point: 1000);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ScreenSeven(point: pt)),
-                      );
-                    },
-                    child: Container(
-                      width: screenWidth - 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: secondaryColor),
-                      height: 50.0,
-                      child: Center(
-                        child: Text('No, Thanks',
+                        child: Text('Spend \$200',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),

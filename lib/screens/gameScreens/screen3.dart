@@ -44,7 +44,8 @@ class _ScreenThreeState extends State<ScreenThree> {
                       var pt = widget.point;
                       print(pt);
                       setState(() {
-                        pt = Point(point: 750);
+                        pt = Point(point: 750,previousChoice: 1);
+                        
                       });
                       Navigator.push(
                         context,
@@ -59,7 +60,7 @@ class _ScreenThreeState extends State<ScreenThree> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Buy Insurance',
+                        child: Text('Buy Insurance \$150',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
@@ -71,7 +72,7 @@ class _ScreenThreeState extends State<ScreenThree> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      var pt = Point(point: 1000);
+                      var pt = Point(point: 900, previousChoice:0);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

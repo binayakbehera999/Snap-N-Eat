@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen9.dart';
+import 'package:snap_n_eat/screens/gameScreens/gameOver.dart';
+import 'package:snap_n_eat/screens/insurance.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
-class ScreenEight extends StatefulWidget {
+class ScreenThirteen extends StatefulWidget {
   final Point point;
-  ScreenEight({this.point});
+  ScreenThirteen({this.point});
 
   @override
-  _ScreenEightState createState() => _ScreenEightState();
+  _ScreenThirteenState createState() => _ScreenThirteenState();
 }
 
-class _ScreenEightState extends State<ScreenEight> {
+class _ScreenThirteenState extends State<ScreenThirteen> {
   @override
   Widget build(BuildContext context) {
     String _point = widget.point.point.toString();
+    int _previousChoice = widget.point.previousChoice;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -26,7 +28,7 @@ class _ScreenEightState extends State<ScreenEight> {
             width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/gameImage/screen8.jpeg"),
+                image: AssetImage("assets/gameImage/screen13.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -41,14 +43,12 @@ class _ScreenEightState extends State<ScreenEight> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      var pt = widget.point;
-                      setState(() {
-                        pt = Point(point: widget.point.point-150,previousChoice: 1);
-                      });
+                      
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ScreenNine(point: pt)),
+                            builder: (context) => GameOver()),
                       );
                     },
                     child: Container(
@@ -58,36 +58,7 @@ class _ScreenEightState extends State<ScreenEight> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Buy Insurance \$150',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: () {
-                      var pt = Point(point: 1000);
-                      setState(() {
-                        pt = Point(point: widget.point.point,previousChoice: 0);
-                      });
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ScreenNine(point: pt)),
-                      );
-                    },
-                    child: Container(
-                      width: screenWidth - 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: secondaryColor),
-                      height: 50.0,
-                      child: Center(
-                        child: Text('No, Thanks',
+                        child: Text('Spend \$400/ Covered by Insurance',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),

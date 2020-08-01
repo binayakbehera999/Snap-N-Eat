@@ -1,10 +1,10 @@
 class Point {
   int point;
-  // int previousChoice;
+  int previousChoice;
   Point(
     {
       this.point,
-      // this.previousChoice
+      this.previousChoice
     }
   );
 }

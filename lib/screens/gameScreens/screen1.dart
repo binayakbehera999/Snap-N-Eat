@@ -45,7 +45,7 @@ class _ScreenOneState extends State<ScreenOne> {
                     var pt= widget.point;
                     print(pt);
                     setState(() {
-                      pt = Point(point: 750);
+                      pt = Point(point: 1000);
                     });
                     Navigator.push(
                       context,
@@ -59,31 +59,7 @@ class _ScreenOneState extends State<ScreenOne> {
                         color: primaryColor),
                     height: 50.0,
                     child: Center(
-                      child: Text('Buy Insurance',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: InkWell(
-                  onTap: () {
-                    var pt = Point(point: 1000);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ScreenTwo(point: pt)),
-                    );
-                  },
-                  child: Container(
-                    width: screenWidth-30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: secondaryColor),
-                    height: 50.0,
-                    child: Center(
-                      child: Text('No, Thanks',
+                      child: Text('Collect Points',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold)),
                     ),

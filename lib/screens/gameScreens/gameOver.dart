@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen8.dart';
+import 'package:snap_n_eat/screens/insurance.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
-class ScreenSeven extends StatefulWidget {
+class GameOver extends StatefulWidget {
   final Point point;
-  ScreenSeven({this.point});
+  GameOver({this.point});
 
   @override
-  _ScreenSevenState createState() => _ScreenSevenState();
+  _GameOverState createState() => _GameOverState();
 }
 
-class _ScreenSevenState extends State<ScreenSeven> {
+class _GameOverState extends State<GameOver> {
   @override
   Widget build(BuildContext context) {
-    String _point = widget.point.point.toString();
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -26,7 +25,7 @@ class _ScreenSevenState extends State<ScreenSeven> {
             width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/gameImage/screen7.jpeg"),
+                image: AssetImage("assets/gameImage/gameOver.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -41,15 +40,10 @@ class _ScreenSevenState extends State<ScreenSeven> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      var pt = widget.point;
-                      print(pt);
-                      setState(() {
-                        pt = Point(point: widget.point.point);
-                      });
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ScreenEight(point: pt)),
+                            builder: (context) => Insurance()),
                       );
                     },
                     child: Container(
@@ -59,7 +53,7 @@ class _ScreenSevenState extends State<ScreenSeven> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Congratulations ->',
+                        child: Text('The End',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
@@ -70,36 +64,35 @@ class _ScreenSevenState extends State<ScreenSeven> {
               ],
             ),
           ),
-          Positioned(
-            right: 20,
-            top: 40,
-            child: Container(
-              width: screenWidth * 0.3,
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: primaryColor,
-              ),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.attach_money,
-                    color: Colors.amber,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    _point,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: screenHeight * 0.018,
-                        fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
-            ),
-          )
+          // Positioned(
+          //   right: 20,
+          //   top: 40,
+          //   child: Container(
+          //     width: screenWidth * 0.3,
+          //     padding: EdgeInsets.all(12),
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: primaryColor,
+          //     ),
+          //     child: Row(
+          //       children: <Widget>[
+          //         Icon(
+          //           Icons.attach_money,
+          //           color: Colors.amber,
+          //         ),
+          //         SizedBox(
+          //           width: 15,
+          //         ),
+          //         Text(
+          //           style: TextStyle(
+          //               color: Colors.white,
+          //               fontSize: screenHeight * 0.018,
+          //               fontWeight: FontWeight.w500),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

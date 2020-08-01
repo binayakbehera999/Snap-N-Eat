@@ -225,26 +225,7 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ),
                       ),
-                      // RaisedButton(
-                      //   onPressed: () {
-
-                      //     var pt = Point(
-                      //       point: 1000
-                      //     );
-
-                      //     Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
-                      //   );
-                      //   },
-                      //   shape: CircleBorder(),
-                      //   elevation: 5.0,
-                      //   splashColor: primaryColor,
-                      //   child: Icon(
-                      //     Icons.camera,
-                      //     color: primaryColor,
-                      //     size: 55,
-                      //   ),
-                      // ),
+                      
                     ],
                   ),
                 ),

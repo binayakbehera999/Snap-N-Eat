@@ -85,7 +85,7 @@ class _InsuranceState extends State<Insurance> {
             child: IconButton(
               onPressed: () {
                 var pt = Point(
-                             point: 1000
+                             point: 0
                            );
                 Navigator.push(context,
                            MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),

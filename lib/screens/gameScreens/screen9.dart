@@ -26,7 +26,7 @@ class _ScreenNineState extends State<ScreenNine> {
             width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/gameImage/screen10.jpeg"),
+                image: AssetImage("assets/gameImage/screen9.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,9 +42,8 @@ class _ScreenNineState extends State<ScreenNine> {
                   child: InkWell(
                     onTap: () {
                       var pt = widget.point;
-                      print(pt);
                       setState(() {
-                        pt = Point(point: 750);
+                        pt = Point(point: widget.point.point,previousChoice: widget.point.previousChoice);
                       });
                       Navigator.push(
                         context,
@@ -59,7 +58,7 @@ class _ScreenNineState extends State<ScreenNine> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Buy Insurance',
+                        child: Text('Congratulations ->',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
@@ -67,32 +66,7 @@ class _ScreenNineState extends State<ScreenNine> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: () {
-                      var pt = Point(point: 1000);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ScreenTen(point: pt)),
-                      );
-                    },
-                    child: Container(
-                      width: screenWidth - 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: secondaryColor),
-                      height: 50.0,
-                      child: Center(
-                        child: Text('No, Thanks',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ),
-                ),
+                
               ],
             ),
           ),
