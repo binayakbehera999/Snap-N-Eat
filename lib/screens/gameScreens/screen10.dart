@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap_n_eat/screens/gameScreens/screen11.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen3.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -27,7 +26,7 @@ class _ScreenTenState extends State<ScreenTen> {
             width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/gameImage/screen2.jpeg"),
+                image: AssetImage("assets/gameImage/screen11.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),

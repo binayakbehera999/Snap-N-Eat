@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap_n_eat/screens/gameScreens/screen10.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen3.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 

@@ -4,14 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/customCard.dart';
 import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
+import 'package:snap_n_eat/screens/insurance.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:snap_n_eat/utils/classifier.dart';
 import 'package:snap_n_eat/screens/foodResult.dart';
 import 'package:snap_n_eat/utils/cameraOutput.dart';
 import 'package:snap_n_eat/utils/calories.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen1.dart';
-import 'package:snap_n_eat/utils/gamePoints.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -70,10 +69,19 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ],
                       ),
-                      SvgPicture.asset(
-                        "assets/icons/dashboard.svg",
-                        alignment: Alignment.topRight,
-                        color: primaryColor,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Insurance()),
+                          );
+                        },
+                        child: SvgPicture.asset(
+                          "assets/icons/dashboard.svg",
+                          alignment: Alignment.topRight,
+                          color: primaryColor,
+                        ),
                       ),
                     ],
                   ),
