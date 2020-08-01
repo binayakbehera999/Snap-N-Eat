@@ -1,4 +1,6 @@
-class Data {
-  String data;
-  Data({this.data});
+class Food {
+  String calories;
+  String foodName;
+
+  Food({this.calories, this.foodName});
 }

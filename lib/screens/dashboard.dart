@@ -13,8 +13,6 @@ import 'package:snap_n_eat/utils/calories.dart';
 import 'package:snap_n_eat/screens/gameScreens/screen1.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
-
-
 class DashBoard extends StatefulWidget {
   @override
   _DashBoardState createState() => _DashBoardState();
@@ -190,49 +188,55 @@ class _DashBoardState extends State<DashBoard> {
                 ),
                 Center(
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      RaisedButton(
-                        onPressed: () async {
-                          var output= await pickImage();
-                          var calorie = await foodCalorie("${output[0]["label"]}");
-                          calorie = calorie.toString();
-                          var result = Data(
-                            data: "$calorie"
-                          );
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => FoodResult(data:result)),
-                        );
-                        },
-                        shape: CircleBorder(),
-                        elevation: 5.0,
-                        splashColor: primaryColor,
-                        child: Icon(
-                          Icons.camera,
-                          color: primaryColor,
-                          size: 55,
+                      Center(
+                        child: RaisedButton(
+                          onPressed: () async {
+                            var output = await pickImage();
+                            var recognisedFood = "${output[0]["label"]}";
+                            var calorie =
+                                await foodCalorie("${output[0]["label"]}");
+                            calorie = calorie.toString();
+                            var result = Food(
+                                calories: "$calorie", foodName: recognisedFood);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      FoodResult(food: result)),
+                            );
+                          },
+                          shape: CircleBorder(),
+                          elevation: 5.0,
+                          splashColor: primaryColor,
+                          child: Icon(
+                            Icons.camera,
+                            color: primaryColor,
+                            size: 55,
+                          ),
                         ),
                       ),
-                      SizedBox(width: 10),
-                      RaisedButton(
-                        onPressed: () {
+                      // RaisedButton(
+                      //   onPressed: () {
 
-                          var pt = Point(
-                            point: 1000
-                          );
-                          
-                          Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
-                        );
-                        },
-                        shape: CircleBorder(),
-                        elevation: 5.0,
-                        splashColor: primaryColor,
-                        child: Icon(
-                          Icons.camera,
-                          color: primaryColor,
-                          size: 55,
-                        ),
-                      ),
+                      //     var pt = Point(
+                      //       point: 1000
+                      //     );
+
+                      //     Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
+                      //   );
+                      //   },
+                      //   shape: CircleBorder(),
+                      //   elevation: 5.0,
+                      //   splashColor: primaryColor,
+                      //   child: Icon(
+                      //     Icons.camera,
+                      //     color: primaryColor,
+                      //     size: 55,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

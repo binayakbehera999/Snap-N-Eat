@@ -44,8 +44,21 @@ class RatingCalculator {
   double goalRating(initialWeight, currWeight, totalDays, currDay, height) {
     double goalWeight = 21.7 * height * height / 10000;
     double idealWeightChange =
-        (((goalWeight - initialWeight) / totalDays) * currDay).abs();
-    double actualWeightChange = (initialWeight - currWeight).abs();
-    return (actualWeightChange / idealWeightChange) * 100;
+        (((goalWeight - initialWeight) / totalDays) * currDay);
+    double actualWeightChange = (initialWeight - currWeight);
+    double idealWeight = initialWeight + idealWeightChange;
+    if (goalWeight <= initialWeight) {
+      if (currWeight >= idealWeight) {
+        return (actualWeightChange / idealWeightChange * 100).abs();
+      } else {
+        return (actualWeightChange / idealWeightChange * 100).abs() / 2;
+      }
+    } else {
+      if (currWeight <= idealWeight) {
+        return (actualWeightChange / idealWeightChange * 100).abs();
+      } else {
+        return (actualWeightChange / idealWeightChange * 100).abs() / 2;
+      }
+    }
   }
 }

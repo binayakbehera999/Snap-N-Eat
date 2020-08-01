@@ -13,9 +13,9 @@ import 'package:snap_n_eat/utils/cameraOutput.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
 class FoodResult extends StatelessWidget {
-  final Data data;
+  final Food food;
   User user;
-  FoodResult({this.data});
+  FoodResult({this.food});
 
   didEat(String food, BuildContext context) {
     print(food);
@@ -31,7 +31,8 @@ class FoodResult extends StatelessWidget {
         .document(updatedDt)
         .get()
         .then((value) {
-      double calorie = value['caloriesIntake'].toDouble() + calorieIntake;
+      double calorie =
+          value['caloriesIntake'].toDouble() + calorieIntake.toDouble();
       db
           .collection('users')
           .document(user.uid)
@@ -73,25 +74,36 @@ class FoodResult extends StatelessWidget {
             Container(
                 height: 54.0,
                 padding: EdgeInsets.all(12.0),
-                child: Text("Recognised Food",
+                child: Text("Recognised Food ",
                     style: TextStyle(fontWeight: FontWeight.w700))),
-            Text(data.data),
-            Row(children: <Widget>[
-              FlatButton(
-                color: primaryColor,
-                child: new SvgPicture.asset(
-                  "assets/icons/check.svg",
-                ),
-                onPressed: () => didEat(data.data, context),
-              ),
-              FlatButton(
-                color: primaryColor,
-                child: new SvgPicture.asset(
-                  "assets/icons/clear.svg",
-                ),
-                onPressed: () => didNotEat(context),
-              ),
-            ])
+            Text(food.foodName),
+            Center(
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: FlatButton(
+                        color: primaryColor,
+                        child: new SvgPicture.asset(
+                          "assets/icons/check.svg",
+                          color: Colors.white,
+                        ),
+                        onPressed: () => didEat(food.foodName, context),
+                      ),
+                    ),
+                    Expanded(
+                      child: FlatButton(
+                        color: primaryColor,
+                        child: new SvgPicture.asset(
+                          "assets/icons/clear.svg",
+                          color: Colors.white,
+                        ),
+                        onPressed: () => didNotEat(context),
+                      ),
+                    ),
+                  ]),
+            )
           ],
         ),
       ),

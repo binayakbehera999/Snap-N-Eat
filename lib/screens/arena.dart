@@ -162,8 +162,8 @@ class _ArenaState extends State<Arena> {
                                                         friendRatingData =
                                                         snapshotFriendList
                                                             .data.documents;
-                                                    print(
-                                                        userRatingData.last.documentID);
+                                                    print(userRatingData
+                                                        .last.documentID);
                                                     print(friendRatingData
                                                         .last.documentID);
                                                     return Graph(
@@ -246,7 +246,9 @@ class _ArenaState extends State<Arena> {
                                                                   .spaceEvenly,
                                                           children: <Widget>[
                                                             Text(
-                                                              "3.0",
+                                                              userHistory[
+                                                                      'rating']
+                                                                  .toString(),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             ),
@@ -259,7 +261,9 @@ class _ArenaState extends State<Arena> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              "4.0",
+                                                              friendHistory[
+                                                                      "rating"]
+                                                                  .toString(),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             )
@@ -276,7 +280,9 @@ class _ArenaState extends State<Arena> {
                                                                   .spaceEvenly,
                                                           children: <Widget>[
                                                             Text(
-                                                              "3.0",
+                                                              userHistory[
+                                                                      "calorieIntake"]
+                                                                  .toString(),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             ),
@@ -289,7 +295,9 @@ class _ArenaState extends State<Arena> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              "4.0",
+                                                              friendHistory[
+                                                                      "calorieIntake"]
+                                                                  .toString(),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             )
@@ -306,7 +314,9 @@ class _ArenaState extends State<Arena> {
                                                                   .spaceEvenly,
                                                           children: <Widget>[
                                                             Text(
-                                                              "3.0",
+                                                              userHistory[
+                                                                      "calorieBurnt"]
+                                                                  .toString(),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             ),
@@ -319,7 +329,9 @@ class _ArenaState extends State<Arena> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              "4.0",
+                                                              friendHistory[
+                                                                      "calorieBurnt"]
+                                                                  .toString(),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             )

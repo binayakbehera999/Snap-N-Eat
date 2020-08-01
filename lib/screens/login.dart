@@ -39,33 +39,39 @@ class _LoginScreenState extends State<LoginScreen> {
         height: double.infinity,
         child: Center(
           widthFactor: 5.0,
-          child: RaisedButton.icon(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            ),
-            padding: EdgeInsets.all(16.0),
-            onPressed: () {
-              oauth.authorise(context, widget.hasAccount).then((value) {
-                print(value);
-              });
-            },
-            color: primaryColor,
-            icon: Icon(
-              Icons.lock_open,
-              size: 30,
-              color: Colors.white,
-            ),
-            label: Text(
-              "Login",
-              style: TextStyle(
-                fontFamily: 'Typo Grotesk',
-                fontSize: 30,
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
+          child: Column(children: <Widget>[
+            Center(
+                child: new Image.asset(
+              'assets/icons/logo.png',
+            )),
+            RaisedButton.icon(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
               ),
-              textAlign: TextAlign.left,
+              padding: EdgeInsets.all(16.0),
+              onPressed: () {
+                oauth.authorise(context, widget.hasAccount).then((value) {
+                  print(value);
+                });
+              },
+              color: primaryColor,
+              icon: Icon(
+                Icons.lock_open,
+                size: 30,
+                color: Colors.white,
+              ),
+              label: Text(
+                "Login",
+                style: TextStyle(
+                  fontFamily: 'Typo Grotesk',
+                  fontSize: 30,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.left,
+              ),
             ),
-          ),
+          ]),
         ),
       ),
     );

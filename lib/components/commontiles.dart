@@ -169,8 +169,8 @@ class _CommonTileState extends State<CommonTile> {
         .document(widget.friendId)
         .collection('pendingChallengeRequest')
         .document(widget.userId)
-        .setData({'noOFDays': noOfDays, 'date': updatedDt},merge: true).whenComplete(
-            () => print("Challenge Sent"));
+        .setData({'noOFDays': noOfDays, 'date': updatedDt},
+            merge: true).whenComplete(() => print("Challenge Sent"));
   }
 
   rejectChallenge() {
@@ -195,13 +195,15 @@ class _CommonTileState extends State<CommonTile> {
         .document(widget.friendId)
         .collection('acceptedChallengeRequest')
         .document(widget.userId)
-        .setData({'noOfDays': noOfDays, 'date': updatedDt},merge: true).whenComplete(() {
+        .setData({'noOfDays': noOfDays, 'date': updatedDt},
+            merge: true).whenComplete(() {
       db
           .collection('users')
           .document(widget.userId)
           .collection('acceptedChallengeRequest')
           .document(widget.friendId)
-          .setData({'noOfDays': noOfDays, 'date': updatedDt},merge: true).whenComplete(() {
+          .setData({'noOfDays': noOfDays, 'date': updatedDt},
+              merge: true).whenComplete(() {
         db
             .collection('users')
             .document(widget.userId)
@@ -238,7 +240,7 @@ class _CommonTileState extends State<CommonTile> {
               title: Text(userDocument['fullName']),
               leading:
                   CircleAvatar(child: Image.network(userDocument['avatar'])),
-              subtitle: Text(userDocument['rating'].toString()),
+              subtitle: Text(userDocument['rating'].toStringAsFixed(2)),
               trailing: RaisedButton(
                 color: primaryColor,
                 elevation: 10,
