@@ -88,6 +88,7 @@ flutter:
     - assets/icons/message.png
     - assets/icons/payslip.png
     - assets/icons/refund.png
+    - assets/icons/health.png
     - assets/icons/friend.svg
     - assets/icons/friendNav.svg
     - assets/icons/challenge.svg

@@ -85,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
               .healthRating(result['user']['weight'], result['user']['height']);
           double bmi = RatingCalculator().bmiCalculator(
               result['user']['height'], result['user']['weight']);
-          db.collection('users').document(userId).updateData({
+          db.collection('users').document(userId).
+          updateData({
             'weight': result['user']['weight'],
             'rating': rating,
           }).whenComplete(() {
