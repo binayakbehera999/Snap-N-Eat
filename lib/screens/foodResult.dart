@@ -18,9 +18,7 @@ class FoodResult extends StatelessWidget {
   FoodResult({this.food});
 
   didEat(String food, BuildContext context) {
-    print(food);
-    double calorieIntake = foodCalorie(food);
-    print(calorieIntake);
+    FoodDetails calorieIntake = foodCalorie(food);
     var db = Firestore.instance;
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
@@ -32,7 +30,8 @@ class FoodResult extends StatelessWidget {
         .get()
         .then((value) {
       double calorie =
-          value['caloriesIntake'].toDouble() + calorieIntake.toDouble();
+          value['calorieIntake'].toDouble() + calorieIntake.calories.toDouble();
+      print(value['calorieIntake']);
       db
           .collection('users')
           .document(user.uid)

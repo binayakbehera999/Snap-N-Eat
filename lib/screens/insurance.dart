@@ -27,7 +27,6 @@ class _InsuranceState extends State<Insurance> {
       backgroundColor: primaryColor,
       body: Stack(
         children: <Widget>[
-
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,7 +44,8 @@ class _InsuranceState extends State<Insurance> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50), topRight: Radius.circular(50)),
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50)),
                   color: Colors.white,
                 ),
                 width: screenWidth,
@@ -54,14 +54,13 @@ class _InsuranceState extends State<Insurance> {
                   child: Column(
                     children: <Widget>[
                       ListView.builder(
-                        physics: ScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: _count,
-                        itemBuilder: (context, index) {
-                          return _buildCard(_name[index], _logo[index], _description[_name[index]]);
-                        }
-                      ),
-                      
+                          physics: ScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: _count,
+                          itemBuilder: (context, index) {
+                            return _buildCard(_name[index], _logo[index],
+                                _description[_name[index]]);
+                          }),
                     ],
                   ),
                 ),
@@ -84,16 +83,16 @@ class _InsuranceState extends State<Insurance> {
             top: screenHeight * 0.05,
             child: IconButton(
               onPressed: () {
-                var pt = Point(
-                             point: 0
-                           );
-                Navigator.push(context,
-                           MaterialPageRoute(builder: (context) => ScreenOne(point:pt)),
-                         );
+                var pt = Point(point: 0);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ScreenOne(point: pt)),
+                );
               },
               icon: Icon(Icons.gamepad),
               color: Colors.amber,
-              iconSize: 30,),
+              iconSize: 30,
+            ),
           ),
         ],
       ),
@@ -110,10 +109,8 @@ class _InsuranceState extends State<Insurance> {
           splashColor: secondaryColor,
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailsPage(
-                heroTag: logo, name: name, description: description)
-              )
-            );
+                builder: (context) => DetailsPage(
+                    heroTag: logo, name: name, description: description)));
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,7 +133,7 @@ class _InsuranceState extends State<Insurance> {
                   ),
                   SizedBox(width: 10.0),
                   Text(name,
-                  softWrap: true,
+                      softWrap: true,
                       style: TextStyle(
                           fontSize: 17.0, fontWeight: FontWeight.bold)),
                 ]),

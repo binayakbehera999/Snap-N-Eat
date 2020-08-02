@@ -8,6 +8,11 @@ class RatingCalculator {
     }
   }
 
+  double changeInCalorie(double bmr, double newbmr, double calorieIntake,
+      double calorieBurnt, double scannedFoodCalorie) {
+    return calorieIntake + scannedFoodCalorie - calorieBurnt - bmr - newbmr;
+  }
+
   double bmiCalculator(double height, double weight) {
     double bmi = (weight / (height * height)) * 10000;
     return bmi;
@@ -20,6 +25,17 @@ class RatingCalculator {
       return 24.9;
     else
       return bmi;
+  }
+
+  double bmrCalc(
+      double height, double weight, double bmi, String sex, int age) {
+    double bmr;
+    if (sex == 'MALE') {
+      bmr = ((10 * weight) + (6.25 * height) - (5 * age) + 5);
+    } else {
+      bmr = ((10 * weight) + (6.25 * height) - (5 * age) - 161);
+    }
+    return bmr;
   }
 
   double newBmrCalc(double height, double optimumBmi, String sex, int age) {
@@ -61,4 +77,19 @@ class RatingCalculator {
       }
     }
   }
+
+  double walking(double extraCalorie) {
+    return (extraCalorie * (114 / 420));
+  }
+
+  double running(double extraCalorie) {
+    return (extraCalorie * (41 / 420));
+  }
+
+  double cycling(double extraCalorie) {
+    return (extraCalorie * (59 / 420));
+  }
+
+  // String calculatePercentage(double calorieIntake, double calorieBurnt) {
+  // }
 }

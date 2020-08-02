@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
             });
             return new Timer(_duration, navigation);
           });
-          // return new Timer(_duration, navigation);
+          return new Timer(_duration, navigation);
         }
       });
     } else {

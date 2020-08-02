@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/customCard.dart';
 import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
-import 'package:snap_n_eat/screens/insurance.dart';
+import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:snap_n_eat/utils/classifier.dart';
@@ -73,14 +73,14 @@ class _DashBoardState extends State<DashBoard> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => Insurance()),
+                            MaterialPageRoute(builder: (context) => Profile()),
                           );
                         },
                         child: SvgPicture.asset(
-                          "assets/icons/dashboard.svg",
+                          "assets/icons/profile.svg",
                           alignment: Alignment.topRight,
                           color: primaryColor,
+                          height: 50,
                         ),
                       ),
                     ],
@@ -215,6 +215,7 @@ class _DashBoardState extends State<DashBoard> {
                                       FoodResult(food: result)),
                             );
                           },
+                          color: Colors.white,
                           shape: CircleBorder(),
                           elevation: 5.0,
                           splashColor: primaryColor,
@@ -225,7 +226,6 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ),
                       ),
-                      
                     ],
                   ),
                 ),

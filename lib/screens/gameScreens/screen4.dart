@@ -43,15 +43,13 @@ class _ScreenFourState extends State<ScreenFour> {
                   child: InkWell(
                     onTap: () {
                       var pt = widget.point;
-                      String txt ="";
+
                       print(pt);
                       setState(() {
-                        if(_previousChoice==1)
-                          {
-                            pt = Point(point:750);
-                          }
-                        else{
-                            pt = Point(point: 650);
+                        if (_previousChoice == 1) {
+                          pt = Point(point: 750);
+                        } else {
+                          pt = Point(point: 650);
                         }
                       });
                       Navigator.push(

@@ -63,7 +63,7 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     SvgPicture.asset(
-                      "assets/icons/dashboard.svg",
+                      "assets/icons/clear.svg",
                       alignment: Alignment.topRight,
                       color: primaryColor,
                       height: screenHeight * 0.03,
@@ -223,16 +223,18 @@ class _ProfileState extends State<Profile> {
                       .collection('users')
                       .document(value.userId)
                       .collection('history')
-                      .orderBy('date',descending: true)
+                      .orderBy('date', descending: true)
                       .limit(7)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return Text("Please Wait");
                     } else {
-                      
                       List<DocumentSnapshot> values = snapshot.data.documents;
-                      return Graph(viewMode: "profile", user: values,);
+                      return Graph(
+                        viewMode: "profile",
+                        user: values,
+                      );
                     }
                   }),
             ],

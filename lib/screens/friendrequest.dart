@@ -40,7 +40,7 @@ class _FriendRequestState extends State<FriendRequest> {
         .setData({
       'avatar': userId.avatar,
       'fullName': userId.fullName,
-    },merge: true).whenComplete(() => print("Friend Request Send"));
+    }, merge: true).whenComplete(() => print("Friend Request Send"));
   }
 
   acceptFriendRequest(String friendId) {
@@ -57,7 +57,7 @@ class _FriendRequestState extends State<FriendRequest> {
         .document(friendId)
         .setData({
       'Friend Since': updatedDt,
-    },merge: true).whenComplete(() {
+    }, merge: true).whenComplete(() {
       db
           .collection('users')
           .document(friendId)
@@ -65,7 +65,8 @@ class _FriendRequestState extends State<FriendRequest> {
           .document(userId.uid)
           .setData({
         'Friend Since': updatedDt,
-      },merge: true).whenComplete(() => print("Added Friend into FriendsList"));
+      }, merge: true).whenComplete(
+              () => print("Added Friend into FriendsList"));
     });
   }
 
@@ -159,7 +160,7 @@ class _FriendRequestState extends State<FriendRequest> {
                           controller: addFriendTextContoller,
                           keyboardType: TextInputType.text,
                           decoration: new InputDecoration(
-                            hintText: 'Enter Room ID...',
+                            hintText: 'Enter Friend ID...',
                             contentPadding: const EdgeInsets.fromLTRB(
                                 20.0, 10.0, 20.0, 10.0),
                             border: new OutlineInputBorder(

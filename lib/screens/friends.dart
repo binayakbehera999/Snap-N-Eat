@@ -25,12 +25,12 @@ class _FriendScreenState extends State<FriendScreen> {
             tabs: [
               Tab(
                   icon: new SvgPicture.asset(
-                "assets/icons/addFriend.svg",
+                "assets/icons/friend.svg",
                 color: primaryColor,
               )),
               Tab(
                   icon: new SvgPicture.asset(
-                "assets/icons/friend.svg",
+                "assets/icons/addFriend.svg",
                 color: primaryColor,
               )),
               Tab(

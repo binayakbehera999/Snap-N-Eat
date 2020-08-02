@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/leaderBoardCard.dart';
 import 'package:snap_n_eat/components/leaderCard.dart';

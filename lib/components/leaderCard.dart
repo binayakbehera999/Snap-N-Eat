@@ -3,6 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
 class LeaderCard extends StatelessWidget {
+  String name;
+  int rank;
+  double rating;
+  LeaderCard({this.name, this.rank, this.rating});
   @override
   Widget build(BuildContext context) {
     return Container(

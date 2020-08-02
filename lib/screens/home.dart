@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
 import 'package:snap_n_eat/screens/friends.dart';
+import 'package:snap_n_eat/screens/insurance.dart';
 import 'package:snap_n_eat/screens/leaderboard.dart';
-import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/algo.dart';
 import 'package:snap_n_eat/utils/auth.dart';
 import 'package:snap_n_eat/utils/constants.dart';
@@ -37,36 +37,38 @@ class _MyHomePageState extends State<MyHomePage> {
     auth = new OAuth();
     var db = Firestore.instance;
     var newFormat = DateFormat("yyyy-MM-dd");
-            String updatedDt = newFormat.format(DateTime.now());
+    String updatedDt = newFormat.format(DateTime.now());
     auth.fetchAllData(widget.token).then((list) {
       final dashBoardProvider =
           Provider.of<DashBoardProvider>(context, listen: false);
-      
+
       list.map((response) {
         Map result = json.decode(response.body);
         if (result.containsKey('activities-calories')) {
           dashBoardProvider
               .setCalories(result['activities-calories'][0]['value']);
           db
-                .collection('users')
-                .document(userId)
-                .collection('history')
-                .orderBy('date', descending: true)
-                .limit(1)
-                .getDocuments()
-                .then((value) {
-              List<DocumentSnapshot> values = value.documents;
-              if (values.first.documentID == updatedDt) {
-                db
-                    .collection('users')
-                    .document(userId)
-                    .collection('history')
-                    .document(updatedDt)
-                    .updateData({
+              .collection('users')
+              .document(userId)
+              .collection('history')
+              .orderBy('date', descending: true)
+              .limit(1)
+              .getDocuments()
+              .then((value) {
+            List<DocumentSnapshot> values = value.documents;
+            if (values.first.documentID == updatedDt) {
+              db
+                  .collection('users')
+                  .document(userId)
+                  .collection('history')
+                  .document(updatedDt)
+                  .updateData(
+                {
                   'calorieBurnt': result['activities-calories'][0]['value'],
-                },).whenComplete(() => print("CaloriesBurnt is update"));
-              }
-            });
+                },
+              ).whenComplete(() => print("CaloriesBurnt is update"));
+            }
+          });
         } else if (result.containsKey('activities-floors')) {
           dashBoardProvider.setFloor(result['activities-floors'][0]['value']);
         } else if (result.containsKey('activities-distance')) {
@@ -86,13 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
               .healthRating(result['user']['weight'], result['user']['height']);
           double bmi = RatingCalculator().bmiCalculator(
               result['user']['height'], result['user']['weight']);
-          db.collection('users').document(userId).
-          updateData({
+          db.collection('users').document(userId).updateData({
             'weight': result['user']['weight'],
             'rating': rating,
           }).whenComplete(() {
-            
-           db
+            db
                 .collection('users')
                 .document(userId)
                 .collection('history')
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'date': updatedDt,
                   'caloriesIntake': 0.0,
                   'rating': rating
-                },merge: true).whenComplete(() => print("New Date is Added"));
+                }, merge: true).whenComplete(() => print("New Date is Added"));
               }
             });
           });
@@ -141,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 iconPath: "assets/icons/dashboard.svg",
                 extras: {"label": "DashBoard"}),
             FluidNavBarIcon(
-                iconPath: "assets/icons/account_circle.svg",
+                iconPath: "assets/icons/list-box.svg",
                 extras: {"label": "Profile"}),
             FluidNavBarIcon(
                 iconPath: "assets/icons/leaderboard.svg",
@@ -171,10 +171,12 @@ class _MyHomePageState extends State<MyHomePage> {
           _child = DashBoard();
           break;
         case 1:
-          _child = Profile();
+          _child = Insurance();
           break;
         case 2:
-          _child = LeaderBoard(userId: userId,);
+          _child = LeaderBoard(
+            userId: userId,
+          );
           break;
         case 3:
           _child = FriendScreen();
