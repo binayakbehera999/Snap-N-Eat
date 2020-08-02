@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'package:snap_n_eat/components/graph.dart';
 import 'package:snap_n_eat/components/loader.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
@@ -117,6 +118,52 @@ class _ArenaState extends State<Arena> {
         widget.noOfDays,
         widget.noOfDaysCompleted,
         friendProfile['height']);
+
+    var newFormat = DateFormat("yyyy-MM-dd");
+    String updatedDt = newFormat.format(DateTime.now());
+
+    db
+        .collection('users')
+        .document(widget.friendId)
+        .collection('acceptedChallengeRequest')
+        .document(widget.user)
+        .collection('history')
+        .document(updatedDt)
+        .get()
+        .then((value) {
+      if (!value.exists) {
+        db
+            .collection('users')
+            .document(widget.friendId)
+            .collection('acceptedChallengeRequest')
+            .document(widget.user)
+            .collection('history')
+            .document(updatedDt)
+            .setData({'score': userScore}).whenComplete(() {
+          db
+              .collection('users')
+              .document(widget.friendId)
+              .collection('acceptedChallengeRequest')
+              .document(widget.friendId)
+              .collection('history')
+              .document(updatedDt)
+              .setData({'score': userScore});
+        });
+      }
+    });
+
+    // print(userHistory['calorieIntake'].runtimeType);
+    // print(userScore);
+    // print(friendScore);
+    // print(friendHistory.data);
+    // print(userScore.toStringAsFixed(2).runtimeType);
+    // print(friendScore.toStringAsFixed(2).runtimeType);
+    // print(userHistory['rating'].toStringAsFixed(1).runtimeType);
+    // print(friendHistory['rating'].toStringAsFixed(1).runtimeType);
+    // print(userHistory['calorieIntake'].toString().runtimeType);
+    // print(friendHistory['calorieIntake'].toString().runtimeType);
+    // print(userHistory['calorieBurnt'].runtimeType);
+    // print(friendHistory['calorieBurnt'].runtimeType);
 
     setState(() {
       loadingState = false;
