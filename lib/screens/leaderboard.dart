@@ -43,18 +43,15 @@ class _LeaderBoardState extends State<LeaderBoard> {
         .map((f) => db.collection('users').document(f.documentID).get()));
 
     friendsData.forEach((element) {
-      print(element);
       friendsList.add(element);
     });
     friendsList.add(mydatabase.first);
-    friendsList.sort((b, a) => a['rating'].compareTo(b['rating']));
-    print(friendsList.first.documentID + "-" + friendsList.last.documentID);
-    print(friendsList.length);
+    friendsList.sort((b, a) => a['overallScore'].compareTo(b['overallScore']));
+
     position = (friendsList
                 .indexWhere((element) => element.documentID == widget.userId) +
             1)
         .toString();
-    print(position);
     setState(() {
       isDataFetched = true;
     });
@@ -65,7 +62,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
     user = Provider.of<DashBoardProvider>(context).user;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    print(screenHeight * 0.06);
     return Scaffold(
         backgroundColor: primaryColor,
         body: !isDataFetched
@@ -116,9 +112,19 @@ class _LeaderBoardState extends State<LeaderBoard> {
                         itemCount: friendsList.length,
                         itemBuilder: (BuildContext context, int index) {
                           if (index == 0) {
-                            return LeaderCard();
+                            return LeaderCard(
+                              rank: index + 1,
+                              score: friendsList[index].data["overallScore"],
+                              name: friendsList[index].data["fullName"],
+                              avatar: friendsList[index].data["avatar"],
+                            );
                           }
-                          return LeaderBoardCard();
+                          return LeaderBoardCard(
+                            rank: index + 1,
+                            score: friendsList[index].data["overallScore"],
+                            name: friendsList[index].data["fullName"],
+                            avatar: friendsList[index].data["avatar"],
+                          );
                         },
                       ),
                     ),

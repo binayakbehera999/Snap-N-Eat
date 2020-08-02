@@ -42,7 +42,7 @@ class _ScreenTwoState extends State<ScreenTwo> {
                   child: InkWell(
                     onTap: () {
                       var pt = widget.point;
-                      print(pt);
+
                       setState(() {
                         pt = Point(point: 900);
                       });

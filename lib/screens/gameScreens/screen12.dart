@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen11.dart';
 import 'package:snap_n_eat/screens/gameScreens/screen13.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen5.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -44,16 +42,12 @@ class _ScreenTwelveState extends State<ScreenTwelve> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      var pt ;
-                      String txt ="";
-                      print(pt);
+                      var pt;
                       setState(() {
-                        if(widget.point.previousChoice==1)
-                          {
-                            pt = Point(point: widget.point.point);
-                          }
-                        else{
-                            pt = Point(point: widget.point.point-50);
+                        if (widget.point.previousChoice == 1) {
+                          pt = Point(point: widget.point.point);
+                        } else {
+                          pt = Point(point: widget.point.point - 50);
                         }
                       });
                       Navigator.push(

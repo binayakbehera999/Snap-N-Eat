@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
-class Toast {
-  void showToast(String msg) {
+class ToastMsg {
+  static showToast(String msg) {
     Fluttertoast.showToast(
         msg: "$msg",
         gravity: ToastGravity.BOTTOM,

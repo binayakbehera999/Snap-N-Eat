@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
 class LeaderBoardCard extends StatelessWidget {
-  final String name;
+  final String name, avatar;
   final int rank;
-  final double rating;
-  LeaderBoardCard({this.name, this.rank, this.rating});
+  final double score;
+  LeaderBoardCard({this.name, this.rank, this.score, this.avatar});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,31 +21,32 @@ class LeaderBoardCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                   child: Text(
-                    "1",
+                    rank.toString(),
                     style: TextStyle(
                         fontSize: 20,
                         color: Color(0xff535C94),
                         fontFamily: "Muli"),
                   ),
                 ),
-                new SvgPicture.asset(
-                  "assets/icons/account_circle.svg",
-                  height: 40,
-                  width: 40,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new Image.network(
+                    avatar,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: <Widget>[
                       Text(
-                        "John",
+                        name,
                         style: TextStyle(
                             color: Color(0xff535C94),
                             fontSize: 15,
                             fontFamily: "Muli"),
                       ),
                       Text(
-                        "22541",
+                        score.toString(),
                         style: TextStyle(
                             color: Color(0xff535C94),
                             fontSize: 15,

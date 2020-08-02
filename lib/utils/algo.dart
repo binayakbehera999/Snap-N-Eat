@@ -59,12 +59,9 @@ class RatingCalculator {
 
   double goalRating(initialWeight, currWeight, totalDays, currDay, height) {
     double goalWeight = 21.7 * height * height / 10000;
-    print(goalWeight);
     double idealWeightChange =
         (((goalWeight - initialWeight) / totalDays) * currDay).abs();
-    print(idealWeightChange);
     double actualWeightChange = (initialWeight - currWeight);
-    print(actualWeightChange);
     double idealWeight = initialWeight - idealWeightChange;
     if (goalWeight <= currWeight) {
       if (idealWeightChange >= 1) {

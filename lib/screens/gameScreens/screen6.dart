@@ -42,9 +42,9 @@ class _ScreenSixState extends State<ScreenSix> {
                   child: InkWell(
                     onTap: () {
                       var pt = widget.point;
-                      print(pt);
+
                       setState(() {
-                        pt = Point(point: (widget.point.point-200));
+                        pt = Point(point: (widget.point.point - 200));
                       });
                       Navigator.push(
                         context,

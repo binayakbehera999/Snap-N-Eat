@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:snap_n_eat/components/toast.dart';
 import 'package:snap_n_eat/screens/arena.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
@@ -9,8 +10,16 @@ class CommonTile extends StatefulWidget {
   final String userId;
   final String arguement;
   final String noOfDays;
+  final int noOfCompleted;
+  final double initialWeight;
   const CommonTile(
-      {Key key, this.friendId, this.userId, this.arguement, this.noOfDays})
+      {Key key,
+      this.friendId,
+      this.userId,
+      this.arguement,
+      this.noOfDays,
+      this.initialWeight,
+      this.noOfCompleted})
       : super(key: key);
 
   @override
@@ -162,7 +171,6 @@ class _CommonTileState extends State<CommonTile> {
     var db = Firestore.instance;
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
-    print(updatedDt);
 
     db
         .collection('users')
@@ -170,7 +178,7 @@ class _CommonTileState extends State<CommonTile> {
         .collection('pendingChallengeRequest')
         .document(widget.userId)
         .setData({'noOFDays': noOfDays, 'date': updatedDt},
-            merge: true).whenComplete(() => print("Challenge Sent"));
+            merge: true).whenComplete(() => {});
   }
 
   rejectChallenge() {
@@ -181,14 +189,13 @@ class _CommonTileState extends State<CommonTile> {
         .collection('pendingChallengeRequest')
         .document(widget.userId)
         .delete()
-        .whenComplete(() => print(" Challenge Rejected"));
+        .whenComplete(() => print("Challenge Rejected"));
   }
 
   acceptChallenge(String noOfDays) {
     var db = Firestore.instance;
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
-    print(updatedDt);
 
     db
         .collection('users')
@@ -210,7 +217,7 @@ class _CommonTileState extends State<CommonTile> {
             .collection('pendingChallengeRequest')
             .document(widget.friendId)
             .delete()
-            .whenComplete(() => print("Challenge Accpeted "));
+            .whenComplete(() => print("Challenge Accpeted"));
       });
     });
   }
@@ -224,7 +231,8 @@ class _CommonTileState extends State<CommonTile> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Text("Please Wait!!!");
+            // return Text("Please Wait!!!")
+            ToastMsg.showToast("Please Wait");
           }
           var userDocument = snapshot.data;
           return Card(
@@ -270,6 +278,10 @@ class _CommonTileState extends State<CommonTile> {
                               MaterialPageRoute(
                                   builder: (context) => Arena(
                                         friendId: widget.friendId,
+                                        user: widget.userId,
+                                        noOfDays: int.parse(widget.noOfDays),
+                                        noOfDaysCompleted: widget.noOfCompleted,
+                                        intialWeight: widget.initialWeight,
                                       )))
                           : showChallengingDialogBox(context);
                 },

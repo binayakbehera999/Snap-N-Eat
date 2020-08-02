@@ -112,18 +112,14 @@ class _FriendlistTileState extends State<FriendlistTile> {
     var db = Firestore.instance;
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
-    print(updatedDt);
 
     db
         .collection('users')
         .document(widget.friendId)
         .collection('pendingChallengeRequest')
         .document(widget.userId)
-        .setData({
-      'noOFDays': noOfDays,
-      'rating': rating,
-      'date': updatedDt
-    },merge: true).whenComplete(() => print("Challenge Sent"));
+        .setData({'noOFDays': noOfDays, 'rating': rating, 'date': updatedDt},
+            merge: true).whenComplete(() => print("Challenge Sent"));
   }
 
   acceptChallenge(String noOfDays, String rating) {
@@ -138,21 +134,15 @@ class _FriendlistTileState extends State<FriendlistTile> {
         .document(widget.friendId)
         .collection('acceptedChallengeRequest')
         .document(widget.userId)
-        .setData({
-      'noOFDays': noOfDays,
-      'rating': rating,
-      'date': updatedDt
-    },merge: true).whenComplete(() {
+        .setData({'noOFDays': noOfDays, 'rating': rating, 'date': updatedDt},
+            merge: true).whenComplete(() {
       db
           .collection('users')
           .document(widget.userId)
           .collection('acceptedChallengeRequest')
           .document(widget.friendId)
-          .setData({
-        'noOFDays': noOfDays,
-        'rating': rating,
-        'date': updatedDt
-      },merge: true).whenComplete(() {
+          .setData({'noOFDays': noOfDays, 'rating': rating, 'date': updatedDt},
+              merge: true).whenComplete(() {
         db
             .collection('users')
             .document(widget.friendId)

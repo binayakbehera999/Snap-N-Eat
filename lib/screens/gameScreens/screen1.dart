@@ -32,69 +32,73 @@ class _ScreenOneState extends State<ScreenOne> {
             ),
           ),
           Positioned(
-          right:20,
-          left:20,
-          bottom: 30,
-          child: Column(
-            
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: InkWell(
-                  onTap: () {
-                    var pt= widget.point;
-                    print(pt);
-                    setState(() {
-                      pt = Point(point: 1000);
-                    });
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ScreenTwo(point: pt)),
-                    );
-                  },
-                  child: Container(
-                    width: screenWidth-30,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: primaryColor),
-                    height: 50.0,
-                    child: Center(
-                      child: Text('Collect Points',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold)),
+            right: 20,
+            left: 20,
+            bottom: 30,
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: InkWell(
+                    onTap: () {
+                      var pt = widget.point;
+                      setState(() {
+                        pt = Point(point: 1000);
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScreenTwo(point: pt)),
+                      );
+                    },
+                    child: Container(
+                      width: screenWidth - 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: primaryColor),
+                      height: 50.0,
+                      child: Center(
+                        child: Text('Collect Points',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          right: 20,
-          top: 40,
-          child: Container(
-                      width: screenWidth*0.3,
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: primaryColor,
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.attach_money,color: Colors.amber,),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            _point,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: screenHeight * 0.018,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),)
+          Positioned(
+            right: 20,
+            top: 40,
+            child: Container(
+              width: screenWidth * 0.3,
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: primaryColor,
+              ),
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.attach_money,
+                    color: Colors.amber,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    _point,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: screenHeight * 0.018,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

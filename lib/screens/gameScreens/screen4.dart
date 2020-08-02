@@ -44,7 +44,6 @@ class _ScreenFourState extends State<ScreenFour> {
                     onTap: () {
                       var pt = widget.point;
 
-                      print(pt);
                       setState(() {
                         if (_previousChoice == 1) {
                           pt = Point(point: 750);

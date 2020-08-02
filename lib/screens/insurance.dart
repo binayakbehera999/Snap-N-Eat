@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/screens/detailsPage.dart';
+import 'package:snap_n_eat/screens/dialog_flow.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -22,7 +23,16 @@ class _InsuranceState extends State<Insurance> {
     final Map _description = _insurance.getDesription();
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    print(_description[_name[0]]['eligibility']);
+    var floatingActionButton = FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FlutterFactsChatBot()),
+        );
+      },
+      backgroundColor: primaryColor,
+      child: Icon(Icons.chat),
+    );
     return Scaffold(
       backgroundColor: primaryColor,
       body: Stack(
@@ -71,11 +81,7 @@ class _InsuranceState extends State<Insurance> {
             alignment: Alignment.bottomRight,
             child: Padding(
               padding: const EdgeInsets.all(25.0),
-              child: FloatingActionButton(
-                onPressed: () {},
-                backgroundColor: primaryColor,
-                child: Icon(Icons.chat),
-              ),
+              child: floatingActionButton,
             ),
           ),
           Positioned(

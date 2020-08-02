@@ -56,9 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   padding: EdgeInsets.all(16.0),
                   onPressed: () {
-                    oauth.authorise(context, widget.hasAccount).then((value) {
-                      print(value);
-                    });
+                    oauth
+                        .authorise(context, widget.hasAccount)
+                        .then((value) {});
                   },
                   color: primaryColor,
                   icon: Icon(

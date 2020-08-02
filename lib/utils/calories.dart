@@ -72,7 +72,6 @@ foodCalorie(food) {
             protein: "0 gms",
             carbs: "0 gms",
             sugar: "0 gms");
-        ;
       }
       break;
   }

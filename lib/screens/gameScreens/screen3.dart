@@ -42,10 +42,9 @@ class _ScreenThreeState extends State<ScreenThree> {
                   child: InkWell(
                     onTap: () {
                       var pt = widget.point;
-                      print(pt);
+
                       setState(() {
-                        pt = Point(point: 750,previousChoice: 1);
-                        
+                        pt = Point(point: 750, previousChoice: 1);
                       });
                       Navigator.push(
                         context,
@@ -72,7 +71,7 @@ class _ScreenThreeState extends State<ScreenThree> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      var pt = Point(point: 900, previousChoice:0);
+                      var pt = Point(point: 900, previousChoice: 0);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

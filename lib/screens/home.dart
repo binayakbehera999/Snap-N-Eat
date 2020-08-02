@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     .document(updatedDt)
                     .setData({
                   'date': updatedDt,
-                  'caloriesIntake': 0.0,
+                  'calorieIntake': 0.0,
                   'rating': rating
                 }, merge: true).whenComplete(() => print("New Date is Added"));
               }

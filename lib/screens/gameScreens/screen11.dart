@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap_n_eat/screens/gameScreens/screen12.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen9.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -44,7 +43,8 @@ class _ScreenElevenState extends State<ScreenEleven> {
                     onTap: () {
                       var pt = widget.point;
                       setState(() {
-                        pt = Point(point: widget.point.point-180,previousChoice: 1);
+                        pt = Point(
+                            point: widget.point.point - 180, previousChoice: 1);
                       });
                       Navigator.push(
                         context,
@@ -73,7 +73,8 @@ class _ScreenElevenState extends State<ScreenEleven> {
                     onTap: () {
                       var pt = Point(point: 1000);
                       setState(() {
-                        pt = Point(point: widget.point.point,previousChoice: 0);
+                        pt =
+                            Point(point: widget.point.point, previousChoice: 0);
                       });
                       Navigator.push(
                         context,

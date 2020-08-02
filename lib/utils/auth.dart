@@ -50,7 +50,6 @@ class OAuth {
       print('Error $e');
     }
     token = tokenResp.accessToken;
-    print(tokenResp.refreshToken);
     SharedPreferences prefs = await _prefs;
     prefs.setString("refreshToken", tokenResp.refreshToken);
     prefs.setString("token", token).then((value) {
@@ -123,9 +122,7 @@ class OAuth {
       print("error $onError");
     });
     client.close();
-    // print(uriResponse.body);
     Map decode = json.decode(uriResponse.body);
-    // return false;
     return decode.containsKey('active');
   }
 
@@ -138,7 +135,6 @@ class OAuth {
           'https://api.fitbit.com/1/user/-/profile.json',
           headers: {"Authorization": "Bearer $token"});
       userProfile = json.decode(uriResponse.body);
-      print(uriResponse.statusCode);
       return userProfile["user"];
     } finally {
       client.close();
@@ -150,7 +146,6 @@ class OAuth {
     var secretKey = "22BTYH:cb2538d70342d5c6f1880535a4a4c766";
     var bytes = utf8.encode(secretKey);
     var base64Str = base64.encode(bytes);
-    print(base64Str);
     var uriResponse =
         await client.post("https://api.fitbit.com/oauth2/token", headers: {
       "Authorization": "Basic $base64Str",
@@ -159,15 +154,13 @@ class OAuth {
       "grant_type": "refresh_token",
       "refresh_token": "$refreshToken",
     });
-    print(uriResponse.body);
     Map result = json.decode(uriResponse.body);
 
-    print(result['token']);
     String token = result['token'];
     String refreshtoken = result['refresh_token'];
     SharedPreferences prefs = await _prefs;
-    prefs.setString("token", token).then((value) => print(value));
-    prefs.setString("refreshToken", refreshtoken).then((value) => print(value));
+    prefs.setString("token", token);
+    prefs.setString("refreshToken", refreshtoken);
     return token;
   }
 
@@ -177,7 +170,6 @@ class OAuth {
       var uriResponse = await client.get(apiEndpoints.heartRate,
           headers: {"Authorization": "Bearer $token"});
       userProfile = json.decode(uriResponse.body);
-      print(uriResponse.body);
     } finally {
       client.close();
     }
@@ -187,7 +179,6 @@ class OAuth {
     var client = http.Client();
     var newFormat = DateFormat("HH:MM");
     String updatedDt = newFormat.format(DateTime.now());
-    print(updatedDt);
     List<String> apiRequests = [
       "https://api.fitbit.com/1/user/-/profile.json",
       "https://api.fitbit.com/1/user/-/activities/calories/date/today/1d/15min/time/00:00/$updatedDt.json",

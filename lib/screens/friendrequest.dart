@@ -47,7 +47,6 @@ class _FriendRequestState extends State<FriendRequest> {
   acceptFriendRequest(String friendId) {
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
-    print(updatedDt);
 
     var db = Firestore.instance;
 
@@ -128,9 +127,7 @@ class _FriendRequestState extends State<FriendRequest> {
                               child: RaisedButton(
                                 color: Colors.white,
                                 elevation: 0,
-                                onPressed: () {
-                                  print('Hello');
-                                },
+                                onPressed: () {},
                                 child: Icon(
                                   Icons.content_copy,
                                   size: 20,

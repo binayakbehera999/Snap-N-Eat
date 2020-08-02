@@ -42,10 +42,19 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
                             itemBuilder: (context, index) {
                               DocumentSnapshot pendingRequests =
                                   snapshot.data.documents[index];
+                              DateTime initialDate =
+                                  DateTime.parse(pendingRequests.data['date']);
+
+                              int noOfDaysCompleted =
+                                  DateTime.now().difference(initialDate).inDays;
                               return CommonTile(
                                 friendId: pendingRequests.documentID,
                                 userId: userId.uid,
                                 arguement: 'viewArena',
+                                noOfDays: pendingRequests['noOfDays'],
+                                noOfCompleted: noOfDaysCompleted,
+                                initialWeight:
+                                    pendingRequests['initialWeight'].toDouble(),
                               );
                             },
                           ),
@@ -69,7 +78,6 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => PendingChallengeRequest()));
-                    print("hello");
                   },
                 )
               ],

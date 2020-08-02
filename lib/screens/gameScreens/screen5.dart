@@ -42,7 +42,7 @@ class _ScreenFiveState extends State<ScreenFive> {
                   child: InkWell(
                     onTap: () {
                       var pt = widget.point;
-                      print(pt);
+
                       setState(() {
                         pt = Point(point: widget.point.point);
                       });
@@ -67,7 +67,6 @@ class _ScreenFiveState extends State<ScreenFive> {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),

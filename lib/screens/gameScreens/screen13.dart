@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap_n_eat/screens/gameScreens/gameOver.dart';
-import 'package:snap_n_eat/screens/insurance.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -43,12 +42,9 @@ class _ScreenThirteenState extends State<ScreenThirteen> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      
-
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => GameOver()),
+                        MaterialPageRoute(builder: (context) => GameOver()),
                       );
                     },
                     child: Container(
