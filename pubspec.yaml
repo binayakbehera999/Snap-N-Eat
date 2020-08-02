@@ -103,12 +103,9 @@ flutter:
     - assets/tflite_model/
     - assets/gameImage/
     - assets/icons/spoiled.svg
-<<<<<<< Updated upstream
     - assets/icons/login-logo.png
 
-=======
     - assets/chatbot/cred.json
->>>>>>> Stashed changes
 
 
 
