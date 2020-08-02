@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:snap_n_eat/screens/gameScreens/Congratulation.dart';
+import 'package:snap_n_eat/screens/gameScreens/congratulation.dart';
 import 'package:snap_n_eat/screens/gameScreens/gameOver.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
