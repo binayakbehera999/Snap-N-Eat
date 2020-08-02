@@ -70,6 +70,7 @@ class _FoodResultState extends State<FoodResult> {
 
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<DashBoardProvider>(context, listen: false).user;
     final rating = RatingCalculator();
     FoodDetails foodDetails = foodCalorie(widget.food);
     double scannedFoodCalorie = foodDetails.calories.toDouble();
