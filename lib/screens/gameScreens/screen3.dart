@@ -1,6 +1,8 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:snap_n_eat/screens/gameScreens/screen4.dart';
+import 'package:snap_n_eat/screens/gameScreens/screen5.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -44,13 +46,25 @@ class _ScreenThreeState extends State<ScreenThree> {
                       var pt = widget.point;
 
                       setState(() {
-                        pt = Point(point: 750, previousChoice: 1);
+                        pt = Point(point: 750,previousChoice: 1);                       
                       });
+                      Random random = new Random();
+                      double prob =random.nextDouble();
+                      
+                      if(prob<=0.5){
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ScreenFour(point: pt)),
                       );
+                      }
+                      else{
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScreenFive(point: pt)),
+                      );
+                      }
                     },
                     child: Container(
                       width: screenWidth - 30,
@@ -71,12 +85,25 @@ class _ScreenThreeState extends State<ScreenThree> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
-                      var pt = Point(point: 900, previousChoice: 0);
+                      var pt = Point(point: 900, previousChoice:0);
+
+                      Random random = new Random();
+                      double prob =random.nextDouble();
+                      
+                      if(prob<=0.5){
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ScreenFour(point: pt)),
                       );
+                      }
+                      else{
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScreenFive(point: pt)),
+                      );
+                      }
                     },
                     child: Container(
                       width: screenWidth - 30,

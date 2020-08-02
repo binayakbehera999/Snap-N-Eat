@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:snap_n_eat/screens/gameScreens/Congratulation.dart';
 import 'package:snap_n_eat/screens/gameScreens/gameOver.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
@@ -15,7 +16,7 @@ class ScreenThirteen extends StatefulWidget {
 class _ScreenThirteenState extends State<ScreenThirteen> {
   @override
   Widget build(BuildContext context) {
-    String _point = widget.point.point.toString();
+    int _point = widget.point.point;
     int _previousChoice = widget.point.previousChoice;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -42,10 +43,26 @@ class _ScreenThirteenState extends State<ScreenThirteen> {
                   padding: EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () {
+                      
+                      if(_previousChoice == 0){
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => GameOver()),
                       );
+                      }
+                      else{
+                        var pt = Point(point: widget.point.point);
+                        print(widget.point.point);
+                      setState(() {
+                        pt = Point(point: _point);
+                      });
+                      
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Congrats(point: pt)),
+                      );
+                      }
                     },
                     child: Container(
                       width: screenWidth - 30,
@@ -85,7 +102,7 @@ class _ScreenThirteenState extends State<ScreenThirteen> {
                     width: 15,
                   ),
                   Text(
-                    _point,
+                    "$_point",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: screenHeight * 0.018,
