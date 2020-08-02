@@ -6,7 +6,7 @@ class Food {
 }
 
 class FoodDetails {
-  String foodName, fat, cholestrol, protein, carbs, sugar;
+  String foodName, fat, cholesterol, protein, carbs, sugar;
   double calories;
   FoodDetails(
       {this.calories,
@@ -14,6 +14,6 @@ class FoodDetails {
       this.fat,
       this.sugar,
       this.carbs,
-      this.cholestrol,
+      this.cholesterol,
       this.protein});
 }

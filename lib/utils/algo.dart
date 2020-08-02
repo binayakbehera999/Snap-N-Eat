@@ -38,10 +38,10 @@ class RatingCalculator {
     return bmr;
   }
 
-  double newBmrCalc(double height, double optimumBmi, String sex, int age) {
+  double newBmrCalc(double height, String sex, int age) {
     double optimumWeight;
     double bmr;
-    optimumWeight = (optimumBmi * height * height) / 10000;
+    optimumWeight = (21.7 * height * height) / 10000;
     if (sex == 'MALE') {
       bmr = ((10 * optimumWeight) + (6.25 * height) - (5 * age) + 5);
     } else {
@@ -59,21 +59,42 @@ class RatingCalculator {
 
   double goalRating(initialWeight, currWeight, totalDays, currDay, height) {
     double goalWeight = 21.7 * height * height / 10000;
+    print(goalWeight);
     double idealWeightChange =
-        (((goalWeight - initialWeight) / totalDays) * currDay);
+        (((goalWeight - initialWeight) / totalDays) * currDay).abs();
+    print(idealWeightChange);
     double actualWeightChange = (initialWeight - currWeight);
-    double idealWeight = initialWeight + idealWeightChange;
-    if (goalWeight <= initialWeight) {
-      if (currWeight >= idealWeight) {
-        return (actualWeightChange / idealWeightChange * 100).abs();
+    print(actualWeightChange);
+    double idealWeight = initialWeight - idealWeightChange;
+    if (goalWeight <= currWeight) {
+      if (idealWeightChange >= 1) {
+        if (currWeight >= idealWeight) {
+          return (actualWeightChange / idealWeightChange * 5).abs();
+        } else {
+          return (((actualWeightChange - idealWeightChange) /
+                      idealWeightChange) *
+                  5)
+              .abs();
+        }
       } else {
-        return (actualWeightChange / idealWeightChange * 100).abs() / 2;
+        if (currWeight >= idealWeight) {
+          return (actualWeightChange * idealWeightChange * 5).abs();
+        } else {
+          return (((actualWeightChange - idealWeightChange) *
+                      idealWeightChange) *
+                  5)
+              .abs();
+        }
       }
     } else {
-      if (currWeight <= idealWeight) {
-        return (actualWeightChange / idealWeightChange * 100).abs();
+      if (idealWeightChange < 1) {
+        return (((actualWeightChange - idealWeightChange) * idealWeightChange) *
+                5)
+            .abs();
       } else {
-        return (actualWeightChange / idealWeightChange * 100).abs() / 2;
+        return (((actualWeightChange - idealWeightChange) / idealWeightChange) *
+                5)
+            .abs();
       }
     }
   }
