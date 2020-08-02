@@ -57,25 +57,39 @@ class RatingCalculator {
     return rating;
   }
 
-  double goalRating(initialWeight, currWeight, totalDays, currDay, height) {
+    double goalRating(initialWeight, currWeight, totalDays, currDay, height) {
     double goalWeight = 21.7 * height * height / 10000;
+    print(goalWeight);
     double idealWeightChange =
-        (((goalWeight - initialWeight) / totalDays) * currDay);
+        (((goalWeight - initialWeight) / totalDays) * currDay).abs();
+    print(idealWeightChange);
     double actualWeightChange = (initialWeight - currWeight);
-    double idealWeight = initialWeight + idealWeightChange;
-    if (goalWeight <= initialWeight) {
+    print(actualWeightChange);
+    double idealWeight = initialWeight - idealWeightChange;
+    if (goalWeight <= currWeight) {
+      if(idealWeightChange>=1){
       if (currWeight >= idealWeight) {
-        return (actualWeightChange / idealWeightChange * 100).abs();
+        return (actualWeightChange / idealWeightChange * 5).abs();
       } else {
-        return (actualWeightChange / idealWeightChange * 100).abs() / 2;
+        return (((actualWeightChange-idealWeightChange)/ idealWeightChange) * 5).abs();
       }
-    } else {
-      if (currWeight <= idealWeight) {
-        return (actualWeightChange / idealWeightChange * 100).abs();
+    } 
+     else{
+       if (currWeight >= idealWeight) {
+        return (actualWeightChange * idealWeightChange * 5).abs();
       } else {
-        return (actualWeightChange / idealWeightChange * 100).abs() / 2;
+        return (((actualWeightChange-idealWeightChange)*idealWeightChange) * 5).abs();
       }
-    }
+     }
+}
+    else {
+        if(idealWeightChange<1){
+        return (((actualWeightChange-idealWeightChange)*idealWeightChange) * 5).abs();
+        }
+      else{
+        return (((actualWeightChange-idealWeightChange)/idealWeightChange) * 5).abs();
+      }
+      }
   }
 
   double walking(double extraCalorie) {

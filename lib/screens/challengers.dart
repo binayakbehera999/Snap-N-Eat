@@ -6,6 +6,7 @@ import 'package:snap_n_eat/components/empty.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
 import 'package:snap_n_eat/screens/pendingchallengerequest.dart';
+import 'package:snap_n_eat/utils/cameraOutput.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 
 class ChallengerScreen extends StatefulWidget {
@@ -42,10 +43,21 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
                             itemBuilder: (context, index) {
                               DocumentSnapshot pendingRequests =
                                   snapshot.data.documents[index];
+                              print(pendingRequests.data['noOfDays']);
+                              DateTime initialDate =
+                                  DateTime.parse(pendingRequests.data['date']);
+                              
+                              int noOfDaysCompleted =DateTime.now()
+                                  .difference(initialDate)
+                                  .inDays
+                                  ;
                               return CommonTile(
                                 friendId: pendingRequests.documentID,
                                 userId: userId.uid,
                                 arguement: 'viewArena',
+                                noOfDays: pendingRequests['noOfDays'],
+                                noOfCompleted: noOfDaysCompleted,
+                                initialWeight: pendingRequests['initialWeight'].toDouble(),
                               );
                             },
                           ),

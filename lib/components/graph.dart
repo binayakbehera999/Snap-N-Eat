@@ -28,6 +28,9 @@ class _GraphState extends State<Graph> {
   @override
   void initState() {
     super.initState();
+    print(widget.user.first.data);
+    print(widget.friend.first.data);
+    
   }
 
   LineChartData mainData() {
@@ -147,13 +150,13 @@ class _GraphState extends State<Graph> {
     return [
       LineChartBarData(
         spots: [
-          FlSpot(0, widget.user[6].data['rating'].toDouble()),
-          FlSpot(2, widget.user[5].data['rating'].toDouble()),
-          FlSpot(4, widget.user[4].data['rating'].toDouble()),
-          FlSpot(6, widget.user[3].data['rating'].toDouble()),
-          FlSpot(8, widget.user[2].data['rating'].toDouble()),
-          FlSpot(10, widget.user[1].data['rating'].toDouble()),
-          FlSpot(12, widget.user[0].data['rating'].toDouble()),
+          FlSpot(0, widget.user[0].data['score'].toDouble()),
+          FlSpot(2, widget.user[1].data['score'].toDouble()),
+          FlSpot(4, widget.user[2].data['score'].toDouble()),
+          FlSpot(6, widget.user[3].data['score'].toDouble()),
+          FlSpot(8, widget.user[4].data['score'].toDouble()),
+          FlSpot(10, widget.user[5].data['score'].toDouble()),
+          FlSpot(12, widget.user[6].data['score'].toDouble()),
         ],
         isCurved: true,
         colors: gradientColors,
@@ -170,13 +173,13 @@ class _GraphState extends State<Graph> {
       ),
       LineChartBarData(
         spots: [
-          FlSpot(0, widget.friend[0].data['rating'].toDouble()),
-          FlSpot(2, widget.friend[1].data['rating'].toDouble()),
-          FlSpot(4, widget.friend[2].data['rating'].toDouble()),
-          FlSpot(6, widget.friend[3].data['rating'].toDouble()),
-          FlSpot(8, widget.friend[4].data['rating'].toDouble()),
-          FlSpot(10, widget.friend[5].data['rating'].toDouble()),
-          FlSpot(12, widget.friend[6].data['rating'].toDouble()),
+          FlSpot(0, widget.friend[0].data['score'].toDouble()),
+          FlSpot(2, widget.friend[1].data['score'].toDouble()),
+          FlSpot(4, widget.friend[2].data['score'].toDouble()),
+          FlSpot(6, widget.friend[3].data['score'].toDouble()),
+          FlSpot(8, widget.friend[4].data['score'].toDouble()),
+          FlSpot(10, widget.friend[5].data['score'].toDouble()),
+          FlSpot(12, widget.friend[6].data['score'].toDouble()),
         ],
         isCurved: true,
         colors: gradientColors,

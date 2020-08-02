@@ -37,7 +37,7 @@ class FoodResult extends StatelessWidget {
           .document(user.uid)
           .collection('history')
           .document(updatedDt)
-          .updateData({"caloriesIntake": calorie}).whenComplete(
+          .updateData({"calorieIntake": calorie}).whenComplete(
               () => navigatedToHome(context));
     });
   }

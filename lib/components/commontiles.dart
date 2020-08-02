@@ -9,8 +9,15 @@ class CommonTile extends StatefulWidget {
   final String userId;
   final String arguement;
   final String noOfDays;
+  final int noOfCompleted;
+  final double initialWeight;
   const CommonTile(
-      {Key key, this.friendId, this.userId, this.arguement, this.noOfDays})
+      {Key key,
+      this.friendId,
+      this.userId,
+      this.arguement,
+      this.noOfDays,
+      this.initialWeight, this.noOfCompleted})
       : super(key: key);
 
   @override
@@ -270,6 +277,10 @@ class _CommonTileState extends State<CommonTile> {
                               MaterialPageRoute(
                                   builder: (context) => Arena(
                                         friendId: widget.friendId,
+                                        user: widget.userId,
+                                        noOfDays: int.parse(widget.noOfDays),
+                                        noOfDaysCompleted: widget.noOfCompleted,
+                                        intialWeight: widget.initialWeight,
                                       )))
                           : showChallengingDialogBox(context);
                 },

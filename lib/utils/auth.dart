@@ -50,7 +50,7 @@ class OAuth {
       print('Error $e');
     }
     token = tokenResp.accessToken;
-    print(tokenResp.refreshToken);
+    print(tokenResp);
     SharedPreferences prefs = await _prefs;
     prefs.setString("refreshToken", tokenResp.refreshToken);
     prefs.setString("token", token).then((value) {
