@@ -6,6 +6,8 @@ import 'package:snap_n_eat/components/graph.dart';
 import 'package:snap_n_eat/components/profileCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/utils/constants.dart';
+import 'package:snap_n_eat/screens/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -14,6 +16,17 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   var pulseRate = 231;
+
+  navigatedToHome(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString("token");
+    Navigator.pushReplacement(
+        context,
+        new MaterialPageRoute(
+            builder: (BuildContext context) => MyHomePage(
+                  token: token,
+                )));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +75,16 @@ class _ProfileState extends State<Profile> {
                         ],
                       ),
                     ),
-                    SvgPicture.asset(
-                      "assets/icons/clear.svg",
-                      alignment: Alignment.topRight,
-                      color: primaryColor,
-                      height: screenHeight * 0.03,
+                    InkWell(
+                      onTap: () {
+                        navigatedToHome(context);
+                      },
+                      child: SvgPicture.asset(
+                        "assets/icons/clear.svg",
+                        alignment: Alignment.topRight,
+                        color: primaryColor,
+                        height: 50,
+                      ),
                     ),
                   ],
                 ),

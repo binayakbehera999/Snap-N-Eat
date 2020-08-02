@@ -248,7 +248,8 @@ class _ArenaState extends State<Arena> {
                                                             Text(
                                                               userHistory[
                                                                       'rating']
-                                                                  .toString(),
+                                                                  .toStringAsFixed(
+                                                                      2),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             ),
@@ -263,7 +264,7 @@ class _ArenaState extends State<Arena> {
                                                             Text(
                                                               friendHistory[
                                                                       "rating"]
-                                                                  .toString(),
+                                                                  .toStringAsFixed(2),
                                                               style: TextStyle(
                                                                   fontSize: 15),
                                                             )

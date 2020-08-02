@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:snap_n_eat/components/empty.dart';
 import 'package:snap_n_eat/components/friendrequesttiles.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
@@ -230,21 +231,22 @@ class _FriendRequestState extends State<FriendRequest> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: snapshot.data.documents.length,
-                            itemBuilder: (context, index) {
-                              DocumentSnapshot pendingRequests =
-                                  snapshot.data.documents[index];
-
-                              return FriendRequestTiles(
-                                name: pendingRequests['fullName'],
-                                avatar: pendingRequests['avatar'],
-                                friendId: pendingRequests.documentID,
-                                userId: userId.uid,
-                              );
-                            },
-                          ),
+                          (snapshot.data.documents.length == 0)
+                              ? Empty(msg: "No pending requests")
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data.documents.length,
+                                  itemBuilder: (context, index) {
+                                    DocumentSnapshot pendingRequests =
+                                        snapshot.data.documents[index];
+                                    return FriendRequestTiles(
+                                      name: pendingRequests['fullName'],
+                                      avatar: pendingRequests['avatar'],
+                                      friendId: pendingRequests.documentID,
+                                      userId: userId.uid,
+                                    );
+                                  },
+                                ),
                         ]);
                 },
               ),

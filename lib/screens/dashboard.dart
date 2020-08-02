@@ -28,7 +28,6 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Consumer<DashBoardProvider>(
         builder: (context, value, child) => SingleChildScrollView(
