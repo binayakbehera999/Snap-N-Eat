@@ -38,10 +38,10 @@ class RatingCalculator {
     return bmr;
   }
 
-  double newBmrCalc(double height, String sex, int age) {
+  double newBmrCalc(double height, double optimumBmi, String sex, int age) {
     double optimumWeight;
     double bmr;
-    optimumWeight = (21.7 * height * height) / 10000;
+    optimumWeight = (optimumBmi * height * height) / 10000;
     if (sex == 'MALE') {
       bmr = ((10 * optimumWeight) + (6.25 * height) - (5 * age) + 5);
     } else {
