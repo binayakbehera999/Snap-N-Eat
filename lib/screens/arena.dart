@@ -118,6 +118,39 @@ class _ArenaState extends State<Arena> {
         widget.noOfDays,
         widget.noOfDaysCompleted,
         friendProfile['height']);
+    var newFormat = DateFormat("yyyy-MM-dd");
+    String updatedDt = newFormat.format(DateTime.now());
+    
+    db
+        .collection('users')
+        .document(widget.friendId)
+        .collection('acceptedChallengeRequest')
+        .document(widget.user)
+        .collection('history')
+        .document(updatedDt)
+        .get()
+        .then((value) {
+      if (!value.exists) {
+        db
+            .collection('users')
+            .document(widget.friendId)
+            .collection('acceptedChallengeRequest')
+            .document(widget.user)
+            .collection('history')
+            .document(updatedDt)
+            .setData({'score': userScore}).whenComplete(() {
+          db
+              .collection('users')
+              .document(widget.friendId)
+              .collection('acceptedChallengeRequest')
+              .document(widget.friendId)
+              .collection('history')
+              .document(updatedDt)
+              .setData({'score': userScore});
+        });
+      }
+    });
+
     // print(userHistory['calorieIntake'].runtimeType);
     // print(userScore);
     // print(friendScore);
