@@ -1,24 +1,22 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:snap_n_eat/screens/gameScreens/alternate.dart';
-import 'package:snap_n_eat/screens/gameScreens/screen4.dart';
 import 'package:snap_n_eat/screens/gameScreens/screen5.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
-class ScreenThree extends StatefulWidget {
+class Alternate extends StatefulWidget {
   final Point point;
-  ScreenThree({this.point});
+  Alternate({this.point});
 
   @override
-  _ScreenThreeState createState() => _ScreenThreeState();
+  _AlternateState createState() => _AlternateState();
 }
 
-class _ScreenThreeState extends State<ScreenThree> {
+class _AlternateState extends State<Alternate> {
   @override
   Widget build(BuildContext context) {
     String _point = widget.point.point.toString();
+    int _previousChoice = widget.point.previousChoice;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -29,7 +27,7 @@ class _ScreenThreeState extends State<ScreenThree> {
             width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/gameImage/screen3.jpeg"),
+                image: AssetImage("assets/gameImage/alternate.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -47,25 +45,17 @@ class _ScreenThreeState extends State<ScreenThree> {
                       var pt = widget.point;
 
                       setState(() {
-                        pt = Point(point: 750,previousChoice: 1);                       
+                        if (_previousChoice == 1) {
+                          pt = Point(point: 750);
+                        } else {
+                          pt = Point(point: 900);
+                        }
                       });
-                      Random random = new Random();
-                      double prob =random.nextDouble();
-                      
-                      if(prob<=0.5){
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ScreenFour(point: pt)),
+                            builder: (context) => ScreenFive(point: pt)),
                       );
-                      }
-                      else{
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Alternate(point: pt)),
-                      );
-                      }
                     },
                     child: Container(
                       width: screenWidth - 30,
@@ -74,46 +64,7 @@ class _ScreenThreeState extends State<ScreenThree> {
                           color: primaryColor),
                       height: 50.0,
                       child: Center(
-                        child: Text('Buy Insurance \$150',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: InkWell(
-                    onTap: () {
-                      var pt = Point(point: 900, previousChoice:0);
-
-                      Random random = new Random();
-                      double prob =random.nextDouble();
-                      
-                      if(prob<=0.5){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ScreenFour(point: pt)),
-                      );
-                      }
-                      else{
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Alternate(point: pt)),
-                      );
-                      }
-                    },
-                    child: Container(
-                      width: screenWidth - 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: secondaryColor),
-                      height: 50.0,
-                      child: Center(
-                        child: Text('No, Thanks',
+                        child: Text('Call an ambulance',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),

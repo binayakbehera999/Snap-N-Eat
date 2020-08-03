@@ -97,7 +97,7 @@ class _CustomPopupState extends State<CustomPopup>
                           color: primaryColor),
                       height: screenWidth / 10,
                       child: Center(
-                        child: Text('Collect Points',
+                        child: Text('Collect',
                             style: TextStyle(
                                 color: Colors.white, fontWeight: FontWeight.bold)),
                       ),

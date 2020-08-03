@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snap_n_eat/components/popUp.dart';
 import 'package:snap_n_eat/screens/dashboard.dart';
+import 'package:snap_n_eat/screens/home.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:snap_n_eat/utils/gamePoints.dart';
 
@@ -60,11 +62,16 @@ class _CongratsState extends State<Congrats> {
               Padding(
                 padding: EdgeInsets.fromLTRB(30, 0, 30, 30),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DashBoard()),
-                    );
+                  onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    String token = prefs.getString("token");
+                    Navigator.pushReplacement(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (BuildContext context) => MyHomePage(
+                                  token: token,
+                                )));
                   },
                   child: Container(
                     width: screenWidth - 30,
@@ -75,7 +82,8 @@ class _CongratsState extends State<Congrats> {
                     child: Center(
                       child: Text('The End',
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold)),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ),
