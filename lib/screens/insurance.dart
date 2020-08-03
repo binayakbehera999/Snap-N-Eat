@@ -37,43 +37,50 @@ class _InsuranceState extends State<Insurance> {
       backgroundColor: primaryColor,
       body: Stack(
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          ListView(
             children: <Widget>[
-              SizedBox(
-                height: screenHeight * 0.1,
-              ),
-              Text(
-                "Insurance",
-                style: TextStyle(
-                  color: secondaryColor,
-                  fontSize: screenHeight * 0.065,
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50)),
-                  color: Colors.white,
-                ),
-                width: screenWidth,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
-                  child: Column(
-                    children: <Widget>[
-                      ListView.builder(
-                          physics: ScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: _count,
-                          itemBuilder: (context, index) {
-                            return _buildCard(_name[index], _logo[index],
-                                _description[_name[index]]);
-                          }),
-                    ],
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: screenHeight * 0.1,
                   ),
-                ),
+                  Text(
+                    "Insurance",
+                    style: TextStyle(
+                      color: secondaryColor,
+                      fontSize: screenHeight * 0.065,
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50)),
+                      color: Colors.white,
+                    ),
+                    width: screenWidth,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
+                      child: Column(
+                        children: <Widget>[
+                          ListView.builder(
+                              physics: ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: _count,
+                              itemBuilder: (context, index) {
+                                return _buildCard(_name[index], _logo[index],
+                                    _description[_name[index]]);
+                              }),
+                              SizedBox(
+                                height: screenHeight * 0.05,
+                              )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -138,10 +145,13 @@ class _InsuranceState extends State<Insurance> {
                     ),
                   ),
                   SizedBox(width: 10.0),
-                  Text(name,
-                      softWrap: true,
-                      style: TextStyle(
-                          fontSize: 17.0, fontWeight: FontWeight.bold)),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Text(name,
+                        softWrap: true,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold)),
+                  ),
                 ]),
               ),
               Padding(
