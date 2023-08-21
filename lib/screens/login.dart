@@ -33,41 +33,51 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Gamify Insurance"),
-      ),
       body: Container(
+        color: Colors.white,
         width: double.infinity,
         height: double.infinity,
         child: Center(
           widthFactor: 5.0,
-          child: RaisedButton.icon(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            ),
-            padding: EdgeInsets.all(16.0),
-            onPressed: () {
-              oauth.authorise(context, widget.hasAccount).then((value) {
-                print(value);
-              });
-            },
-            color: primaryColor,
-            icon: Icon(
-              Icons.lock_open,
-              size: 30,
-              color: Colors.white,
-            ),
-            label: Text(
-              "Login",
-              style: TextStyle(
-                fontFamily: 'Typo Grotesk',
-                fontSize: 30,
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Center(
+                    child: new Image.asset(
+                  'assets/icons/login-logo.png',
+                  height: 80,
+                )),
+                SizedBox(
+                  height: 50,
+                ),
+                RaisedButton.icon(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  padding: EdgeInsets.all(16.0),
+                  onPressed: () {
+                    oauth
+                        .authorise(context, widget.hasAccount)
+                        .then((value) {});
+                  },
+                  color: primaryColor,
+                  icon: Icon(
+                    Icons.lock_open,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    "Login",
+                    style: TextStyle(
+                      fontFamily: 'Typo Grotesk',
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ]),
         ),
       ),
     );

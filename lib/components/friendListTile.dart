@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class FriendlistTile extends StatefulWidget {
   final String friendId;
@@ -111,22 +112,19 @@ class _FriendlistTileState extends State<FriendlistTile> {
     var db = Firestore.instance;
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
-    print(updatedDt);
 
     db
         .collection('users')
         .document(widget.friendId)
         .collection('pendingChallengeRequest')
         .document(widget.userId)
-        .setData({
-      'noOFDays': noOfDays,
-      'rating': rating,
-      'date': updatedDt
-    }).whenComplete(() => print("Challenge Sent"));
+        .setData({'noOFDays': noOfDays, 'rating': rating, 'date': updatedDt},
+            merge: true).whenComplete(() => print("Challenge Sent"));
   }
 
   acceptChallenge(String noOfDays, String rating) {
     var db = Firestore.instance;
+
     var newFormat = DateFormat("yyyy-MM-dd");
     String updatedDt = newFormat.format(DateTime.now());
     print(updatedDt);
@@ -136,21 +134,15 @@ class _FriendlistTileState extends State<FriendlistTile> {
         .document(widget.friendId)
         .collection('acceptedChallengeRequest')
         .document(widget.userId)
-        .setData({
-      'noOFDays': noOfDays,
-      'rating': rating,
-      'date': updatedDt
-    }).whenComplete(() {
+        .setData({'noOFDays': noOfDays, 'rating': rating, 'date': updatedDt},
+            merge: true).whenComplete(() {
       db
           .collection('users')
           .document(widget.userId)
           .collection('acceptedChallengeRequest')
           .document(widget.friendId)
-          .setData({
-        'noOFDays': noOfDays,
-        'rating': rating,
-        'date': updatedDt
-      }).whenComplete(() {
+          .setData({'noOFDays': noOfDays, 'rating': rating, 'date': updatedDt},
+              merge: true).whenComplete(() {
         db
             .collection('users')
             .document(widget.friendId)
@@ -176,23 +168,35 @@ class _FriendlistTileState extends State<FriendlistTile> {
           var userDocument = snapshot.data;
           return Card(
             margin: EdgeInsets.all(10.0),
-            shadowColor: Colors.grey,
-            elevation: 15.0,
+            elevation: 10.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(20.0),
+                Radius.circular(10.0),
               ),
             ),
             child: new ListTile(
-              title: Text(userDocument['fullName']),
+              title: Text(
+                userDocument['fullName'],
+                style: TextStyle(
+                  fontSize: 15,
+                  color: primaryColor,
+                ),
+              ),
               leading:
                   CircleAvatar(child: Image.network(userDocument['avatar'])),
-              subtitle: Text(userDocument['rating'].toString()),
+              subtitle: Text(
+                userDocument['rating'].toString(),
+                style: TextStyle(color: primaryColor, fontSize: 20),
+              ),
               trailing: FlatButton(
+                color: primaryColor,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
-                child: Text('Challenge !'),
+                child: Text(
+                  'Challenge !',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   showChallengingDialogBox(context);
                 },

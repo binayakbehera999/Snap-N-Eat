@@ -8,6 +8,11 @@ class RatingCalculator {
     }
   }
 
+  double changeInCalorie(double bmr, double newbmr, double calorieIntake,
+      double calorieBurnt, double scannedFoodCalorie) {
+    return calorieIntake + scannedFoodCalorie - calorieBurnt - bmr - newbmr;
+  }
+
   double bmiCalculator(double height, double weight) {
     double bmi = (weight / (height * height)) * 10000;
     return bmi;
@@ -20,6 +25,17 @@ class RatingCalculator {
       return 24.9;
     else
       return bmi;
+  }
+
+  double bmrCalc(
+      double height, double weight, double bmi, String sex, int age) {
+    double bmr;
+    if (sex == 'MALE') {
+      bmr = ((10 * weight) + (6.25 * height) - (5 * age) + 5);
+    } else {
+      bmr = ((10 * weight) + (6.25 * height) - (5 * age) - 161);
+    }
+    return bmr;
   }
 
   double newBmrCalc(double height, double optimumBmi, String sex, int age) {
@@ -36,15 +52,62 @@ class RatingCalculator {
 
   double healthRating(weight, height) {
     double optimumWeight = 21.7 * height * height / 10000;
-    double rating = (5 - (weight - optimumWeight) / 5).abs();
+    double rating =
+        (((weight - optimumWeight) / optimumWeight).abs() - 1).abs() * 5;
     return rating;
   }
 
-  // double goalRating(initialWeight, currWeight, totalWeek, currWeek, height) {
-  //   double goalWeight = 21.7 * height * height / 10000;
-  //   double idealWeightChange =
-  //       (((goalWeight - initialWeight) / totalWeek) * currWeek).abs();
-  //   double actualWeightChange = (initialWeight - currWeight).abs();
-  //   return (actualWeightChange / idealWeightChange) * 5;
+  double goalRating(initialWeight, currWeight, totalDays, currDay, height) {
+    double goalWeight = 21.7 * height * height / 10000;
+    double idealWeightChange =
+        (((goalWeight - initialWeight) / totalDays) * currDay).abs();
+    double actualWeightChange = (initialWeight - currWeight);
+    double idealWeight = initialWeight - idealWeightChange;
+    if (goalWeight <= currWeight) {
+      if (idealWeightChange >= 1) {
+        if (currWeight >= idealWeight) {
+          return (actualWeightChange / idealWeightChange * 5).abs();
+        } else {
+          return (((actualWeightChange - idealWeightChange) /
+                      idealWeightChange) *
+                  5)
+              .abs();
+        }
+      } else {
+        if (currWeight >= idealWeight) {
+          return (actualWeightChange * idealWeightChange * 5).abs();
+        } else {
+          return (((actualWeightChange - idealWeightChange) *
+                      idealWeightChange) *
+                  5)
+              .abs();
+        }
+      }
+    } else {
+      if (idealWeightChange < 1) {
+        return (((actualWeightChange - idealWeightChange) * idealWeightChange) *
+                5)
+            .abs();
+      } else {
+        return (((actualWeightChange - idealWeightChange) / idealWeightChange) *
+                5)
+            .abs();
+      }
+    }
+  }
+
+  double walking(double extraCalorie) {
+    return (extraCalorie * (114 / 420));
+  }
+
+  double running(double extraCalorie) {
+    return (extraCalorie * (41 / 420));
+  }
+
+  double cycling(double extraCalorie) {
+    return (extraCalorie * (59 / 420));
+  }
+
+  // String calculatePercentage(double calorieIntake, double calorieBurnt) {
   // }
 }

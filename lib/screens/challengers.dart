@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:snap_n_eat/components/commontiles.dart';
+import 'package:snap_n_eat/components/empty.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
+import 'package:snap_n_eat/screens/pendingchallengerequest.dart';
+import 'package:snap_n_eat/utils/constants.dart';
 
 class ChallengerScreen extends StatefulWidget {
   @override
@@ -20,21 +24,65 @@ class _ChallengerScreenState extends State<ChallengerScreen> {
         stream: Firestore.instance
             .collection("users")
             .document(userId.uid)
-            .collection('Challenger')
+            .collection('acceptedChallengeRequest')
             .snapshots(),
         builder: (context, snapshot) {
-          return !snapshot.hasData
-              ? Text('PLease Wait')
-              : (snapshot.data.documents.length == 0)
-                  ? Text(" You are alone in the Race")
-                  : ListView.builder(
-                      itemCount: snapshot.data.documents.length,
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot pendingRequests =
-                            snapshot.data.documents[index];
-                        return Text(pendingRequests.documentID);
-                      },
-                    );
+          return SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                !snapshot.hasData
+                    ? Text('PLease Wait')
+                    : (snapshot.data.documents.length == 0)
+                        ? Empty(
+                            msg: "You are alone in the Race",
+                          )
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, index) {
+                              DocumentSnapshot pendingRequests =
+                                  snapshot.data.documents[index];
+                              DateTime initialDate =
+                                  DateTime.parse(pendingRequests.data['date']);
+
+                              int noOfDaysCompleted =
+                                  DateTime.now().difference(initialDate).inDays;
+                              return CommonTile(
+                                friendId: pendingRequests.documentID,
+                                userId: userId.uid,
+                                arguement: 'viewArena',
+                                noOfDays: pendingRequests['noOfDays'],
+                                noOfCompleted: noOfDaysCompleted,
+                                initialWeight:
+                                    pendingRequests['initialWeight'].toDouble(),
+                              );
+                            },
+                          ),
+                RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40)),
+                  elevation: 20,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      "Pending Requests",
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PendingChallengeRequest()));
+                  },
+                )
+              ],
+            ),
+          );
         },
       ),
     );

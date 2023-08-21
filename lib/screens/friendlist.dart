@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:snap_n_eat/components/friendListTile.dart';
-import 'package:snap_n_eat/components/friendrequesttiles.dart';
+import 'package:snap_n_eat/components/commontiles.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/models/user.dart';
 
@@ -25,7 +23,7 @@ class _FriendListState extends State<FriendList> {
         .setData({
       'avatar': userId.avatar,
       'fullName': userId.fullName,
-    }).whenComplete(() => print("Friend Request Send"));
+    },merge: true).whenComplete(() => print("Friend Request Send"));
   }
 
   @override
@@ -48,9 +46,10 @@ class _FriendListState extends State<FriendList> {
                       itemBuilder: (context, index) {
                         DocumentSnapshot pendingRequests =
                             snapshot.data.documents[index];
-                        return FriendlistTile(
+                        return CommonTile(
                           friendId: pendingRequests.documentID,
                           userId: userId.uid,
+                          arguement: 'viewFriends',
                         );
                       },
                     );

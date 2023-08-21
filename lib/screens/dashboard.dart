@@ -4,8 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/customCard.dart';
 import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
+import 'package:snap_n_eat/screens/profile.dart';
 import 'package:snap_n_eat/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:snap_n_eat/utils/classifier.dart';
+import 'package:snap_n_eat/screens/foodResult.dart';
+import 'package:snap_n_eat/utils/cameraOutput.dart';
+import 'package:snap_n_eat/utils/calories.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -14,10 +19,15 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   @override
+  void initState() {
+    super.initState();
+    loadModel().then((value) {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Consumer<DashBoardProvider>(
         builder: (context, value, child) => SingleChildScrollView(
@@ -58,10 +68,19 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ],
                       ),
-                      SvgPicture.asset(
-                        "assets/icons/dashboard.svg",
-                        alignment: Alignment.topRight,
-                        color: primaryColor,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Profile()),
+                          );
+                        },
+                        child: SvgPicture.asset(
+                          "assets/icons/profile.svg",
+                          alignment: Alignment.topRight,
+                          color: primaryColor,
+                          height: 50,
+                        ),
                       ),
                     ],
                   ),
@@ -87,8 +106,8 @@ class _DashBoardState extends State<DashBoard> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 new CircularPercentIndicator(
-                                  radius: 90,
-                                  lineWidth: 13.0,
+                                  radius: 80,
+                                  lineWidth: 7.0,
                                   animation: true,
                                   percent: 0.7,
                                   center: new SvgPicture.asset(
@@ -130,7 +149,7 @@ class _DashBoardState extends State<DashBoard> {
                         CustomCard(
                           iconSvg: "assets/icons/heartbeat.svg",
                           value: value.heartrate,
-                          unit: "scores",
+                          unit: "bpm",
                           height: screenHeight * 0.25,
                           width: screenWidth * 0.35,
                         ),
@@ -158,14 +177,14 @@ class _DashBoardState extends State<DashBoard> {
                         CustomCard(
                           iconSvg: "assets/icons/foot.svg",
                           value: value.steps.toString(),
-                          unit: "scores",
+                          unit: "steps",
                           height: screenHeight * 0.25,
                           width: screenWidth * 0.35,
                         ),
                         SizedBox(height: screenWidth * 0.03),
                         CustomCard(
                           iconSvg: "assets/icons/stairs.svg",
-                          unit: "kms",
+                          unit: "floors",
                           value: value.floor.toString(),
                           height: screenHeight * 0.25,
                           width: screenWidth * 0.35,
@@ -175,16 +194,38 @@ class _DashBoardState extends State<DashBoard> {
                   ],
                 ),
                 Center(
-                  child: RaisedButton(
-                    onPressed: () => print("clicked"),
-                    shape: CircleBorder(),
-                    elevation: 5.0,
-                    splashColor: primaryColor,
-                    child: Icon(
-                      Icons.camera,
-                      color: Colors.grey,
-                      size: 40,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Center(
+                        child: RaisedButton(
+                          onPressed: () async {
+                            var output = await pickImage();
+                            var recognisedFood = "${output[0]["label"]}";
+                            var calorie =
+                                await foodCalorie("${output[0]["label"]}");
+                            calorie = calorie.toString();
+                            var result = Food(
+                                calories: "$calorie", foodName: recognisedFood);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      FoodResult(food: result)),
+                            );
+                          },
+                          color: Colors.white,
+                          shape: CircleBorder(),
+                          elevation: 5.0,
+                          splashColor: primaryColor,
+                          child: Icon(
+                            Icons.camera,
+                            color: primaryColor,
+                            size: 55,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

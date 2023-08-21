@@ -1,11 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:snap_n_eat/components/graph.dart';
 import 'package:snap_n_eat/components/profileCard.dart';
-import 'package:snap_n_eat/components/smallCard.dart';
 import 'package:snap_n_eat/models/dashboardProvider.dart';
 import 'package:snap_n_eat/utils/constants.dart';
+import 'package:snap_n_eat/screens/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -14,11 +16,17 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   var pulseRate = 231;
-  var email = 'binayakbehera@gmail.com';
-  var rating = 4.0;
-  var height = 5.8;
-  var weight = 70;
-  var bmi = 22.3;
+
+  navigatedToHome(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString("token");
+    Navigator.pushReplacement(
+        context,
+        new MaterialPageRoute(
+            builder: (BuildContext context) => MyHomePage(
+                  token: token,
+                )));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +35,7 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       body: Consumer<DashBoardProvider>(
-        builder: (context, value, child) =>  Container(
+        builder: (context, value, child) => Container(
           height: screenHeight,
           width: screenWidth,
           color: Colors.white,
@@ -67,11 +75,16 @@ class _ProfileState extends State<Profile> {
                         ],
                       ),
                     ),
-                    SvgPicture.asset(
-                      "assets/icons/dashboard.svg",
-                      alignment: Alignment.topRight,
-                      color: primaryColor,
-                      height: screenHeight * 0.03,
+                    InkWell(
+                      onTap: () {
+                        navigatedToHome(context);
+                      },
+                      child: SvgPicture.asset(
+                        "assets/icons/clear.svg",
+                        alignment: Alignment.topRight,
+                        color: primaryColor,
+                        height: 50,
+                      ),
                     ),
                   ],
                 ),
@@ -176,12 +189,16 @@ class _ProfileState extends State<Profile> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              value.rating.toString(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: screenHeight * 0.015,
-                                  fontWeight: FontWeight.w500),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 5),
+                              child: Text(
+                                value.rating.toStringAsFixed(2),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: screenHeight * 0.015,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             )
                           ],
                         ),
@@ -198,28 +215,46 @@ class _ProfileState extends State<Profile> {
                     ProfileCard(
                       iconSvg: "assets/icons/height.svg",
                       unit: "cm",
-                      value: ((value.height/100)).toString(),
+                      value: ((value.height / 100)).toString(),
                       height: screenWidth * 0.25,
                       width: screenWidth * 0.25,
                     ),
                     ProfileCard(
                       iconSvg: "assets/icons/weight-scale.svg",
                       unit: "KGs",
-                      value: "$weight",
+                      value: (value.weight).toString(),
                       height: screenWidth * 0.25,
                       width: screenWidth * 0.25,
                     ),
                     ProfileCard(
                       iconSvg: "assets/icons/bmi.svg",
                       unit: "k/m2",
-                      value: "$height",
+                      value: (value.bmi).toStringAsFixed(2),
                       height: screenWidth * 0.25,
                       width: screenWidth * 0.29,
                     ),
                   ],
                 ),
               ),
-              Graph(),
+              StreamBuilder(
+                  stream: Firestore.instance
+                      .collection('users')
+                      .document(value.userId)
+                      .collection('history')
+                      .orderBy('date', descending: true)
+                      .limit(7)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Text("Please Wait");
+                    } else {
+                      List<DocumentSnapshot> values = snapshot.data.documents;
+                      return Graph(
+                        viewMode: "profile",
+                        user: values,
+                      );
+                    }
+                  }),
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -36,12 +37,19 @@ class OAuth {
 
   Future<AccessTokenResponse> authorise(
       BuildContext context, bool hasAccount) async {
-    tokenResp = await client.getTokenWithAuthCodeFlow(
-        clientId: '22BTRZ',
-        clientSecret: '75e8096e59982cb6e3d084c44c46102f',
-        scopes: scopes);
+    try {
+      client.accessTokenRequestHeaders = {
+        'response_type': 'token',
+        'expires_in': '31536000'
+      };
+      tokenResp = await client.getTokenWithAuthCodeFlow(
+          clientId: '22BTYH',
+          clientSecret: 'cb2538d70342d5c6f1880535a4a4c766',
+          scopes: scopes);
+    } on PlatformException catch (e) {
+      print('Error $e');
+    }
     token = tokenResp.accessToken;
-    print(tokenResp.refreshToken);
     SharedPreferences prefs = await _prefs;
     prefs.setString("refreshToken", tokenResp.refreshToken);
     prefs.setString("token", token).then((value) {
@@ -66,20 +74,27 @@ class OAuth {
                   .document(user.uid)
                   .setData(user.toMap(), merge: true)
                   .whenComplete(() {
-                print("Successfull");
+                Navigator.pushReplacement(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) => MyHomePage(
+                              token: token,
+                            )));
               });
+            } else {
+              Navigator.pushReplacement(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (BuildContext context) => MyHomePage(
+                            token: token,
+                          )));
             }
           });
         });
-        Navigator.pushReplacement(
-            context,
-            new MaterialPageRoute(
-                builder: (BuildContext context) => MyHomePage(
-                      token: token,
-                    )));
       }
+    }).catchError((onError) {
+      print("error $onError");
     });
-
     return tokenResp;
   }
 
@@ -91,7 +106,9 @@ class OAuth {
       clientSecret: 'cb2538d70342d5c6f1880535a4a4c766',
       scopes: scopes,
     );
-    return oauth2Helper.getToken();
+    return oauth2Helper.getToken().catchError((onError) {
+      print("error $onError");
+    });
   }
 
   Future<bool> validate(String token) async {
@@ -101,11 +118,11 @@ class OAuth {
       "Content-Type": "application/x-www-form-urlencoded"
     }, body: {
       "token": token
+    }).catchError((onError) {
+      print("error $onError");
     });
     client.close();
-    // print(uriResponse.body);
     Map decode = json.decode(uriResponse.body);
-    // return false;
     return decode.containsKey('active');
   }
 
@@ -118,7 +135,6 @@ class OAuth {
           'https://api.fitbit.com/1/user/-/profile.json',
           headers: {"Authorization": "Bearer $token"});
       userProfile = json.decode(uriResponse.body);
-      print(uriResponse.statusCode);
       return userProfile["user"];
     } finally {
       client.close();
@@ -127,10 +143,9 @@ class OAuth {
 
   Future<String> refreshToken(String refreshToken) async {
     var client = http.Client();
-    var secretKey = "22BTRZ:75e8096e59982cb6e3d084c44c46102f";
+    var secretKey = "22BTYH:cb2538d70342d5c6f1880535a4a4c766";
     var bytes = utf8.encode(secretKey);
     var base64Str = base64.encode(bytes);
-    print(base64Str);
     var uriResponse =
         await client.post("https://api.fitbit.com/oauth2/token", headers: {
       "Authorization": "Basic $base64Str",
@@ -139,15 +154,13 @@ class OAuth {
       "grant_type": "refresh_token",
       "refresh_token": "$refreshToken",
     });
-    print(uriResponse.body);
     Map result = json.decode(uriResponse.body);
 
-    print(result['token']);
     String token = result['token'];
     String refreshtoken = result['refresh_token'];
     SharedPreferences prefs = await _prefs;
-    prefs.setString("token", token).then((value) => print(value));
-    prefs.setString("refreshToken", refreshtoken).then((value) => print(value));
+    prefs.setString("token", token);
+    prefs.setString("refreshToken", refreshtoken);
     return token;
   }
 
@@ -157,7 +170,6 @@ class OAuth {
       var uriResponse = await client.get(apiEndpoints.heartRate,
           headers: {"Authorization": "Bearer $token"});
       userProfile = json.decode(uriResponse.body);
-      print(uriResponse.body);
     } finally {
       client.close();
     }
@@ -167,7 +179,6 @@ class OAuth {
     var client = http.Client();
     var newFormat = DateFormat("HH:MM");
     String updatedDt = newFormat.format(DateTime.now());
-    print(updatedDt);
     List<String> apiRequests = [
       "https://api.fitbit.com/1/user/-/profile.json",
       "https://api.fitbit.com/1/user/-/activities/calories/date/today/1d/15min/time/00:00/$updatedDt.json",

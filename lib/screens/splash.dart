@@ -24,10 +24,8 @@ class _SplashScreenState extends State<SplashScreen>
     var _duration = new Duration(seconds: 3);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
-    print(token);
     if (token != null) {
       oAuth.validate(token).then((value) {
-        print(value);
         setState(() {
           check = value;
         });
@@ -40,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen>
             });
             return new Timer(_duration, navigation);
           });
-          // return new Timer(_duration, navigation);
+          return new Timer(_duration, navigation);
         }
       });
     } else {
@@ -74,7 +72,6 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     oAuth = new OAuth();
-    // oAuth.refreshToken(token).then((value) => print(value));
     animationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 2));
     animation = new CurvedAnimation(
