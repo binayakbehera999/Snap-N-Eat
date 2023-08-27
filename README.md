@@ -1,4 +1,4 @@
-# Insure+
+# Snap-N-Eat
 
 A new Flutter project.
 
